@@ -7,6 +7,20 @@ import { SECTION_IDS } from '@/lib/constants';
 import selfJpg from '@/assets/self.jpg'; // Import the image
 import { useIsMobile } from '@/hooks/use-mobile'; // Import the hook
 
+interface GalleryImage {
+  src: string;
+  alt: string;
+  hint: string;
+  zIndex: string;
+}
+
+interface Transform {
+  x: number;
+  y: number;
+  rotate: number;
+  scale: number;
+}
+
 export function HeroSection() {
   const headingText = "Hey, I'm Braydon!\nWelcome to my corner of\nthe internet!";
   const taglineText = "I'm a front-end developer with a love for design and a knack for tinkering. This site is intentionally over-engineered and serves as my playground for experimenting with new ideas and seeing what sticks!";
@@ -31,7 +45,7 @@ export function HeroSection() {
     },
   };
   
-  const images = [
+  const allImages: GalleryImage[] = [
     { src: "https://i.postimg.cc/kG1kjmNF/PXL-20250223-134508159-441290144-1465373175.jpg", alt: "Gallery image 1: Fun moment", hint: "personal activity", zIndex: "z-0" },
     { src: "https://i.postimg.cc/q7j4GBhL/PXL-20250223-134925254-1976385255.jpg", alt: "Gallery image 2: Speaking", hint: "public speaking", zIndex: "z-10" },
     { src: "https://i.postimg.cc/rwTDnmsX/IMG-20250201-091854-995-709592560.jpg", alt: "Gallery image 3: Professional headshot", hint: "professional headshot", zIndex: "z-20" },
@@ -39,7 +53,7 @@ export function HeroSection() {
     { src: "https://i.postimg.cc/QtFC9K45/IMG-20250314-134009-347-611735110.jpg", alt: "Gallery image 5: Candid", hint: "candid moment", zIndex: "z-0" },
   ];
 
-  const galleryTransforms5 = [
+  const galleryTransforms5: Transform[] = [
     { x: -220, y: 0, rotate: -10, scale: 1 }, // Image 1 (Far Left)
     { x: -110, y: 0, rotate: -5, scale: 1 },  // Image 2 (Near Left)
     { x: 0, y: 0, rotate: 0, scale: 1.05 },   // Image 3 (Center)
@@ -47,18 +61,18 @@ export function HeroSection() {
     { x: 220, y: 0, rotate: 10, scale: 1 },  // Image 5 (Far Right)
   ];
 
-  const galleryTransforms3 = [
-    { x: -150, y: 0, rotate: -8, scale: 1 },  // Corresponds to original images[1]
-    { x: 0, y: 0, rotate: 0, scale: 1.05 },   // Corresponds to original images[2]
-    { x: 150, y: 0, rotate: 8, scale: 1 },   // Corresponds to original images[3]
+  const galleryTransforms3: Transform[] = [
+    { x: -150, y: 0, rotate: -8, scale: 1 },  // Corresponds to original allImages[1]
+    { x: 0, y: 0, rotate: 0, scale: 1.05 },   // Corresponds to original allImages[2]
+    { x: 150, y: 0, rotate: 8, scale: 1 },   // Corresponds to original allImages[3]
   ];
 
   // On SSR, isMobile will be false (useIsMobile returns !!undefined), so it defaults to 5 images.
   // On client-side hydration, it will adjust if necessary.
-  const imagesToDisplay = isMobile === undefined ? images : (isMobile ? images.slice(1, 4) : images);
+  const imagesToDisplay = isMobile === undefined ? allImages : (isMobile ? allImages.slice(1, 4) : allImages);
   const activeTransforms = isMobile === undefined ? galleryTransforms5 : (isMobile ? galleryTransforms3 : galleryTransforms5);
 
-  const galleryItemInitial = { opacity: 0, y: 30, scale: 0.8, rotate: 0 };
+  const galleryItemInitial = { opacity: 0, y: 30, scale: 0.8, rotate: 0, x:0 };
   const galleryItemVariants = {
     hidden: galleryItemInitial,
     visible: (i: number) => ({ // i will be 0, 1, 2 for mobile if 3 images are shown
@@ -74,10 +88,10 @@ export function HeroSection() {
   return (
     <section 
       id={SECTION_IDS.HERO} 
-      className="min-h-screen flex flex-col items-center justify-center text-center bg-card relative overflow-hidden p-4 sm:p-6 md:p-8"
+      className="min-h-screen flex flex-col items-center justify-start text-center bg-card relative overflow-hidden p-4 sm:p-6 md:p-8" // Changed justify-center to justify-start
     >
       <motion.div 
-        className="mb-6 sm:mb-8"
+        className="mb-6 sm:mb-8" // This margin might need adjustment for closer spacing if p-4 on section is not enough
         variants={profilePicVariants}
         initial="hidden"
         animate="visible"
@@ -119,15 +133,15 @@ export function HeroSection() {
       >
         {imagesToDisplay.map((img, index) => (
           <motion.div
-            key={img.alt} // Using alt as key, ensure it's unique
-            custom={index} // index will be 0,1 for 3-image, 0..4 for 5-image
+            key={img.alt} 
+            custom={index} 
             variants={galleryItemVariants}
             initial="hidden" 
             animate="visible"
             className={`absolute ${img.zIndex}`}
             style={{ transformOrigin: 'center center' }}
             whileHover={{
-              scale: 1.2, 
+              scale: (activeTransforms[index]?.scale ?? 1) * 1.15, // Apply hover scale relative to base scale
               zIndex: 30,   
               transition: { type: "spring", stiffness: 300, damping: 10 }
             }}
@@ -146,4 +160,3 @@ export function HeroSection() {
     </section>
   );
 }
-
