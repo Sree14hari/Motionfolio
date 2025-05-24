@@ -30,11 +30,11 @@ export function HeroSection() {
   
   const galleryItemInitial = { opacity: 0, y: 30, scale: 0.8, rotate: 0 };
   const galleryTransforms = [
-    { x: -220, y: 25, rotate: -10, scale: 1 }, // Image 1 (Far Left) - Increased x
-    { x: -110, y: 10, rotate: -5, scale: 1 },  // Image 2 (Near Left) - Increased x
+    { x: -220, y: 25, rotate: -10, scale: 1 }, // Image 1 (Far Left)
+    { x: -110, y: 10, rotate: -5, scale: 1 },  // Image 2 (Near Left)
     { x: 0, y: 0, rotate: 0, scale: 1.05 },   // Image 3 (Center)
-    { x: 110, y: 10, rotate: 5, scale: 1 },   // Image 4 (Near Right) - Increased x
-    { x: 220, y: 25, rotate: 10, scale: 1 },  // Image 5 (Far Right) - Increased x
+    { x: 110, y: 10, rotate: 5, scale: 1 },   // Image 4 (Near Right)
+    { x: 220, y: 25, rotate: 10, scale: 1 },  // Image 5 (Far Right)
   ];
 
   const galleryItemVariants = {
@@ -99,7 +99,7 @@ export function HeroSection() {
       </motion.p>
       
       <motion.div 
-        className="relative flex justify-center items-start h-auto min-h-[320px] w-full max-w-3xl mt-4" // Increased min-h
+        className="relative flex justify-center items-start h-auto min-h-[320px] w-full max-w-3xl mt-4"
         initial="hidden"
         animate="visible"
       >
@@ -111,13 +111,18 @@ export function HeroSection() {
             initial="hidden" 
             animate="visible"
             className={`absolute ${img.zIndex}`}
-            style={{ transformOrigin: 'center center' }} 
+            style={{ transformOrigin: 'center center' }}
+            whileHover={{
+              scale: 1.2, // Scale up more on hover
+              zIndex: 30,   // Bring to the very front
+              transition: { type: "spring", stiffness: 300, damping: 10 }
+            }}
           >
             <Image 
               src={img.src} 
               alt={img.alt} 
-              width={160} // Increased width
-              height={224} // Increased height
+              width={160}
+              height={224}
               className="rounded-lg shadow-xl" 
               data-ai-hint={img.hint} 
             />
