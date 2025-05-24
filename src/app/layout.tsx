@@ -31,8 +31,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}>
-        <Navbar /> {/* Top navbar, now hidden on small screens */}
-        <main className="flex-grow lg:pt-16 pb-20 lg:pb-0"> {/* Adjusted padding: lg:pt-16 for desktop top nav, pb-20 for mobile bottom nav */}
+        <Navbar /> {/* Top navbar, hidden on small screens, visible on lg+ */}
+        <main className="flex-grow lg:pt-16 pb-20 lg:pb-0"> {/* Adjusted padding: lg:pt-16 for desktop top nav, pb-20 for mobile bottom nav, lg:pb-0 as bottom nav is hidden */}
           {children}
         </main>
         <Footer />
