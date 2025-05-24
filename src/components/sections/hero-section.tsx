@@ -32,7 +32,7 @@ export function HeroSection() {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.5, ease: "easeOut" }
+      transition: { duration: 0.4, ease: "easeOut" } // Reduced duration
     },
   };
 
@@ -41,7 +41,7 @@ export function HeroSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut", delay: 0.2 }
+      transition: { duration: 0.4, ease: "easeOut", delay: 0.1 } // Reduced duration and delay
     },
   };
 
@@ -53,7 +53,6 @@ export function HeroSection() {
     { src: "https://i.postimg.cc/QtFC9K45/IMG-20250314-134009-347-611735110.jpg", alt: "Gallery image 5: Candid", hint: "candid moment", zIndex: "z-0" },
   ];
 
-  // Wider spread for desktop
   const galleryTransforms5: Transform[] = [
     { x: -260, y: 0, rotate: -10, scale: 1 },    // Image 1 (Far Left)
     { x: -130, y: 0, rotate: -5, scale: 1 },     // Image 2 (Near Left)
@@ -74,13 +73,12 @@ export function HeroSection() {
   let imageHeight: number;
 
   if (isMobile === undefined) {
-    // Don't render images until isMobile is determined to prevent flash/glitch
     imagesToDisplay = [];
     activeTransforms = [];
-    imageWidth = 160; // Default desktop width
-    imageHeight = 224; // Default desktop height
+    imageWidth = 160; 
+    imageHeight = 224; 
   } else if (isMobile) {
-    imagesToDisplay = allImages.slice(1, 4); // Middle 3 images
+    imagesToDisplay = allImages.slice(1, 4); 
     activeTransforms = galleryTransforms3;
     imageWidth = 120;
     imageHeight = 168;
@@ -100,7 +98,7 @@ export function HeroSection() {
       y: activeTransforms[i]?.y ?? 0,
       scale: activeTransforms[i]?.scale ?? 1,
       rotate: activeTransforms[i]?.rotate ?? 0,
-      transition: { type: 'spring', stiffness: 100, damping: 15, delay: 0.4 + i * 0.12 }
+      transition: { type: 'spring', stiffness: 100, damping: 15, delay: 0.2 + i * 0.08 } // Reduced delay
     }),
   };
 
@@ -148,7 +146,7 @@ export function HeroSection() {
         variants={contentVariants}
         initial="hidden"
         animate="visible"
-        style={{ transition: { delay: 0.3 } }} 
+        style={{ transition: { delay: 0.15 } }} // Reduced delay to match faster content variant
       >
         {taglineText}
       </motion.p>
@@ -185,5 +183,3 @@ export function HeroSection() {
     </section>
   );
 }
-
-    

@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { SECTION_IDS, CONTACT_SECTION_SOCIAL_LINKS } from '@/lib/constants'; // Use CONTACT_SECTION_SOCIAL_LINKS
+import { SECTION_IDS, CONTACT_SECTION_SOCIAL_LINKS } from '@/lib/constants'; 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -21,7 +21,7 @@ export function ContactSection() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.2 },
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 }, // Reduced stagger and delay
     },
   };
 
@@ -30,7 +30,7 @@ export function ContactSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.4, ease: "easeOut" }, // Reduced duration
     },
   };
 
@@ -79,7 +79,7 @@ export function ContactSection() {
             <motion.div variants={itemVariants} className="mt-10 sm:mt-12 text-center">
               <p className="text-sm text-muted-foreground mb-4">Or connect with me on social media:</p>
               <div className="flex justify-center space-x-6">
-                {CONTACT_SECTION_SOCIAL_LINKS.map((link) => { // Use CONTACT_SECTION_SOCIAL_LINKS
+                {CONTACT_SECTION_SOCIAL_LINKS.map((link) => { 
                   const IconComponent = getIcon(link.Icon);
                   return IconComponent ? (
                     <motion.a

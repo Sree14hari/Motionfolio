@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion';
 import { SECTION_IDS } from '@/lib/constants';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Award, Download } from 'lucide-react'; // Example icons
+import { Award, Download } from 'lucide-react'; 
 import { Button } from '@/components/ui/button';
 
 interface Certificate {
@@ -12,12 +12,12 @@ interface Certificate {
   title: string;
   issuer: string;
   date: string;
-  imageUrl?: string; // Optional: URL to an image/logo of the certificate or issuer
-  verifyUrl?: string; // Optional: URL to verify the certificate
-  downloadUrl?: string; // Optional: URL to download a PDF of the certificate
+  imageUrl?: string; 
+  imageHint?: string;
+  verifyUrl?: string; 
+  downloadUrl?: string; 
 }
 
-// Placeholder data - replace with your actual certificates
 const certificatesData: Certificate[] = [
   {
     id: 'cert1',
@@ -53,7 +53,7 @@ export function CertificatesSection() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.2 },
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 }, // Reduced stagger and delay
     },
   };
 
@@ -62,7 +62,7 @@ export function CertificatesSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.4, ease: "easeOut" }, // Reduced duration
     },
   };
 
@@ -87,7 +87,7 @@ export function CertificatesSection() {
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={sectionVariants} // Stagger children
+          variants={sectionVariants}
         >
           {certificatesData.map((cert) => (
             <motion.div key={cert.id} variants={itemVariants}>
