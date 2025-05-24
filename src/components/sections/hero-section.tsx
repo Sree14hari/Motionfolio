@@ -5,10 +5,13 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { SECTION_IDS } from '@/lib/constants';
 import selfJpg from '@/assets/self.jpg'; // Import the image
+import { useIsMobile } from '@/hooks/use-mobile'; // Import the hook
 
 export function HeroSection() {
   const headingText = "Hey, I'm Braydon!\nWelcome to my corner of\nthe internet!";
   const taglineText = "I'm a front-end developer with a love for design and a knack for tinkering. This site is intentionally over-engineered and serves as my playground for experimenting with new ideas and seeing what sticks!";
+
+  const isMobile = useIsMobile();
 
   const profilePicVariants = {
     hidden: { opacity: 0, scale: 0.8 },
@@ -28,27 +31,6 @@ export function HeroSection() {
     },
   };
   
-  const galleryItemInitial = { opacity: 0, y: 30, scale: 0.8, rotate: 0 };
-  const galleryTransforms = [
-    { x: -220, y: 0, rotate: -10, scale: 1 }, // Image 1 (Far Left) - y changed from 25 to 0
-    { x: -110, y: 0, rotate: -5, scale: 1 },  // Image 2 (Near Left) - y changed from 10 to 0
-    { x: 0, y: 0, rotate: 0, scale: 1.05 },   // Image 3 (Center)
-    { x: 110, y: 0, rotate: 5, scale: 1 },   // Image 4 (Near Right) - y changed from 10 to 0
-    { x: 220, y: 0, rotate: 10, scale: 1 },  // Image 5 (Far Right) - y changed from 25 to 0
-  ];
-
-  const galleryItemVariants = {
-    hidden: galleryItemInitial,
-    visible: (i: number) => ({
-      opacity: 1,
-      x: galleryTransforms[i].x,
-      y: galleryTransforms[i].y,
-      scale: galleryTransforms[i].scale,
-      rotate: galleryTransforms[i].rotate,
-      transition: { type: 'spring', stiffness: 100, damping: 15, delay: 0.4 + i * 0.12 }
-    }),
-  };
-
   const images = [
     { src: "https://i.postimg.cc/kG1kjmNF/PXL-20250223-134508159-441290144-1465373175.jpg", alt: "Gallery image 1: Fun moment", hint: "personal activity", zIndex: "z-0" },
     { src: "https://i.postimg.cc/q7j4GBhL/PXL-20250223-134925254-1976385255.jpg", alt: "Gallery image 2: Speaking", hint: "public speaking", zIndex: "z-10" },
@@ -56,6 +38,38 @@ export function HeroSection() {
     { src: "https://i.postimg.cc/QMxHDycf/PXL-20250307-154437525-1572406705.jpg", alt: "Gallery image 4: Presentation", hint: "conference presentation", zIndex: "z-10" },
     { src: "https://i.postimg.cc/QtFC9K45/IMG-20250314-134009-347-611735110.jpg", alt: "Gallery image 5: Candid", hint: "candid moment", zIndex: "z-0" },
   ];
+
+  const galleryTransforms5 = [
+    { x: -220, y: 0, rotate: -10, scale: 1 }, // Image 1 (Far Left)
+    { x: -110, y: 0, rotate: -5, scale: 1 },  // Image 2 (Near Left)
+    { x: 0, y: 0, rotate: 0, scale: 1.05 },   // Image 3 (Center)
+    { x: 110, y: 0, rotate: 5, scale: 1 },   // Image 4 (Near Right)
+    { x: 220, y: 0, rotate: 10, scale: 1 },  // Image 5 (Far Right)
+  ];
+
+  const galleryTransforms3 = [
+    { x: -150, y: 0, rotate: -8, scale: 1 },  // Corresponds to original images[1]
+    { x: 0, y: 0, rotate: 0, scale: 1.05 },   // Corresponds to original images[2]
+    { x: 150, y: 0, rotate: 8, scale: 1 },   // Corresponds to original images[3]
+  ];
+
+  // On SSR, isMobile will be false (useIsMobile returns !!undefined), so it defaults to 5 images.
+  // On client-side hydration, it will adjust if necessary.
+  const imagesToDisplay = isMobile === undefined ? images : (isMobile ? images.slice(1, 4) : images);
+  const activeTransforms = isMobile === undefined ? galleryTransforms5 : (isMobile ? galleryTransforms3 : galleryTransforms5);
+
+  const galleryItemInitial = { opacity: 0, y: 30, scale: 0.8, rotate: 0 };
+  const galleryItemVariants = {
+    hidden: galleryItemInitial,
+    visible: (i: number) => ({ // i will be 0, 1, 2 for mobile if 3 images are shown
+      opacity: 1,
+      x: activeTransforms[i]?.x ?? 0,
+      y: activeTransforms[i]?.y ?? 0,
+      scale: activeTransforms[i]?.scale ?? 1,
+      rotate: activeTransforms[i]?.rotate ?? 0,
+      transition: { type: 'spring', stiffness: 100, damping: 15, delay: 0.4 + i * 0.12 }
+    }),
+  };
 
   return (
     <section 
@@ -103,18 +117,18 @@ export function HeroSection() {
         initial="hidden"
         animate="visible"
       >
-        {images.map((img, index) => (
+        {imagesToDisplay.map((img, index) => (
           <motion.div
-            key={index}
-            custom={index}
+            key={img.alt} // Using alt as key, ensure it's unique
+            custom={index} // index will be 0,1 for 3-image, 0..4 for 5-image
             variants={galleryItemVariants}
             initial="hidden" 
             animate="visible"
             className={`absolute ${img.zIndex}`}
             style={{ transformOrigin: 'center center' }}
             whileHover={{
-              scale: 1.2, // Scale up more on hover
-              zIndex: 30,   // Bring to the very front
+              scale: 1.2, 
+              zIndex: 30,   
               transition: { type: "spring", stiffness: 300, damping: 10 }
             }}
           >
@@ -132,3 +146,4 @@ export function HeroSection() {
     </section>
   );
 }
+
