@@ -51,7 +51,7 @@ export function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={cn(
-        "hidden lg:fixed top-0 left-0 right-0 z-50 transition-all duration-300", // Ensures top navbar is for lg screens and up
+        "hidden lg:flex lg:fixed top-0 left-0 right-0 z-50 transition-all duration-300", // Ensures top navbar is for lg screens and up
         isScrolled ? "bg-card/90 shadow-lg backdrop-blur-lg" : "bg-transparent"
       )}
     >
