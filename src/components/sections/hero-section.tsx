@@ -113,18 +113,18 @@ export function HeroSection() {
             {[0, 1, 2].map((index) => (
               <motion.div
                 key={index}
-                className="absolute top-0 left-0 w-full h-full rounded-full border-2 border-primary"
+                className="absolute top-0 left-0 w-full h-full rounded-full border-2"
                 style={{ borderColor: 'hsl(var(--primary))' }}
                 initial={{ scale: 1, opacity: 0.7 }}
                 animate={{
-                  scale: 2.5 + index * 0.5, // Waves expand to different sizes
+                  scale: 1.1 + index * 0.15, // Reduced scale for shorter waves
                   opacity: 0,
                 }}
                 transition={{
-                  duration: 3, // Slower duration for a more graceful wave
+                  duration: 2, // Slightly faster duration
                   ease: "linear",
                   repeat: Infinity,
-                  delay: index * 1, // Stagger delay more
+                  delay: index * 0.6, // Slightly faster stagger
                 }}
               />
             ))}
@@ -166,7 +166,7 @@ export function HeroSection() {
             className={`absolute ${img.zIndex}`}
             style={{ transformOrigin: 'center center' }}
             whileHover={{
-              scale: (activeTransforms[index]?.scale ?? 1) * 1.1, // Adjusted hover scale
+              scale: (activeTransforms[index]?.scale ?? 1) * 1.1, 
               zIndex: 30,   
               transition: { type: "spring", stiffness: 300, damping: 10 }
             }}
