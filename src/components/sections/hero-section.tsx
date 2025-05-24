@@ -4,6 +4,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { SECTION_IDS } from '@/lib/constants';
+import selfJpg from '@/assets/self.jpg'; // Import the image
 
 export function HeroSection() {
   const headingText = "Hey, I'm Braydon!\nWelcome to my corner of\nthe internet!";
@@ -66,11 +67,11 @@ export function HeroSection() {
         animate="visible"
       >
         <Image
-          src="/self.jpg"
+          src={selfJpg} // Use the imported image
           alt="Profile picture"
           width={100}
           height={100}
-          className="rounded-full mx-auto shadow-xl border-2 border-background"
+          className="rounded-full mx-auto shadow-xl border-2 border-background object-cover" // Added object-cover
           data-ai-hint="profile picture"
           priority
         />
