@@ -9,19 +9,20 @@ export const SECTION_IDS = {
   CONTACT: 'contact',
 } as const;
 
-// Define a type for individual section objects that includes an Icon
+// Define a type for individual section objects that includes an Icon and href
 export interface SectionConfig {
   id: typeof SECTION_IDS[keyof typeof SECTION_IDS];
   name: string;
   Icon: string; // Name of the Lucide icon
+  href: string; // URL path for the section's page
 }
 
 export const SECTIONS: SectionConfig[] = [
-  { id: SECTION_IDS.HERO, name: 'Home', Icon: 'Home' },
-  { id: SECTION_IDS.PROJECTS, name: 'Projects', Icon: 'Briefcase' },
-  { id: SECTION_IDS.CERTIFICATES, name: 'Certificates', Icon: 'Award' },
-  { id: SECTION_IDS.JOURNEY, name: 'Journey', Icon: 'Map' },
-  { id: SECTION_IDS.CONTACT, name: 'Contact', Icon: 'Mail' },
+  { id: SECTION_IDS.HERO, name: 'Home', Icon: 'Home', href: '/' },
+  { id: SECTION_IDS.PROJECTS, name: 'Projects', Icon: 'Briefcase', href: '/projects' },
+  { id: SECTION_IDS.CERTIFICATES, name: 'Certificates', Icon: 'Award', href: '/certificates' },
+  { id: SECTION_IDS.JOURNEY, name: 'Journey', Icon: 'Map', href: '/journey' },
+  { id: SECTION_IDS.CONTACT, name: 'Contact', Icon: 'Mail', href: '/contact' },
 ];
 
 export interface Project {
