@@ -12,7 +12,7 @@ export function AppBar() {
       className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-card/90 backdrop-blur-lg shadow-md"
     >
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-center h-14">
+        <div className="flex items-center justify-start h-14"> {/* Changed justify-center to justify-start */}
           <span className="font-cursive text-3xl font-bold text-primary">
             SREEHARI
           </span>
