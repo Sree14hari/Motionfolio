@@ -87,7 +87,7 @@ export function HeroSection() {
       </motion.h1>
 
       <motion.p
-        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mb-4" // Further reduced bottom margin
+        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mb-2" // Reduced bottom margin
         variants={taglineContentVariants}
         initial="hidden"
         animate="visible"
@@ -96,7 +96,7 @@ export function HeroSection() {
       </motion.p>
       
       <motion.div
-        className="relative flex justify-center items-center h-[300px] sm:h-[350px] md:h-[400px] w-full max-w-lg sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto" 
+        className="relative flex justify-center items-start h-[300px] sm:h-[350px] md:h-[400px] w-full max-w-lg sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto" // Changed items-center to items-start
         variants={galleryContainerVariants}
         initial="hidden"
         animate="visible"
@@ -149,4 +149,3 @@ export function HeroSection() {
     </section>
   );
 }
-
