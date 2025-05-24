@@ -116,7 +116,7 @@ export function HeroSection() {
           className="absolute z-20"
           style={{ transform: 'translateX(-100px) rotate(10deg)', transformOrigin: 'center center' }} 
         >
-          <Image src="https://placehold.co/220x260.png" alt="Gallery image 2: Speaking" width={160} height={189} className="rounded-lg shadow-xl" data-ai-hint="speaking event" />
+          <Image src="https://i.postimg.cc/q7j4GBhL/PXL-20250223-134925254-1976385255.jpg" alt="Gallery image 2: Speaking" width={160} height={189} className="rounded-lg shadow-xl" data-ai-hint="speaking event" />
         </motion.div>
 
         {/* Image 3 - Center */}
@@ -125,7 +125,7 @@ export function HeroSection() {
           className="absolute z-30"
           style={{ transform: 'translateY(-15px) scale(1.1) rotate(-3deg)', transformOrigin: 'center center' }} 
         >
-          <Image src="https://placehold.co/250x250.png" alt="Gallery image 3: Professional headshot" width={180} height={180} className="rounded-lg shadow-xl" data-ai-hint="professional headshot" />
+          <Image src="https://i.postimg.cc/rwTDnmsX/IMG-20250201-091854-995-709592560.jpg" alt="Gallery image 3: Professional headshot" width={180} height={180} className="rounded-lg shadow-xl" data-ai-hint="professional headshot" />
         </motion.div>
 
         {/* Image 4 - Near Right */}
@@ -134,7 +134,7 @@ export function HeroSection() {
           className="absolute z-20"
           style={{ transform: 'translateX(100px) rotate(-10deg)', transformOrigin: 'center center' }} 
         >
-          <Image src="https://placehold.co/220x270.png" alt="Gallery image 4: Career highlight" width={160} height={196} className="rounded-lg shadow-xl" data-ai-hint="career highlight" />
+          <Image src="https://i.postimg.cc/QMxHDycf/PXL-20250307-154437525-1572406705.jpg" alt="Gallery image 4: Career highlight" width={160} height={196} className="rounded-lg shadow-xl" data-ai-hint="career highlight" />
         </motion.div>
 
         {/* Image 5 - Far Right */}
@@ -143,7 +143,7 @@ export function HeroSection() {
           className="absolute z-10"
           style={{ transform: 'translateX(190px) rotate(20deg)', transformOrigin: 'center center' }} 
         >
-          <Image src="https://placehold.co/200x290.png" alt="Gallery image 5: Candid" width={140} height={203} className="rounded-lg shadow-xl" data-ai-hint="candid moment" />
+          <Image src="https://i.postimg.cc/QtFC9K45/IMG-20250314-134009-347-611735110.jpg" alt="Gallery image 5: Candid" width={140} height={203} className="rounded-lg shadow-xl" data-ai-hint="candid moment" />
         </motion.div>
       </motion.div>
     </section>
