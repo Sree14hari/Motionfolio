@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -24,7 +25,7 @@ export function Navbar() {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={cn(
         "hidden md:flex md:fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        "bg-background border-b border-border/70 shadow-sm" // Updated classes for main navbar bar
+        "bg-card/25 backdrop-blur-lg border-b border-border/70 shadow-sm" // Re-added blur and semi-transparent background
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,7 +42,6 @@ export function Navbar() {
 
           {/* Centered Nav Links (Desktop) */}
           <div className="flex flex-grow justify-center min-w-0">
-            {/* Removed cn() for this div, applied classes directly */}
             <div 
               className="flex items-center border border-border/50 shadow-sm rounded-full p-1 space-x-1 bg-card"
             >
@@ -68,7 +68,6 @@ export function Navbar() {
 
           {/* Right Aligned Social Icons (Desktop) */}
           <div className="flex items-center space-x-3">
-            {/* Removed cn() for this div, applied classes directly */}
             <div 
               className="flex items-center space-x-1 border border-border/50 shadow-sm text-muted-foreground px-3 py-1.5 rounded-full bg-card"
             >
@@ -80,7 +79,7 @@ export function Navbar() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, color: "hsl(var(--primary))" }} // Adjusted hover for muted foreground
+                    whileHover={{ scale: 1.1, color: "hsl(var(--primary))" }} 
                     className="p-1"
                     aria-label={`My ${link.name} profile`}
                   >
