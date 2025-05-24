@@ -8,6 +8,7 @@ import { useActiveSection } from '@/hooks/use-active-section';
 import { cn } from '@/lib/utils';
 import * as LucideIcons from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
@@ -60,7 +61,7 @@ export function Navbar() {
           <div className="flex flex-grow justify-center min-w-0">
             <div className={cn(
                 "flex items-center border border-transparent shadow-sm rounded-full p-1 space-x-1",
-                "bg-muted/60 dark:bg-muted/50" // Adjusted for better contrast on blurred background
+                "bg-muted/60 dark:bg-muted/50" 
             )}>
               {SECTIONS.map((section) => (
                 <NavLinkContent key={section.id} href={`#${section.id}`} sectionId={section.id}>
@@ -70,9 +71,9 @@ export function Navbar() {
             </div>
           </div>
           
-          {/* Right Aligned Social Icons (Desktop) */}
+          {/* Right Aligned Social Icons & Theme Toggle (Desktop) */}
           <div className="flex items-center space-x-3">
-            <div className="flex items-center space-x-1 bg-foreground/15 text-foreground px-3 py-1.5 rounded-full shadow-sm"> {/* Adjusted for better contrast */}
+            <div className="flex items-center space-x-1 bg-foreground/15 text-foreground px-3 py-1.5 rounded-full shadow-sm">
               {NAVBAR_SOCIAL_LINKS.map((link) => {
                 const IconComponent = getIcon(link.Icon);
                 return IconComponent ? (
@@ -90,6 +91,7 @@ export function Navbar() {
                 ) : null;
               })}
             </div>
+            <ThemeToggle />
           </div>
         </div>
       </div>
