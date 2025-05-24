@@ -8,16 +8,23 @@ export const SECTION_IDS = {
   PROJECTS: 'projects',
   SPEAKING: 'speaking',
   TOOLBOX: 'toolbox',
-  CONTACT: 'contact', // Keep contact ID if the section still exists on the page
+  CONTACT: 'contact', 
 } as const;
 
-export const SECTIONS = [
-  { id: SECTION_IDS.HERO, name: 'Home' },
-  { id: SECTION_IDS.ABOUT, name: 'About' },
-  { id: SECTION_IDS.BLOG, name: 'Blog' },
-  { id: SECTION_IDS.PROJECTS, name: 'Projects' },
-  { id: SECTION_IDS.SPEAKING, name: 'Speaking' },
-  { id: SECTION_IDS.TOOLBOX, name: 'Toolbox' },
+// Define a type for individual section objects that includes an Icon
+export interface SectionConfig {
+  id: typeof SECTION_IDS[keyof typeof SECTION_IDS];
+  name: string;
+  Icon: string; // Name of the Lucide icon
+}
+
+export const SECTIONS: SectionConfig[] = [
+  { id: SECTION_IDS.HERO, name: 'Home', Icon: 'Home' },
+  { id: SECTION_IDS.ABOUT, name: 'About', Icon: 'UserCircle2' }, // Changed from User to UserCircle2 for better visual
+  { id: SECTION_IDS.BLOG, name: 'Blog', Icon: 'Newspaper' }, // Changed from LayoutList
+  { id: SECTION_IDS.PROJECTS, name: 'Projects', Icon: 'Briefcase' }, // Or FolderKanban
+  { id: SECTION_IDS.SPEAKING, name: 'Speaking', Icon: 'Presentation' }, // Changed from Mic
+  { id: SECTION_IDS.TOOLBOX, name: 'Toolbox', Icon: 'Wrench' }, // Changed from Toolbox icon (which exists) for variety, Wrench is also good
 ];
 
 export interface Project {
@@ -74,19 +81,15 @@ export const PROJECTS_DATA: Project[] = [
   },
 ];
 
-// Social links to be displayed in the navbar, matching the image
 export const NAVBAR_SOCIAL_LINKS = [
   { name: 'Twitter', Icon: 'Twitter', href: 'https://twitter.com/yourprofile' },
   { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://linkedin.com/in/yourprofile' },
   { name: 'GitHub', Icon: 'Github', href: 'https://github.com/yourprofile' },
 ];
 
-// Original SOCIAL_LINKS for contact section, if still needed elsewhere
 export const CONTACT_SECTION_SOCIAL_LINKS = [
   { name: 'Email', Icon: 'Mail', href: 'mailto:hello@motionfolio.com' },
   { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://linkedin.com/in/yourprofile' },
   { name: 'GitHub', Icon: 'Github', href: 'https://github.com/yourprofile' },
   { name: 'Twitter', Icon: 'Twitter', href: 'https://twitter.com/yourprofile' },
 ];
-// For ContactSection, ensure it uses CONTACT_SECTION_SOCIAL_LINKS if you want to keep all original links there.
-// The navbar will use NAVBAR_SOCIAL_LINKS.
