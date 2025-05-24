@@ -107,7 +107,7 @@ export function HeroSection() {
           className="absolute z-10"
           style={{ transform: 'translateX(-190px) rotate(-20deg)', transformOrigin: 'center center' }} 
         >
-          <Image src="https://placehold.co/200x280.png" alt="Gallery image 1: Fun moment" width={140} height={196} className="rounded-lg shadow-xl" data-ai-hint="personal activity" />
+          <Image src="https://i.postimg.cc/kG1kjmNF/PXL-20250223-134508159-441290144-1465373175.jpg" alt="Gallery image 1: Fun moment" width={140} height={196} className="rounded-lg shadow-xl" data-ai-hint="personal activity" />
         </motion.div>
 
         {/* Image 2 - Near Left */}
