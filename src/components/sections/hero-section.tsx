@@ -87,7 +87,7 @@ export function HeroSection() {
       </motion.h1>
 
       <motion.p
-        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mb-1" // Changed to mb-1 (4px)
+        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mb-4" // Changed to mb-4
         variants={taglineContentVariants}
         initial="hidden"
         animate="visible"
