@@ -30,11 +30,11 @@ export function HeroSection() {
   
   const galleryItemInitial = { opacity: 0, y: 30, scale: 0.8, rotate: 0 };
   const galleryTransforms = [
-    { x: -190, y: 25, rotate: -10, scale: 1 }, // Image 1 (Far Left)
-    { x: -95, y: 10, rotate: -5, scale: 1 },  // Image 2 (Near Left)
+    { x: -220, y: 25, rotate: -10, scale: 1 }, // Image 1 (Far Left) - Increased x
+    { x: -110, y: 10, rotate: -5, scale: 1 },  // Image 2 (Near Left) - Increased x
     { x: 0, y: 0, rotate: 0, scale: 1.05 },   // Image 3 (Center)
-    { x: 95, y: 10, rotate: 5, scale: 1 },   // Image 4 (Near Right)
-    { x: 190, y: 25, rotate: 10, scale: 1 },  // Image 5 (Far Right)
+    { x: 110, y: 10, rotate: 5, scale: 1 },   // Image 4 (Near Right) - Increased x
+    { x: 220, y: 25, rotate: 10, scale: 1 },  // Image 5 (Far Right) - Increased x
   ];
 
   const galleryItemVariants = {
@@ -51,9 +51,9 @@ export function HeroSection() {
 
   const images = [
     { src: "https://i.postimg.cc/kG1kjmNF/PXL-20250223-134508159-441290144-1465373175.jpg", alt: "Gallery image 1: Fun moment", hint: "personal activity", zIndex: "z-0" },
-    { src: "https://i.postimg.cc/cCrzRLs9/IMG-20250122-121545-119-910828229.jpg", alt: "Gallery image 2: Speaking", hint: "public speaking", zIndex: "z-10" },
+    { src: "https://i.postimg.cc/q7j4GBhL/PXL-20250223-134925254-1976385255.jpg", alt: "Gallery image 2: Speaking", hint: "public speaking", zIndex: "z-10" },
     { src: "https://i.postimg.cc/rwTDnmsX/IMG-20250201-091854-995-709592560.jpg", alt: "Gallery image 3: Professional headshot", hint: "professional headshot", zIndex: "z-20" },
-    { src: "https://i.postimg.cc/5f1q2CQQ/PXL-20250116-111049798-779042009-445005337.jpg", alt: "Gallery image 4: Presentation", hint: "conference presentation", zIndex: "z-10" },
+    { src: "https://i.postimg.cc/QMxHDycf/PXL-20250307-154437525-1572406705.jpg", alt: "Gallery image 4: Presentation", hint: "conference presentation", zIndex: "z-10" },
     { src: "https://i.postimg.cc/QtFC9K45/IMG-20250314-134009-347-611735110.jpg", alt: "Gallery image 5: Candid", hint: "candid moment", zIndex: "z-0" },
   ];
 
@@ -99,17 +99,16 @@ export function HeroSection() {
       </motion.p>
       
       <motion.div 
-        className="relative flex justify-center items-start h-auto min-h-[280px] w-full max-w-3xl mt-4"
+        className="relative flex justify-center items-start h-auto min-h-[320px] w-full max-w-3xl mt-4" // Increased min-h
         initial="hidden"
         animate="visible"
-        // No variants needed on the container for children's staggered animation if children define their own delay
       >
         {images.map((img, index) => (
           <motion.div
             key={index}
             custom={index}
             variants={galleryItemVariants}
-            initial="hidden" // Children need initial and animate too if parent doesn't orchestrate via variants
+            initial="hidden" 
             animate="visible"
             className={`absolute ${img.zIndex}`}
             style={{ transformOrigin: 'center center' }} 
@@ -117,8 +116,8 @@ export function HeroSection() {
             <Image 
               src={img.src} 
               alt={img.alt} 
-              width={140} 
-              height={196} // Adjusted height for consistency, original had one at 203
+              width={160} // Increased width
+              height={224} // Increased height
               className="rounded-lg shadow-xl" 
               data-ai-hint={img.hint} 
             />
