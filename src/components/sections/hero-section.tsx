@@ -45,7 +45,7 @@ export function HeroSection() {
   };
 
   const galleryItemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.9, rotate: 0 },
+    hidden: { opacity: 0, y: 20, scale: 0.9 }, // Removed rotate from here as it's handled by inline style
     visible: { 
       opacity: 1, 
       y: 0, 
@@ -95,7 +95,7 @@ export function HeroSection() {
       </motion.p>
       
       <motion.div
-        className="relative flex justify-center items-center h-[220px] sm:h-[280px] md:h-[320px] w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl mx-auto"
+        className="relative flex justify-center items-center h-[250px] sm:h-[300px] md:h-[350px] w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto"
         variants={galleryContainerVariants}
         initial="hidden"
         animate="visible"
@@ -104,7 +104,7 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-10"
-          style={{ transform: 'translateX(-135px) rotate(-15deg)', transformOrigin: 'center' }}
+          style={{ transform: 'translateX(-180px) rotate(-20deg)', transformOrigin: 'center' }}
         >
           <Image src="https://placehold.co/200x280.png" alt="Gallery image 1: Fun moment" width={130} height={182} className="rounded-lg shadow-xl" data-ai-hint="personal activity" />
         </motion.div>
@@ -113,7 +113,7 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-20"
-          style={{ transform: 'translateX(-60px) rotate(8deg)', transformOrigin: 'center' }}
+          style={{ transform: 'translateX(-90px) rotate(10deg)', transformOrigin: 'center' }}
         >
           <Image src="https://placehold.co/220x260.png" alt="Gallery image 2: Speaking" width={150} height={177} className="rounded-lg shadow-xl" data-ai-hint="speaking event" />
         </motion.div>
@@ -122,7 +122,7 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-30"
-          style={{ transform: 'translateY(-10px) scale(1.15)', transformOrigin: 'center' }}
+          style={{ transform: 'translateY(-15px) scale(1.15)', transformOrigin: 'center' }}
         >
           <Image src="https://placehold.co/250x250.png" alt="Gallery image 3: Professional headshot" width={170} height={170} className="rounded-lg shadow-xl" data-ai-hint="professional headshot" />
         </motion.div>
@@ -131,7 +131,7 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-20"
-          style={{ transform: 'translateX(60px) rotate(-8deg)', transformOrigin: 'center' }}
+          style={{ transform: 'translateX(90px) rotate(-10deg)', transformOrigin: 'center' }}
         >
           <Image src="https://placehold.co/220x270.png" alt="Gallery image 4: Career highlight" width={150} height={182} className="rounded-lg shadow-xl" data-ai-hint="career highlight" />
         </motion.div>
@@ -140,7 +140,7 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-10"
-          style={{ transform: 'translateX(135px) rotate(15deg)', transformOrigin: 'center' }}
+          style={{ transform: 'translateX(180px) rotate(20deg)', transformOrigin: 'center' }}
         >
           <Image src="https://placehold.co/200x290.png" alt="Gallery image 5: Candid" width={130} height={188} className="rounded-lg shadow-xl" data-ai-hint="candid moment" />
         </motion.div>
