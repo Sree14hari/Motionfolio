@@ -3,12 +3,10 @@ export const APP_NAME = "MotionFolio";
 
 export const SECTION_IDS = {
   HERO: 'hero',
-  ABOUT: 'about',
-  BLOG: 'blog',
   PROJECTS: 'projects',
-  SPEAKING: 'speaking',
-  TOOLBOX: 'toolbox',
-  CONTACT: 'contact', 
+  CERTIFICATES: 'certificates',
+  JOURNEY: 'journey',
+  CONTACT: 'contact',
 } as const;
 
 // Define a type for individual section objects that includes an Icon
@@ -20,11 +18,10 @@ export interface SectionConfig {
 
 export const SECTIONS: SectionConfig[] = [
   { id: SECTION_IDS.HERO, name: 'Home', Icon: 'Home' },
-  { id: SECTION_IDS.ABOUT, name: 'About', Icon: 'UserCircle2' }, // Changed from User to UserCircle2 for better visual
-  { id: SECTION_IDS.BLOG, name: 'Blog', Icon: 'Newspaper' }, // Changed from LayoutList
-  { id: SECTION_IDS.PROJECTS, name: 'Projects', Icon: 'Briefcase' }, // Or FolderKanban
-  { id: SECTION_IDS.SPEAKING, name: 'Speaking', Icon: 'Presentation' }, // Changed from Mic
-  { id: SECTION_IDS.TOOLBOX, name: 'Toolbox', Icon: 'Wrench' }, // Changed from Toolbox icon (which exists) for variety, Wrench is also good
+  { id: SECTION_IDS.PROJECTS, name: 'Projects', Icon: 'Briefcase' },
+  { id: SECTION_IDS.CERTIFICATES, name: 'Certificates', Icon: 'Award' },
+  { id: SECTION_IDS.JOURNEY, name: 'Journey', Icon: 'Map' },
+  { id: SECTION_IDS.CONTACT, name: 'Contact', Icon: 'Mail' },
 ];
 
 export interface Project {
