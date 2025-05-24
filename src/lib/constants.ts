@@ -82,14 +82,14 @@ export const PROJECTS_DATA: Project[] = [
 ];
 
 export const NAVBAR_SOCIAL_LINKS = [
-  { name: 'Instagram', Icon: 'Instagram', href: 'https://instagram.com/yourprofile' },
-  { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://linkedin.com/in/yourprofile' },
-  { name: 'GitHub', Icon: 'Github', href: 'https://github.com/yourprofile' },
+  { name: 'Instagram', Icon: 'Instagram', href: 'https://www.instagram.com/s_ree.har_i' },
+  { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://www.linkedin.com/in/sree14hari/' },
+  { name: 'GitHub', Icon: 'Github', href: 'https://github.com/Sree14hari' },
 ];
 
 export const CONTACT_SECTION_SOCIAL_LINKS = [
   { name: 'Email', Icon: 'Mail', href: 'mailto:hello@motionfolio.com' },
-  { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://linkedin.com/in/yourprofile' },
-  { name: 'GitHub', Icon: 'Github', href: 'https://github.com/yourprofile' },
-  { name: 'Instagram', Icon: 'Instagram', href: 'https://instagram.com/yourprofile' },
+  { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://www.linkedin.com/in/sree14hari/' },
+  { name: 'GitHub', Icon: 'Github', href: 'https://github.com/Sree14hari' },
+  { name: 'Instagram', Icon: 'Instagram', href: 'https://www.instagram.com/s_ree.har_i' },
 ];
