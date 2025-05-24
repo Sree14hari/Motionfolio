@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -42,10 +41,10 @@ export function Navbar() {
 
           {/* Centered Nav Links (Desktop) */}
           <div className="flex flex-grow justify-center min-w-0">
-            <div className={cn(
-                "flex items-center border border-border/50 shadow-sm rounded-full p-1 space-x-1", // Updated classes for nav links pill
-                "bg-card" 
-            )}>
+            {/* Removed cn() for this div, applied classes directly */}
+            <div 
+              className="flex items-center border border-border/50 shadow-sm rounded-full p-1 space-x-1 bg-card"
+            >
               {SECTIONS.map((section) => {
                 const isActive = pathname === section.href;
                 return (
@@ -69,10 +68,10 @@ export function Navbar() {
 
           {/* Right Aligned Social Icons (Desktop) */}
           <div className="flex items-center space-x-3">
-            <div className={cn(
-              "flex items-center space-x-1 border border-border/50 shadow-sm text-muted-foreground px-3 py-1.5 rounded-full", // Updated classes for social icons pill
-              "bg-card"
-              )}>
+            {/* Removed cn() for this div, applied classes directly */}
+            <div 
+              className="flex items-center space-x-1 border border-border/50 shadow-sm text-muted-foreground px-3 py-1.5 rounded-full bg-card"
+            >
               {NAVBAR_SOCIAL_LINKS.map((link) => {
                 const IconComponent = getIcon(link.Icon);
                 return IconComponent ? (
