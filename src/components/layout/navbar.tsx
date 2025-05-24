@@ -25,7 +25,7 @@ export function Navbar() {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={cn(
         "hidden md:flex md:fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        "bg-card/25 backdrop-blur-lg shadow-lg"
+        "bg-background border-b border-border/70 shadow-sm" // Updated classes for main navbar bar
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,8 +43,8 @@ export function Navbar() {
           {/* Centered Nav Links (Desktop) */}
           <div className="flex flex-grow justify-center min-w-0">
             <div className={cn(
-                "flex items-center border border-transparent shadow-sm rounded-full p-1 space-x-1",
-                "bg-muted/60"
+                "flex items-center border border-border/50 shadow-sm rounded-full p-1 space-x-1", // Updated classes for nav links pill
+                "bg-card" 
             )}>
               {SECTIONS.map((section) => {
                 const isActive = pathname === section.href;
@@ -54,7 +54,7 @@ export function Navbar() {
                       className={cn(
                         "px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ease-in-out",
                         isActive
-                          ? "bg-background text-primary font-semibold shadow-sm"
+                          ? "bg-background text-primary font-semibold shadow-sm" // Active link style
                           : "text-muted-foreground hover:text-primary",
                         "focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-1 focus:ring-offset-card"
                       )}
@@ -67,9 +67,12 @@ export function Navbar() {
             </div>
           </div>
 
-          {/* Right Aligned Social Icons & Theme Toggle (Desktop) */}
+          {/* Right Aligned Social Icons (Desktop) */}
           <div className="flex items-center space-x-3">
-            <div className="flex items-center space-x-1 bg-foreground/15 text-foreground px-3 py-1.5 rounded-full shadow-sm">
+            <div className={cn(
+              "flex items-center space-x-1 border border-border/50 shadow-sm text-muted-foreground px-3 py-1.5 rounded-full", // Updated classes for social icons pill
+              "bg-card"
+              )}>
               {NAVBAR_SOCIAL_LINKS.map((link) => {
                 const IconComponent = getIcon(link.Icon);
                 return IconComponent ? (
@@ -78,7 +81,7 @@ export function Navbar() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, opacity: 0.85 }}
+                    whileHover={{ scale: 1.1, color: "hsl(var(--primary))" }} // Adjusted hover for muted foreground
                     className="p-1"
                     aria-label={`My ${link.name} profile`}
                   >
