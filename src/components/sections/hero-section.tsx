@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { SECTION_IDS } from '@/lib/constants';
-import selfJpg from '@/assets/self.jpg'; 
+import selfJpg from '@/assets/self.jpg';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface GalleryImage {
@@ -110,7 +110,7 @@ export function HeroSection() {
       className="min-h-screen flex flex-col items-center justify-start text-center bg-card relative overflow-hidden p-6 md:p-8"
     >
       <motion.div
-        className="mb-6 sm:mb-8"
+        className="mb-6 sm:mb-8" 
         variants={profilePicVariants}
         initial="hidden"
         animate="visible"
@@ -130,8 +130,10 @@ export function HeroSection() {
         </div>
       </motion.div>
 
+      <div className="w-full h-px bg-border"></div>
+
       <motion.h1
-        className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 sm:mb-6 text-foreground whitespace-pre-line"
+        className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground whitespace-pre-line mt-6 sm:mt-8"
         variants={contentVariants}
         initial="hidden"
         animate="visible"
@@ -139,19 +141,20 @@ export function HeroSection() {
         {headingText}
       </motion.h1>
 
+      <div className="w-full h-px bg-border mt-6 sm:mt-8"></div>
+
       <motion.p
-        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mb-4"
+        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mt-6 sm:mt-8 mb-4"
         variants={contentVariants}
         initial="hidden"
         animate="visible"
-        style={{ transition: { delay: 0.3 } }}
+        style={{ transition: { delay: 0.3 } }} 
       >
         {taglineText}
       </motion.p>
 
       <motion.div
         className="relative flex justify-center items-start h-auto min-h-[320px] w-full max-w-3xl mt-4"
-        // Removed initial/animate from container as items handle their own
       >
         {imagesToDisplay.map((img, index) => (
           <motion.div
@@ -163,7 +166,7 @@ export function HeroSection() {
             className={`absolute ${img.zIndex}`}
             style={{ transformOrigin: 'center center' }}
             whileHover={{
-              scale: (activeTransforms[index]?.scale ?? 1) * 1.1, // Ensure scale is based on resolved activeTransform
+              scale: (activeTransforms[index]?.scale ?? 1) * 1.1,
               zIndex: 30,
               transition: { type: "spring", stiffness: 300, damping: 10 }
             }}
@@ -182,3 +185,5 @@ export function HeroSection() {
     </section>
   );
 }
+
+    
