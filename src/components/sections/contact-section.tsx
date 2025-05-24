@@ -1,15 +1,15 @@
+
 "use client";
 
 import { motion } from 'framer-motion';
-import { SECTION_IDS, SOCIAL_LINKS } from '@/lib/constants';
+import { SECTION_IDS, CONTACT_SECTION_SOCIAL_LINKS } from '@/lib/constants'; // Use CONTACT_SECTION_SOCIAL_LINKS
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import * as LucideIcons from 'lucide-react'; // Import all to dynamically access
+import * as LucideIcons from 'lucide-react'; 
 import type { LucideProps } from 'lucide-react';
 
-// Helper to get Lucide icon component by name
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
   return IconComponent || null;
@@ -64,7 +64,7 @@ export function ContactSection() {
             <motion.form 
               variants={itemVariants}
               className="space-y-6" 
-              onSubmit={(e) => e.preventDefault()} // Basic form, no actual submission logic
+              onSubmit={(e) => e.preventDefault()} 
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <Input type="text" placeholder="Your Name" aria-label="Your Name" className="text-base" />
@@ -79,7 +79,7 @@ export function ContactSection() {
             <motion.div variants={itemVariants} className="mt-10 sm:mt-12 text-center">
               <p className="text-sm text-muted-foreground mb-4">Or connect with me on social media:</p>
               <div className="flex justify-center space-x-6">
-                {SOCIAL_LINKS.map((link) => {
+                {CONTACT_SECTION_SOCIAL_LINKS.map((link) => { // Use CONTACT_SECTION_SOCIAL_LINKS
                   const IconComponent = getIcon(link.Icon);
                   return IconComponent ? (
                     <motion.a
