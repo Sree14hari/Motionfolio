@@ -3,12 +3,13 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { APP_NAME, SECTIONS, SECTION_IDS, NAVBAR_SOCIAL_LINKS } from '@/lib/constants';
+import { SECTIONS, SECTION_IDS, NAVBAR_SOCIAL_LINKS } from '@/lib/constants';
 import { useActiveSection } from '@/hooks/use-active-section';
 import { cn } from '@/lib/utils';
 import * as LucideIcons from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { Logo } from '@/components/icons/logo'; // Import the Logo component
 
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
@@ -50,10 +51,10 @@ export function Navbar() {
           {/* Logo */}
           <Link href={`#${SECTION_IDS.HERO}`} passHref legacyBehavior>
             <motion.a
-              className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
+              className="flex items-center text-foreground hover:text-primary transition-colors" // Added flex and items-center
               whileHover={{ scale: 1.05 }}
             >
-              {APP_NAME}
+              <Logo className="h-8 w-auto" /> {/* Use Logo component, adjust size as needed */}
             </motion.a>
           </Link>
 
