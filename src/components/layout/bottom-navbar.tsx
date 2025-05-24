@@ -23,7 +23,7 @@ export function BottomNavbar() {
       initial={{ y: 100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-card/90 backdrop-blur-lg shadow-top rounded-t-2xl" // lg:hidden ensures it's for smaller screens
+      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-card/90 backdrop-blur-lg shadow-top rounded-t-2xl" // md:hidden ensures it's for smaller screens
     >
       <div className="container mx-auto px-2 sm:px-4">
         <div className="flex items-center justify-around h-16">

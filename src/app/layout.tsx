@@ -41,10 +41,10 @@ export default function RootLayout({
         <AppBar /> {/* Mobile-only App Bar, AppBar height is h-14 (56px) */}
         <Navbar /> {/* Desktop-only Top navbar, Navbar height is h-16 (64px) */}
         {/* 
-          Mobile: pt-14 (for AppBar) + pb-16 (for BottomNavbar h-16)
-          Desktop: lg:pt-16 (for Navbar) + lg:pb-0 (no BottomNavbar)
+          Small screens (<md): pt-14 (for AppBar) + pb-16 (for BottomNavbar h-16)
+          Medium screens and up (>=md): pt-16 (for Navbar) + pb-0 (no BottomNavbar)
         */}
-        <main className="flex-grow pt-14 lg:pt-16 pb-16 lg:pb-0"> 
+        <main className="flex-grow pt-14 md:pt-16 pb-16 md:pb-0"> 
           {children}
         </main>
         <Footer />
