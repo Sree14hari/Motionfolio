@@ -19,7 +19,7 @@ export function HeroSection() {
     },
   };
 
-  const headingContentVariants = {
+  const contentVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
@@ -27,31 +27,13 @@ export function HeroSection() {
       transition: { duration: 0.6, ease: "easeOut", delay: 0.2 } 
     },
   };
-
-  const taglineContentVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.7, ease: "easeOut", delay: 0.4 } 
-    },
-  };
   
-  const galleryContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.6 },
-    },
-  };
-
-  const galleryItemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.9 },
+  const singleImageVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
     visible: { 
       opacity: 1, 
-      y: 0, 
       scale: 1, 
-      transition: { type: 'spring', stiffness: 120, damping: 15 } 
+      transition: { type: 'spring', stiffness: 120, damping: 15, delay: 0.4 } 
     },
   };
 
@@ -71,7 +53,7 @@ export function HeroSection() {
           alt="Profile picture"
           width={100}
           height={100}
-          className="rounded-full mx-auto shadow-xl border-2 border-background object-cover" // Added object-cover
+          className="rounded-full mx-auto shadow-xl border-2 border-background object-cover"
           data-ai-hint="profile picture"
           priority
         />
@@ -79,7 +61,7 @@ export function HeroSection() {
 
       <motion.h1
         className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 sm:mb-6 text-foreground whitespace-pre-line"
-        variants={headingContentVariants}
+        variants={contentVariants}
         initial="hidden"
         animate="visible"
       >
@@ -87,64 +69,29 @@ export function HeroSection() {
       </motion.h1>
 
       <motion.p
-        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mb-4" // Standardized margin
-        variants={taglineContentVariants}
+        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mb-4"
+        variants={contentVariants}
         initial="hidden"
         animate="visible"
+        style={{ transition: { delay: 0.3 } }} // Slight delay for tagline
       >
         {taglineText}
       </motion.p>
       
       <motion.div
-        className="relative flex justify-center items-start h-[300px] sm:h-[350px] md:h-[400px] w-full max-w-lg sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto"
-        variants={galleryContainerVariants}
+        className="mt-4" // Added margin-top for spacing
+        variants={singleImageVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* Image 1 - Far Left */}
-        <motion.div
-          variants={galleryItemVariants}
-          className="absolute z-10"
-          style={{ transform: 'translateX(-300px) rotate(-25deg) translateY(50px)', transformOrigin: 'center center' }} 
-        >
-          <Image src="https://i.postimg.cc/kG1kjmNF/PXL-20250223-134508159-441290144-1465373175.jpg" alt="Gallery image 1: Fun moment" width={140} height={196} className="rounded-lg shadow-xl" data-ai-hint="personal activity" />
-        </motion.div>
-
-        {/* Image 2 - Near Left */}
-        <motion.div
-          variants={galleryItemVariants}
-          className="absolute z-20"
-          style={{ transform: 'translateX(-150px) rotate(-15deg) translateY(25px)', transformOrigin: 'center center' }} 
-        >
-          <Image src="https://i.postimg.cc/q7j4GBhL/PXL-20250223-134925254-1976385255.jpg" alt="Gallery image 2: Speaking" width={160} height={189} className="rounded-lg shadow-xl" data-ai-hint="speaking event" />
-        </motion.div>
-
-        {/* Image 3 - Center */}
-        <motion.div
-          variants={galleryItemVariants}
-          className="absolute z-30"
-          style={{ transform: 'translateY(0px) scale(1.15) rotate(0deg)', transformOrigin: 'center center' }} 
-        >
-          <Image src="https://i.postimg.cc/rwTDnmsX/IMG-20250201-091854-995-709592560.jpg" alt="Gallery image 3: Professional headshot" width={180} height={180} className="rounded-lg shadow-xl" data-ai-hint="professional headshot" />
-        </motion.div>
-
-        {/* Image 4 - Near Right */}
-        <motion.div
-          variants={galleryItemVariants}
-          className="absolute z-20"
-          style={{ transform: 'translateX(150px) rotate(15deg) translateY(25px)', transformOrigin: 'center center' }} 
-        >
-          <Image src="https://i.postimg.cc/QMxHDycf/PXL-20250307-154437525-1572406705.jpg" alt="Gallery image 4: Career highlight" width={160} height={196} className="rounded-lg shadow-xl" data-ai-hint="career highlight" />
-        </motion.div>
-
-        {/* Image 5 - Far Right */}
-        <motion.div
-          variants={galleryItemVariants}
-          className="absolute z-10"
-          style={{ transform: 'translateX(300px) rotate(25deg) translateY(50px)', transformOrigin: 'center center' }} 
-        >
-          <Image src="https://i.postimg.cc/QtFC9K45/IMG-20250314-134009-347-611735110.jpg" alt="Gallery image 5: Candid" width={140} height={203} className="rounded-lg shadow-xl" data-ai-hint="candid moment" />
-        </motion.div>
+        <Image 
+          src="https://i.postimg.cc/rwTDnmsX/IMG-20250201-091854-995-709592560.jpg" 
+          alt="Genesis event badge" 
+          width={240} 
+          height={336} 
+          className="rounded-lg shadow-xl" 
+          data-ai-hint="event badge" 
+        />
       </motion.div>
     </section>
   );
