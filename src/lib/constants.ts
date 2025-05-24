@@ -82,7 +82,7 @@ export const PROJECTS_DATA: Project[] = [
 ];
 
 export const NAVBAR_SOCIAL_LINKS = [
-  { name: 'Twitter', Icon: 'Twitter', href: 'https://twitter.com/yourprofile' },
+  { name: 'Instagram', Icon: 'Instagram', href: 'https://instagram.com/yourprofile' },
   { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://linkedin.com/in/yourprofile' },
   { name: 'GitHub', Icon: 'Github', href: 'https://github.com/yourprofile' },
 ];
@@ -91,5 +91,5 @@ export const CONTACT_SECTION_SOCIAL_LINKS = [
   { name: 'Email', Icon: 'Mail', href: 'mailto:hello@motionfolio.com' },
   { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://linkedin.com/in/yourprofile' },
   { name: 'GitHub', Icon: 'Github', href: 'https://github.com/yourprofile' },
-  { name: 'Twitter', Icon: 'Twitter', href: 'https://twitter.com/yourprofile' },
+  { name: 'Instagram', Icon: 'Instagram', href: 'https://instagram.com/yourprofile' },
 ];
