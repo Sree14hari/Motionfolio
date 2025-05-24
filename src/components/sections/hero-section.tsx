@@ -29,22 +29,22 @@ export function HeroSection() {
 
   const profilePicVariants = {
     hidden: { opacity: 0, scale: 0.8 },
-    visible: { 
-      opacity: 1, 
-      scale: 1, 
-      transition: { duration: 0.5, ease: "easeOut" } 
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5, ease: "easeOut" }
     },
   };
 
   const contentVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.6, ease: "easeOut", delay: 0.2 } 
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut", delay: 0.2 }
     },
   };
-  
+
   const allImages: GalleryImage[] = [
     { src: "https://i.postimg.cc/kG1kjmNF/PXL-20250223-134508159-441290144-1465373175.jpg", alt: "Gallery image 1: Fun moment", hint: "personal activity", zIndex: "z-0" },
     { src: "https://i.postimg.cc/q7j4GBhL/PXL-20250223-134925254-1976385255.jpg", alt: "Gallery image 2: Speaking", hint: "public speaking", zIndex: "z-10" },
@@ -67,8 +67,6 @@ export function HeroSection() {
     { x: 130, y: 0, rotate: 8, scale: 1 },   // Corresponds to original allImages[3]
   ];
 
-  // Show all 5 images if isMobile is undefined (initial state) or false (desktop)
-  // Show 3 images (middle ones) if isMobile is true
   const imagesToDisplay = isMobile === undefined ? allImages : (isMobile ? allImages.slice(1, 4) : allImages);
   const activeTransforms = isMobile === undefined ? galleryTransforms5 : (isMobile ? galleryTransforms3 : galleryTransforms5);
 
@@ -89,46 +87,31 @@ export function HeroSection() {
   };
 
   return (
-    <section 
-      id={SECTION_IDS.HERO} 
+    <section
+      id={SECTION_IDS.HERO}
       className="min-h-screen flex flex-col items-center justify-start text-center bg-card relative overflow-hidden p-6 md:p-8"
     >
-      <motion.div 
-        className="mb-6 sm:mb-8" 
+      <motion.div
+        className="mb-6 sm:mb-8"
         variants={profilePicVariants}
         initial="hidden"
         animate="visible"
       >
-        <div className="relative w-[100px] h-[100px] mx-auto">
+        <div className="relative w-[132px] h-[132px] mx-auto">
+          {/* Outer Ring */}
+          <div className="absolute inset-0 rounded-full border-2 border-muted"></div>
+          {/* Inner Ring */}
+          <div className="absolute top-1/2 left-1/2 w-[116px] h-[116px] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-muted"></div>
+
           <Image
-            src={selfJpg} 
+            src={selfJpg}
             alt="Profile picture"
             width={100}
             height={100}
-            className="rounded-full shadow-xl border-2 border-background object-cover z-10 relative"
+            className="absolute top-1/2 left-1/2 w-[100px] h-[100px] -translate-x-1/2 -translate-y-1/2 rounded-full shadow-xl border-2 border-background object-cover z-10"
             data-ai-hint="profile picture"
             priority
           />
-          <div className="absolute inset-0">
-            {[0, 1, 2].map((index) => (
-              <motion.div
-                key={index}
-                className="absolute top-0 left-0 w-full h-full rounded-full border-2"
-                style={{ borderColor: 'hsl(var(--primary))' }}
-                initial={{ scale: 1, opacity: 0.7 }}
-                animate={{
-                  scale: 1.1 + index * 0.15, 
-                  opacity: 0,
-                }}
-                transition={{
-                  duration: 3, // Increased from 2
-                  ease: "linear",
-                  repeat: Infinity,
-                  delay: index * 1, // Increased from 0.6
-                }}
-              />
-            ))}
-          </div>
         </div>
       </motion.div>
 
@@ -146,38 +129,38 @@ export function HeroSection() {
         variants={contentVariants}
         initial="hidden"
         animate="visible"
-        style={{ transition: { delay: 0.3 } }} 
+        style={{ transition: { delay: 0.3 } }}
       >
         {taglineText}
       </motion.p>
-      
-      <motion.div 
-        className="relative flex justify-center items-start h-auto min-h-[320px] w-full max-w-3xl mt-4" // items-start
+
+      <motion.div
+        className="relative flex justify-center items-start h-auto min-h-[320px] w-full max-w-3xl mt-4"
         initial="hidden"
         animate="visible"
       >
         {imagesToDisplay.map((img, index) => (
           <motion.div
-            key={img.alt} 
-            custom={index} 
+            key={img.alt}
+            custom={index}
             variants={galleryItemVariants}
-            initial="hidden" 
+            initial="hidden"
             animate="visible"
             className={`absolute ${img.zIndex}`}
             style={{ transformOrigin: 'center center' }}
             whileHover={{
-              scale: (activeTransforms[index]?.scale ?? 1) * 1.1, 
-              zIndex: 30,   
+              scale: (activeTransforms[index]?.scale ?? 1) * 1.1,
+              zIndex: 30,
               transition: { type: "spring", stiffness: 300, damping: 10 }
             }}
           >
-            <Image 
-              src={img.src} 
-              alt={img.alt} 
+            <Image
+              src={img.src}
+              alt={img.alt}
               width={imageWidth}
               height={imageHeight}
-              className="rounded-lg shadow-xl" 
-              data-ai-hint={img.hint} 
+              className="rounded-lg shadow-xl"
+              data-ai-hint={img.hint}
             />
           </motion.div>
         ))}
