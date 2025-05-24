@@ -87,7 +87,7 @@ export function HeroSection() {
       </motion.h1>
 
       <motion.p
-        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mb-4" // Changed to mb-4
+        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mb-4" // Standardized margin
         variants={taglineContentVariants}
         initial="hidden"
         animate="visible"
@@ -96,7 +96,7 @@ export function HeroSection() {
       </motion.p>
       
       <motion.div
-        className="relative flex justify-center items-start h-[300px] sm:h-[350px] md:h-[400px] w-full max-w-lg sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto" // Changed items-center to items-start
+        className="relative flex justify-center items-start h-[300px] sm:h-[350px] md:h-[400px] w-full max-w-lg sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto"
         variants={galleryContainerVariants}
         initial="hidden"
         animate="visible"
@@ -105,7 +105,7 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-10"
-          style={{ transform: 'translateX(-160px) rotate(-15deg) translateY(20px)', transformOrigin: 'center center' }} 
+          style={{ transform: 'translateX(-180px) rotate(-20deg) translateY(30px)', transformOrigin: 'center center' }} 
         >
           <Image src="https://i.postimg.cc/kG1kjmNF/PXL-20250223-134508159-441290144-1465373175.jpg" alt="Gallery image 1: Fun moment" width={140} height={196} className="rounded-lg shadow-xl" data-ai-hint="personal activity" />
         </motion.div>
@@ -114,7 +114,7 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-20"
-          style={{ transform: 'translateX(-85px) rotate(7deg) translateY(0px)', transformOrigin: 'center center' }} 
+          style={{ transform: 'translateX(-90px) rotate(-10deg) translateY(15px)', transformOrigin: 'center center' }} 
         >
           <Image src="https://i.postimg.cc/q7j4GBhL/PXL-20250223-134925254-1976385255.jpg" alt="Gallery image 2: Speaking" width={160} height={189} className="rounded-lg shadow-xl" data-ai-hint="speaking event" />
         </motion.div>
@@ -123,7 +123,7 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-30"
-          style={{ transform: 'translateY(-20px) scale(1.15) rotate(-3deg)', transformOrigin: 'center center' }} 
+          style={{ transform: 'translateY(0px) scale(1.1) rotate(0deg)', transformOrigin: 'center center' }} 
         >
           <Image src="https://i.postimg.cc/rwTDnmsX/IMG-20250201-091854-995-709592560.jpg" alt="Gallery image 3: Professional headshot" width={180} height={180} className="rounded-lg shadow-xl" data-ai-hint="professional headshot" />
         </motion.div>
@@ -132,7 +132,7 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-20"
-          style={{ transform: 'translateX(85px) rotate(-8deg) translateY(5px)', transformOrigin: 'center center' }} 
+          style={{ transform: 'translateX(90px) rotate(10deg) translateY(15px)', transformOrigin: 'center center' }} 
         >
           <Image src="https://i.postimg.cc/QMxHDycf/PXL-20250307-154437525-1572406705.jpg" alt="Gallery image 4: Career highlight" width={160} height={196} className="rounded-lg shadow-xl" data-ai-hint="career highlight" />
         </motion.div>
@@ -141,7 +141,7 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-10"
-          style={{ transform: 'translateX(165px) rotate(12deg) translateY(25px)', transformOrigin: 'center center' }} 
+          style={{ transform: 'translateX(180px) rotate(20deg) translateY(30px)', transformOrigin: 'center center' }} 
         >
           <Image src="https://i.postimg.cc/QtFC9K45/IMG-20250314-134009-347-611735110.jpg" alt="Gallery image 5: Candid" width={140} height={203} className="rounded-lg shadow-xl" data-ai-hint="candid moment" />
         </motion.div>
