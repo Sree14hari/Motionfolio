@@ -41,7 +41,7 @@ export function Navbar() {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={cn(
         "hidden lg:flex lg:fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        "bg-card/50 shadow-lg backdrop-blur-lg" 
+        "bg-card/25 shadow-lg backdrop-blur-lg" 
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,7 +60,7 @@ export function Navbar() {
           <div className="flex flex-grow justify-center min-w-0">
             <div className={cn(
                 "flex items-center border border-transparent shadow-sm rounded-full p-1 space-x-1",
-                "bg-muted/20 dark:bg-muted/10" 
+                "bg-muted/60 dark:bg-muted/50" // Adjusted for better contrast on blurred background
             )}>
               {SECTIONS.map((section) => (
                 <NavLinkContent key={section.id} href={`#${section.id}`} sectionId={section.id}>
@@ -72,7 +72,7 @@ export function Navbar() {
           
           {/* Right Aligned Social Icons (Desktop) */}
           <div className="flex items-center space-x-3">
-            <div className="flex items-center space-x-1 bg-foreground/10 text-foreground px-3 py-1.5 rounded-full shadow-sm">
+            <div className="flex items-center space-x-1 bg-foreground/15 text-foreground px-3 py-1.5 rounded-full shadow-sm"> {/* Adjusted for better contrast */}
               {NAVBAR_SOCIAL_LINKS.map((link) => {
                 const IconComponent = getIcon(link.Icon);
                 return IconComponent ? (
