@@ -12,6 +12,7 @@ export default {
       fontFamily: {
         sans: ['var(--font-geist-sans)', 'sans-serif'],
         mono: ['var(--font-geist-mono)', 'monospace'],
+        cursive: ['var(--font-dancing-script)', 'cursive'],
       },
   		colors: {
   			background: 'hsl(var(--background))',
