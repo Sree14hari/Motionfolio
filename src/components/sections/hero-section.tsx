@@ -88,10 +88,10 @@ export function HeroSection() {
   return (
     <section 
       id={SECTION_IDS.HERO} 
-      className="min-h-screen flex flex-col items-center justify-start text-center bg-card relative overflow-hidden p-4 sm:p-6 md:p-8" // Changed justify-center to justify-start
+      className="min-h-screen flex flex-col items-center justify-start text-center bg-card relative overflow-hidden p-6 md:p-8" // Changed p-4 sm:p-6 to p-6
     >
       <motion.div 
-        className="mb-6 sm:mb-8" // This margin might need adjustment for closer spacing if p-4 on section is not enough
+        className="mb-6 sm:mb-8" 
         variants={profilePicVariants}
         initial="hidden"
         animate="visible"
@@ -160,3 +160,4 @@ export function HeroSection() {
     </section>
   );
 }
+
