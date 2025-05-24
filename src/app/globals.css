@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,7 +18,7 @@
     --primary-foreground: 0 0% 100%; /* White #FFFFFF */
     --secondary: 0 0% 85%; /* Slightly darker grey */
     --secondary-foreground: 0 0% 13%;
-    --muted: 0 0% 90%; 
+    --muted: 0 0% 90%;
     --muted-foreground: 0 0% 45.1%; /* Adjusted for readability */
     --accent: 0 0% 50.2%; /* Medium grey #808080 */
     --accent-foreground: 0 0% 100%; /* White #FFFFFF */
@@ -41,40 +42,7 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-  .dark {
-    --background: 0 0% 10%; /* Dark grey for dark mode background */
-    --foreground: 0 0% 95%; /* Light grey for text */
-    --card: 0 0% 15%; /* Slightly lighter dark grey for cards */
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 0 0% 70%; /* Lighter grey for primary elements in dark mode */
-    --primary-foreground: 0 0% 10%; /* Dark text on lighter grey buttons */
-    --secondary: 0 0% 20%;
-    --secondary-foreground: 0 0% 95%;
-    --muted: 0 0% 20%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 70%; /* Lighter grey for accent */
-    --accent-foreground: 0 0% 10%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 25%;
-    --input: 0 0% 25%;
-    --ring: 0 0% 70%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
+  /* .dark class removed */
 }
 
 @layer base {

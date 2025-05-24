@@ -2,7 +2,6 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { Logo } from '@/components/icons/logo'; // Import the Logo component
 
 export function AppBar() {
@@ -16,8 +15,8 @@ export function AppBar() {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-14">
           {/* Replace text with Logo component */}
-          <Logo className="h-7 w-auto text-primary" /> 
-          <ThemeToggle />
+          <Logo className="h-7 w-auto text-primary" />
+          {/* ThemeToggle removed from here */}
         </div>
       </div>
     </motion.header>
