@@ -4,8 +4,8 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { SECTION_IDS } from '@/lib/constants';
-import selfJpg from '@/assets/self.jpg'; // Import the image
-import { useIsMobile } from '@/hooks/use-mobile'; // Import the hook
+import selfJpg from '@/assets/self.jpg'; 
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface GalleryImage {
   src: string;
@@ -53,12 +53,13 @@ export function HeroSection() {
     { src: "https://i.postimg.cc/QtFC9K45/IMG-20250314-134009-347-611735110.jpg", alt: "Gallery image 5: Candid", hint: "candid moment", zIndex: "z-0" },
   ];
 
+  // Wider spread for desktop
   const galleryTransforms5: Transform[] = [
-    { x: -220, y: 0, rotate: -10, scale: 1 }, // Image 1 (Far Left)
-    { x: -110, y: 0, rotate: -5, scale: 1 },  // Image 2 (Near Left)
-    { x: 0, y: 0, rotate: 0, scale: 1.05 },   // Image 3 (Center)
-    { x: 110, y: 0, rotate: 5, scale: 1 },   // Image 4 (Near Right)
-    { x: 220, y: 0, rotate: 10, scale: 1 },  // Image 5 (Far Right)
+    { x: -260, y: 0, rotate: -10, scale: 1 },    // Image 1 (Far Left)
+    { x: -130, y: 0, rotate: -5, scale: 1 },     // Image 2 (Near Left)
+    { x: 0, y: 0, rotate: 0, scale: 1.05 },      // Image 3 (Center)
+    { x: 130, y: 0, rotate: 5, scale: 1 },       // Image 4 (Near Right)
+    { x: 260, y: 0, rotate: 10, scale: 1 },      // Image 5 (Far Right)
   ];
 
   const galleryTransforms3: Transform[] = [
@@ -67,11 +68,28 @@ export function HeroSection() {
     { x: 130, y: 0, rotate: 8, scale: 1 },   // Corresponds to original allImages[3]
   ];
 
-  const imagesToDisplay = isMobile === undefined ? allImages : (isMobile ? allImages.slice(1, 4) : allImages);
-  const activeTransforms = isMobile === undefined ? galleryTransforms5 : (isMobile ? galleryTransforms3 : galleryTransforms5);
+  let imagesToDisplay: GalleryImage[];
+  let activeTransforms: Transform[];
+  let imageWidth: number;
+  let imageHeight: number;
 
-  const imageWidth = isMobile ? 120 : 160;
-  const imageHeight = isMobile ? 168 : 224;
+  if (isMobile === undefined) {
+    // Don't render images until isMobile is determined to prevent flash/glitch
+    imagesToDisplay = [];
+    activeTransforms = [];
+    imageWidth = 160; // Default desktop width
+    imageHeight = 224; // Default desktop height
+  } else if (isMobile) {
+    imagesToDisplay = allImages.slice(1, 4); // Middle 3 images
+    activeTransforms = galleryTransforms3;
+    imageWidth = 120;
+    imageHeight = 168;
+  } else {
+    imagesToDisplay = allImages;
+    activeTransforms = galleryTransforms5;
+    imageWidth = 160;
+    imageHeight = 224;
+  }
 
   const galleryItemInitial = { opacity: 0, y: 30, scale: 0.8, rotate: 0, x:0 };
   const galleryItemVariants = {
@@ -98,11 +116,8 @@ export function HeroSection() {
         animate="visible"
       >
         <div className="relative w-[132px] h-[132px] mx-auto">
-          {/* Outer Ring */}
           <div className="absolute inset-0 rounded-full border-2 border-muted"></div>
-          {/* Inner Ring */}
           <div className="absolute top-1/2 left-1/2 w-[116px] h-[116px] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-muted"></div>
-
           <Image
             src={selfJpg}
             alt="Profile picture"
@@ -136,8 +151,7 @@ export function HeroSection() {
 
       <motion.div
         className="relative flex justify-center items-start h-auto min-h-[320px] w-full max-w-3xl mt-4"
-        initial="hidden"
-        animate="visible"
+        // Removed initial/animate from container as items handle their own
       >
         {imagesToDisplay.map((img, index) => (
           <motion.div
@@ -149,7 +163,7 @@ export function HeroSection() {
             className={`absolute ${img.zIndex}`}
             style={{ transformOrigin: 'center center' }}
             whileHover={{
-              scale: (activeTransforms[index]?.scale ?? 1) * 1.1,
+              scale: (activeTransforms[index]?.scale ?? 1) * 1.1, // Ensure scale is based on resolved activeTransform
               zIndex: 30,
               transition: { type: "spring", stiffness: 300, damping: 10 }
             }}
