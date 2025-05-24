@@ -93,7 +93,7 @@ export function Navbar() {
           </Link>
 
           {/* Centered Nav Links (Desktop) */}
-          <div className="hidden md:flex flex-grow justify-center min-w-0"> {/* Added min-w-0 */}
+          <div className="hidden lg:flex flex-grow justify-center min-w-0"> {/* Changed md:flex to lg:flex */}
             <div className="flex items-center bg-muted/60 dark:bg-muted/30 border border-border/30 shadow-sm rounded-full p-1 space-x-1">
               {SECTIONS.map((section) => (
                 <NavLinkContent key={section.id} href={`#${section.id}`} sectionId={section.id}>
@@ -105,7 +105,7 @@ export function Navbar() {
           
           {/* Right Aligned Social Icons (Desktop) & Mobile Menu Toggle */}
           <div className="flex items-center space-x-3">
-            <div className="hidden md:flex items-center space-x-1 bg-foreground text-background px-3 py-1.5 rounded-full shadow-sm">
+            <div className="hidden lg:flex items-center space-x-1 bg-foreground text-background px-3 py-1.5 rounded-full shadow-sm"> {/* Changed md:flex to lg:flex */}
               {NAVBAR_SOCIAL_LINKS.map((link) => {
                 const IconComponent = getIcon(link.Icon);
                 return IconComponent ? (
@@ -123,7 +123,7 @@ export function Navbar() {
                 ) : null;
               })}
             </div>
-            <div className="md:hidden">
+            <div className="lg:hidden"> {/* Changed md:hidden to lg:hidden */}
               <Button variant="ghost" size="icon" onClick={toggleMenu} aria-label="Toggle menu">
                 {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
@@ -138,7 +138,7 @@ export function Navbar() {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-card/90 backdrop-blur-lg pb-3"
+          className="lg:hidden bg-card/90 backdrop-blur-lg pb-3" // Changed md:hidden to lg:hidden
         >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
             {SECTIONS.map((section) => (
