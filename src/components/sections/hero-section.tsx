@@ -117,14 +117,14 @@ export function HeroSection() {
                 style={{ borderColor: 'hsl(var(--primary))' }}
                 initial={{ scale: 1, opacity: 0.7 }}
                 animate={{
-                  scale: 1.1 + index * 0.15, // Reduced scale for shorter waves
+                  scale: 1.1 + index * 0.15, 
                   opacity: 0,
                 }}
                 transition={{
-                  duration: 2, // Slightly faster duration
+                  duration: 3, // Increased from 2
                   ease: "linear",
                   repeat: Infinity,
-                  delay: index * 0.6, // Slightly faster stagger
+                  delay: index * 1, // Increased from 0.6
                 }}
               />
             ))}
@@ -185,4 +185,3 @@ export function HeroSection() {
     </section>
   );
 }
-
