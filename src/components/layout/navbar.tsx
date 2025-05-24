@@ -93,7 +93,7 @@ export function Navbar() {
           </Link>
 
           {/* Centered Nav Links (Desktop) */}
-          <div className="hidden md:flex flex-grow justify-center">
+          <div className="hidden md:flex flex-grow justify-center min-w-0"> {/* Added min-w-0 */}
             <div className="flex items-center bg-muted/60 dark:bg-muted/30 border border-border/30 shadow-sm rounded-full p-1 space-x-1">
               {SECTIONS.map((section) => (
                 <NavLinkContent key={section.id} href={`#${section.id}`} sectionId={section.id}>
