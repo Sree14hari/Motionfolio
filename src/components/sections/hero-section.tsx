@@ -45,7 +45,7 @@ export function HeroSection() {
   };
 
   const galleryItemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.9 }, // Removed rotate from here as it's handled by inline style
+    hidden: { opacity: 0, y: 20, scale: 0.9 },
     visible: { 
       opacity: 1, 
       y: 0, 
@@ -66,8 +66,8 @@ export function HeroSection() {
         animate="visible"
       >
         <Image
-          src="https://placehold.co/128x128.png"
-          alt="Braydon's profile picture"
+          src="/self.jpg"
+          alt="Profile picture"
           width={100}
           height={100}
           className="rounded-full mx-auto shadow-xl border-2 border-background"
@@ -95,7 +95,7 @@ export function HeroSection() {
       </motion.p>
       
       <motion.div
-        className="relative flex justify-center items-center h-[250px] sm:h-[300px] md:h-[350px] w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto"
+        className="relative flex justify-center items-center h-[300px] sm:h-[350px] md:h-[400px] w-full max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto"
         variants={galleryContainerVariants}
         initial="hidden"
         animate="visible"
@@ -104,45 +104,45 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-10"
-          style={{ transform: 'translateX(-180px) rotate(-20deg)', transformOrigin: 'center' }}
+          style={{ transform: 'translateX(-180px) rotate(-25deg)', transformOrigin: 'center center' }}
         >
-          <Image src="https://placehold.co/200x280.png" alt="Gallery image 1: Fun moment" width={130} height={182} className="rounded-lg shadow-xl" data-ai-hint="personal activity" />
+          <Image src="https://placehold.co/200x280.png" alt="Gallery image 1: Fun moment" width={140} height={196} className="rounded-lg shadow-xl" data-ai-hint="personal activity" />
         </motion.div>
 
         {/* Image 2 - Near Left */}
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-20"
-          style={{ transform: 'translateX(-90px) rotate(10deg)', transformOrigin: 'center' }}
+          style={{ transform: 'translateX(-90px) rotate(15deg)', transformOrigin: 'center center' }}
         >
-          <Image src="https://placehold.co/220x260.png" alt="Gallery image 2: Speaking" width={150} height={177} className="rounded-lg shadow-xl" data-ai-hint="speaking event" />
+          <Image src="https://placehold.co/220x260.png" alt="Gallery image 2: Speaking" width={160} height={189} className="rounded-lg shadow-xl" data-ai-hint="speaking event" />
         </motion.div>
 
         {/* Image 3 - Center */}
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-30"
-          style={{ transform: 'translateY(-15px) scale(1.15)', transformOrigin: 'center' }}
+          style={{ transform: 'translateY(-20px) scale(1.15) rotate(-5deg)', transformOrigin: 'center center' }}
         >
-          <Image src="https://placehold.co/250x250.png" alt="Gallery image 3: Professional headshot" width={170} height={170} className="rounded-lg shadow-xl" data-ai-hint="professional headshot" />
+          <Image src="https://placehold.co/250x250.png" alt="Gallery image 3: Professional headshot" width={180} height={180} className="rounded-lg shadow-xl" data-ai-hint="professional headshot" />
         </motion.div>
 
         {/* Image 4 - Near Right */}
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-20"
-          style={{ transform: 'translateX(90px) rotate(-10deg)', transformOrigin: 'center' }}
+          style={{ transform: 'translateX(90px) rotate(-15deg)', transformOrigin: 'center center' }}
         >
-          <Image src="https://placehold.co/220x270.png" alt="Gallery image 4: Career highlight" width={150} height={182} className="rounded-lg shadow-xl" data-ai-hint="career highlight" />
+          <Image src="https://placehold.co/220x270.png" alt="Gallery image 4: Career highlight" width={160} height={196} className="rounded-lg shadow-xl" data-ai-hint="career highlight" />
         </motion.div>
 
         {/* Image 5 - Far Right */}
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-10"
-          style={{ transform: 'translateX(180px) rotate(20deg)', transformOrigin: 'center' }}
+          style={{ transform: 'translateX(180px) rotate(25deg)', transformOrigin: 'center center' }}
         >
-          <Image src="https://placehold.co/200x290.png" alt="Gallery image 5: Candid" width={130} height={188} className="rounded-lg shadow-xl" data-ai-hint="candid moment" />
+          <Image src="https://placehold.co/200x290.png" alt="Gallery image 5: Candid" width={140} height={203} className="rounded-lg shadow-xl" data-ai-hint="candid moment" />
         </motion.div>
       </motion.div>
     </section>
