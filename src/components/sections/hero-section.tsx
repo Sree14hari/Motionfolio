@@ -67,6 +67,8 @@ export function HeroSection() {
     { x: 130, y: 0, rotate: 8, scale: 1 },   // Corresponds to original allImages[3]
   ];
 
+  // Show all 5 images if isMobile is undefined (initial state) or false (desktop)
+  // Show 3 images (middle ones) if isMobile is true
   const imagesToDisplay = isMobile === undefined ? allImages : (isMobile ? allImages.slice(1, 4) : allImages);
   const activeTransforms = isMobile === undefined ? galleryTransforms5 : (isMobile ? galleryTransforms3 : galleryTransforms5);
 
@@ -76,7 +78,7 @@ export function HeroSection() {
   const galleryItemInitial = { opacity: 0, y: 30, scale: 0.8, rotate: 0, x:0 };
   const galleryItemVariants = {
     hidden: galleryItemInitial,
-    visible: (i: number) => ({ // i will be 0, 1, 2 for mobile if 3 images are shown
+    visible: (i: number) => ({
       opacity: 1,
       x: activeTransforms[i]?.x ?? 0,
       y: activeTransforms[i]?.y ?? 0,
@@ -97,15 +99,37 @@ export function HeroSection() {
         initial="hidden"
         animate="visible"
       >
-        <Image
-          src={selfJpg} 
-          alt="Profile picture"
-          width={100}
-          height={100}
-          className="rounded-full mx-auto shadow-xl border-2 border-background object-cover"
-          data-ai-hint="profile picture"
-          priority
-        />
+        <div className="relative w-[100px] h-[100px] mx-auto">
+          <Image
+            src={selfJpg} 
+            alt="Profile picture"
+            width={100}
+            height={100}
+            className="rounded-full shadow-xl border-2 border-background object-cover z-10 relative"
+            data-ai-hint="profile picture"
+            priority
+          />
+          <div className="absolute inset-0">
+            {[0, 1, 2].map((index) => (
+              <motion.div
+                key={index}
+                className="absolute top-0 left-0 w-full h-full rounded-full border-2 border-primary"
+                style={{ borderColor: 'hsl(var(--primary))' }}
+                initial={{ scale: 1, opacity: 0.7 }}
+                animate={{
+                  scale: 2.5 + index * 0.5, // Waves expand to different sizes
+                  opacity: 0,
+                }}
+                transition={{
+                  duration: 3, // Slower duration for a more graceful wave
+                  ease: "linear",
+                  repeat: Infinity,
+                  delay: index * 1, // Stagger delay more
+                }}
+              />
+            ))}
+          </div>
+        </div>
       </motion.div>
 
       <motion.h1
@@ -128,7 +152,7 @@ export function HeroSection() {
       </motion.p>
       
       <motion.div 
-        className="relative flex justify-center items-start h-auto min-h-[320px] w-full max-w-3xl mt-4"
+        className="relative flex justify-center items-start h-auto min-h-[320px] w-full max-w-3xl mt-4" // items-start
         initial="hidden"
         animate="visible"
       >
@@ -142,7 +166,7 @@ export function HeroSection() {
             className={`absolute ${img.zIndex}`}
             style={{ transformOrigin: 'center center' }}
             whileHover={{
-              scale: (activeTransforms[index]?.scale ?? 1) * 1.15, 
+              scale: (activeTransforms[index]?.scale ?? 1) * 1.1, // Adjusted hover scale
               zIndex: 30,   
               transition: { type: "spring", stiffness: 300, damping: 10 }
             }}
@@ -161,3 +185,4 @@ export function HeroSection() {
     </section>
   );
 }
+
