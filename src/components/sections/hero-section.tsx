@@ -105,7 +105,7 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-10"
-          style={{ transform: 'translateX(-180px) rotate(-20deg) translateY(30px)', transformOrigin: 'center center' }} 
+          style={{ transform: 'translateX(-300px) rotate(-25deg) translateY(50px)', transformOrigin: 'center center' }} 
         >
           <Image src="https://i.postimg.cc/kG1kjmNF/PXL-20250223-134508159-441290144-1465373175.jpg" alt="Gallery image 1: Fun moment" width={140} height={196} className="rounded-lg shadow-xl" data-ai-hint="personal activity" />
         </motion.div>
@@ -114,7 +114,7 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-20"
-          style={{ transform: 'translateX(-90px) rotate(-10deg) translateY(15px)', transformOrigin: 'center center' }} 
+          style={{ transform: 'translateX(-150px) rotate(-15deg) translateY(25px)', transformOrigin: 'center center' }} 
         >
           <Image src="https://i.postimg.cc/q7j4GBhL/PXL-20250223-134925254-1976385255.jpg" alt="Gallery image 2: Speaking" width={160} height={189} className="rounded-lg shadow-xl" data-ai-hint="speaking event" />
         </motion.div>
@@ -123,7 +123,7 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-30"
-          style={{ transform: 'translateY(0px) scale(1.1) rotate(0deg)', transformOrigin: 'center center' }} 
+          style={{ transform: 'translateY(0px) scale(1.15) rotate(0deg)', transformOrigin: 'center center' }} 
         >
           <Image src="https://i.postimg.cc/rwTDnmsX/IMG-20250201-091854-995-709592560.jpg" alt="Gallery image 3: Professional headshot" width={180} height={180} className="rounded-lg shadow-xl" data-ai-hint="professional headshot" />
         </motion.div>
@@ -132,7 +132,7 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-20"
-          style={{ transform: 'translateX(90px) rotate(10deg) translateY(15px)', transformOrigin: 'center center' }} 
+          style={{ transform: 'translateX(150px) rotate(15deg) translateY(25px)', transformOrigin: 'center center' }} 
         >
           <Image src="https://i.postimg.cc/QMxHDycf/PXL-20250307-154437525-1572406705.jpg" alt="Gallery image 4: Career highlight" width={160} height={196} className="rounded-lg shadow-xl" data-ai-hint="career highlight" />
         </motion.div>
@@ -141,7 +141,7 @@ export function HeroSection() {
         <motion.div
           variants={galleryItemVariants}
           className="absolute z-10"
-          style={{ transform: 'translateX(180px) rotate(20deg) translateY(30px)', transformOrigin: 'center center' }} 
+          style={{ transform: 'translateX(300px) rotate(25deg) translateY(50px)', transformOrigin: 'center center' }} 
         >
           <Image src="https://i.postimg.cc/QtFC9K45/IMG-20250314-134009-347-611735110.jpg" alt="Gallery image 5: Candid" width={140} height={203} className="rounded-lg shadow-xl" data-ai-hint="candid moment" />
         </motion.div>
