@@ -28,15 +28,34 @@ export function HeroSection() {
     },
   };
   
+  const galleryItemInitial = { opacity: 0, y: 30, scale: 0.8, rotate: 0 };
+  const galleryTransforms = [
+    { x: -190, y: 25, rotate: -10, scale: 1 }, // Image 1 (Far Left)
+    { x: -95, y: 10, rotate: -5, scale: 1 },  // Image 2 (Near Left)
+    { x: 0, y: 0, rotate: 0, scale: 1.05 },   // Image 3 (Center)
+    { x: 95, y: 10, rotate: 5, scale: 1 },   // Image 4 (Near Right)
+    { x: 190, y: 25, rotate: 10, scale: 1 },  // Image 5 (Far Right)
+  ];
+
   const galleryItemVariants = {
-    hidden: { opacity: 0, scale: 0.9, y: 20 },
+    hidden: galleryItemInitial,
     visible: (i: number) => ({
       opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: { type: 'spring', stiffness: 100, damping: 12, delay: 0.4 + i * 0.1 }
+      x: galleryTransforms[i].x,
+      y: galleryTransforms[i].y,
+      scale: galleryTransforms[i].scale,
+      rotate: galleryTransforms[i].rotate,
+      transition: { type: 'spring', stiffness: 100, damping: 15, delay: 0.4 + i * 0.12 }
     }),
   };
+
+  const images = [
+    { src: "https://i.postimg.cc/kG1kjmNF/PXL-20250223-134508159-441290144-1465373175.jpg", alt: "Gallery image 1: Fun moment", hint: "personal activity", zIndex: "z-0" },
+    { src: "https://i.postimg.cc/cCrzRLs9/IMG-20250122-121545-119-910828229.jpg", alt: "Gallery image 2: Speaking", hint: "public speaking", zIndex: "z-10" },
+    { src: "https://i.postimg.cc/rwTDnmsX/IMG-20250201-091854-995-709592560.jpg", alt: "Gallery image 3: Professional headshot", hint: "professional headshot", zIndex: "z-20" },
+    { src: "https://i.postimg.cc/5f1q2CQQ/PXL-20250116-111049798-779042009-445005337.jpg", alt: "Gallery image 4: Presentation", hint: "conference presentation", zIndex: "z-10" },
+    { src: "https://i.postimg.cc/QtFC9K45/IMG-20250314-134009-347-611735110.jpg", alt: "Gallery image 5: Candid", hint: "candid moment", zIndex: "z-0" },
+  ];
 
   return (
     <section 
@@ -50,7 +69,7 @@ export function HeroSection() {
         animate="visible"
       >
         <Image
-          src={selfJpg} // Use the imported image
+          src={selfJpg} 
           alt="Profile picture"
           width={100}
           height={100}
@@ -74,66 +93,37 @@ export function HeroSection() {
         variants={contentVariants}
         initial="hidden"
         animate="visible"
-        style={{ transition: { delay: 0.3 } }} // Slight delay for tagline
+        style={{ transition: { delay: 0.3 } }} 
       >
         {taglineText}
       </motion.p>
       
-      {/* Image Gallery */}
       <motion.div 
-        className="relative flex justify-center items-start h-auto min-h-[280px] w-full max-w-3xl mt-4" // items-start to align to top, adjust height/min-h as needed
+        className="relative flex justify-center items-start h-auto min-h-[280px] w-full max-w-3xl mt-4"
         initial="hidden"
         animate="visible"
+        // No variants needed on the container for children's staggered animation if children define their own delay
       >
-        {/* Image 1 - Far Left */}
-        <motion.div
-          custom={0}
-          variants={galleryItemVariants}
-          className="absolute z-0"
-          style={{ transform: 'translateX(-190px) rotate(-10deg) translateY(25px)', transformOrigin: 'center center' }} 
-        >
-          <Image src="https://i.postimg.cc/kG1kjmNF/PXL-20250223-134508159-441290144-1465373175.jpg" alt="Gallery image 1: Fun moment" width={140} height={196} className="rounded-lg shadow-xl" data-ai-hint="personal activity" />
-        </motion.div>
-
-        {/* Image 2 - Near Left */}
-        <motion.div
-          custom={1}
-          variants={galleryItemVariants}
-          className="absolute z-10"
-          style={{ transform: 'translateX(-95px) rotate(-5deg) translateY(10px)', transformOrigin: 'center center' }} 
-        >
-          <Image src="https://i.postimg.cc/cCrzRLs9/IMG-20250122-121545-119-910828229.jpg" alt="Gallery image 2: Speaking" width={140} height={196} className="rounded-lg shadow-xl" data-ai-hint="public speaking" />
-        </motion.div>
-
-        {/* Image 3 - Center */}
-        <motion.div
-          custom={2}
-          variants={galleryItemVariants}
-          className="absolute z-20"
-          style={{ transform: 'translateY(0px) scale(1.05) rotate(0deg)', transformOrigin: 'center center' }} 
-        >
-          <Image src="https://i.postimg.cc/rwTDnmsX/IMG-20250201-091854-995-709592560.jpg" alt="Gallery image 3: Professional headshot" width={140} height={196} className="rounded-lg shadow-xl" data-ai-hint="professional headshot" />
-        </motion.div>
-
-        {/* Image 4 - Near Right */}
-        <motion.div
-          custom={3}
-          variants={galleryItemVariants}
-          className="absolute z-10" // z-10 to be behind center but above far right
-          style={{ transform: 'translateX(95px) rotate(5deg) translateY(10px)', transformOrigin: 'center center' }} 
-        >
-          <Image src="https://i.postimg.cc/5f1q2CQQ/PXL-20250116-111049798-779042009-445005337.jpg" alt="Gallery image 4: Presentation" width={140} height={196} className="rounded-lg shadow-xl" data-ai-hint="conference presentation" />
-        </motion.div>
-
-        {/* Image 5 - Far Right */}
-        <motion.div
-          custom={4}
-          variants={galleryItemVariants}
-          className="absolute z-0" // z-0 to be at the back
-          style={{ transform: 'translateX(190px) rotate(10deg) translateY(25px)', transformOrigin: 'center center' }} 
-        >
-          <Image src="https://i.postimg.cc/QtFC9K45/IMG-20250314-134009-347-611735110.jpg" alt="Gallery image 5: Candid" width={140} height={196} className="rounded-lg shadow-xl" data-ai-hint="candid moment" />
-        </motion.div>
+        {images.map((img, index) => (
+          <motion.div
+            key={index}
+            custom={index}
+            variants={galleryItemVariants}
+            initial="hidden" // Children need initial and animate too if parent doesn't orchestrate via variants
+            animate="visible"
+            className={`absolute ${img.zIndex}`}
+            style={{ transformOrigin: 'center center' }} 
+          >
+            <Image 
+              src={img.src} 
+              alt={img.alt} 
+              width={140} 
+              height={196} // Adjusted height for consistency, original had one at 203
+              className="rounded-lg shadow-xl" 
+              data-ai-hint={img.hint} 
+            />
+          </motion.div>
+        ))}
       </motion.div>
     </section>
   );
