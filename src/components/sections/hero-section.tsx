@@ -62,15 +62,16 @@ export function HeroSection() {
   ];
 
   const galleryTransforms3: Transform[] = [
-    { x: -150, y: 0, rotate: -8, scale: 1 },  // Corresponds to original allImages[1]
+    { x: -130, y: 0, rotate: -8, scale: 1 },  // Corresponds to original allImages[1]
     { x: 0, y: 0, rotate: 0, scale: 1.05 },   // Corresponds to original allImages[2]
-    { x: 150, y: 0, rotate: 8, scale: 1 },   // Corresponds to original allImages[3]
+    { x: 130, y: 0, rotate: 8, scale: 1 },   // Corresponds to original allImages[3]
   ];
 
-  // On SSR, isMobile will be false (useIsMobile returns !!undefined), so it defaults to 5 images.
-  // On client-side hydration, it will adjust if necessary.
   const imagesToDisplay = isMobile === undefined ? allImages : (isMobile ? allImages.slice(1, 4) : allImages);
   const activeTransforms = isMobile === undefined ? galleryTransforms5 : (isMobile ? galleryTransforms3 : galleryTransforms5);
+
+  const imageWidth = isMobile ? 120 : 160;
+  const imageHeight = isMobile ? 168 : 224;
 
   const galleryItemInitial = { opacity: 0, y: 30, scale: 0.8, rotate: 0, x:0 };
   const galleryItemVariants = {
@@ -88,7 +89,7 @@ export function HeroSection() {
   return (
     <section 
       id={SECTION_IDS.HERO} 
-      className="min-h-screen flex flex-col items-center justify-start text-center bg-card relative overflow-hidden p-6 md:p-8" // Changed p-4 sm:p-6 to p-6
+      className="min-h-screen flex flex-col items-center justify-start text-center bg-card relative overflow-hidden p-6 md:p-8"
     >
       <motion.div 
         className="mb-6 sm:mb-8" 
@@ -141,7 +142,7 @@ export function HeroSection() {
             className={`absolute ${img.zIndex}`}
             style={{ transformOrigin: 'center center' }}
             whileHover={{
-              scale: (activeTransforms[index]?.scale ?? 1) * 1.15, // Apply hover scale relative to base scale
+              scale: (activeTransforms[index]?.scale ?? 1) * 1.15, 
               zIndex: 30,   
               transition: { type: "spring", stiffness: 300, damping: 10 }
             }}
@@ -149,8 +150,8 @@ export function HeroSection() {
             <Image 
               src={img.src} 
               alt={img.alt} 
-              width={160}
-              height={224}
+              width={imageWidth}
+              height={imageHeight}
               className="rounded-lg shadow-xl" 
               data-ai-hint={img.hint} 
             />
@@ -160,4 +161,3 @@ export function HeroSection() {
     </section>
   );
 }
-
