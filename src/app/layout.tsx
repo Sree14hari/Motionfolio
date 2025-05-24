@@ -38,13 +38,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${geistSans.variable} ${geistMono.variable} ${dancingScript.variable} antialiased bg-background text-foreground`}>
-        <AppBar /> {/* Mobile-only App Bar, AppBar height is h-14 (56px) */}
+        <AppBar /> {/* Mobile-only App Bar, AppBar height is h-16 (64px) */}
         <Navbar /> {/* Desktop-only Top navbar, Navbar height is h-16 (64px) */}
         {/* 
-          Small screens (<md): pt-14 (for AppBar) + pb-16 (for BottomNavbar h-16)
-          Medium screens and up (>=md): pt-16 (for Navbar) + pb-0 (no BottomNavbar)
+          Small screens (<md): pt-16 (for AppBar h-16) + pb-16 (for BottomNavbar h-16)
+          Medium screens and up (>=md): pt-16 (for Navbar h-16) + pb-0 (no BottomNavbar)
         */}
-        <main className="flex-grow pt-14 md:pt-16 pb-16 md:pb-0"> 
+        <main className="flex-grow pt-16 pb-16 md:pb-0"> {/* Changed pt-14 md:pt-16 to pt-16 */}
           {children}
         </main>
         <Footer />
