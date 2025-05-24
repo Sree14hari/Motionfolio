@@ -30,11 +30,11 @@ export function HeroSection() {
   
   const galleryItemInitial = { opacity: 0, y: 30, scale: 0.8, rotate: 0 };
   const galleryTransforms = [
-    { x: -220, y: 25, rotate: -10, scale: 1 }, // Image 1 (Far Left)
-    { x: -110, y: 10, rotate: -5, scale: 1 },  // Image 2 (Near Left)
+    { x: -220, y: 0, rotate: -10, scale: 1 }, // Image 1 (Far Left) - y changed from 25 to 0
+    { x: -110, y: 0, rotate: -5, scale: 1 },  // Image 2 (Near Left) - y changed from 10 to 0
     { x: 0, y: 0, rotate: 0, scale: 1.05 },   // Image 3 (Center)
-    { x: 110, y: 10, rotate: 5, scale: 1 },   // Image 4 (Near Right)
-    { x: 220, y: 25, rotate: 10, scale: 1 },  // Image 5 (Far Right)
+    { x: 110, y: 0, rotate: 5, scale: 1 },   // Image 4 (Near Right) - y changed from 10 to 0
+    { x: 220, y: 0, rotate: 10, scale: 1 },  // Image 5 (Far Right) - y changed from 25 to 0
   ];
 
   const galleryItemVariants = {
