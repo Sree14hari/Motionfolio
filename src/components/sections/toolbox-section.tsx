@@ -49,7 +49,7 @@ export function ToolboxSection() {
   return (
     <motion.section
       id={SECTION_IDS.TOOLBOX}
-      className="py-16 sm:py-24 bg-background"
+      className="py-16 sm:py-24 bg-card" // Changed from bg-background to bg-card
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
