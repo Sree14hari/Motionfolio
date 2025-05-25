@@ -4,26 +4,48 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { SECTION_IDS, TOOLBOX_DATA } from '@/lib/constants';
-import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
 
-export function ToolboxSection() {
-  const sectionVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-    },
-  };
+const sectionVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2, delayChildren: 0.2 },
+  },
+};
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.4, ease: 'easeOut' },
+const titleItemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: 'easeOut' },
+  },
+};
+
+const gridContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.07,
+      delayChildren: 0.3, // Delay after title/subheading animations
     },
-  };
+  },
+};
+
+const gridItemVariants = {
+  hidden: { opacity: 0, scale: 0.85, y: 20 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: 'easeOut' },
+  },
+};
+
+export function ToolboxSection() {
+  const headingText = "Hardware && software\nI keep in my toolbox.";
 
   return (
     <motion.section
@@ -36,46 +58,54 @@ export function ToolboxSection() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          variants={itemVariants}
+          variants={titleItemVariants}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-2">
-            Toolbox
+          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-2 whitespace-pre-line">
+            {headingText}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Check out my favorite tools and spots around the web.
-          </p>
+        </motion.div>
+
+        <motion.div 
+          variants={titleItemVariants} 
+          className="text-center mb-8 sm:mb-10"
+        >
+          <h3 className="text-sm font-medium text-primary uppercase tracking-wider">
+            Applications
+          </h3>
         </motion.div>
 
         <motion.div
-          variants={sectionVariants} // Reuse sectionVariants for staggering children
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-8"
+          variants={gridContainerVariants}
+          className="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10"
         >
           {TOOLBOX_DATA.map((tool) => (
             <motion.div
               key={tool.id}
-              variants={itemVariants}
-              whileHover={{ y: -5, scale: 1.05, boxShadow: "0px 8px 15px rgba(0,0,0,0.1)" }}
+              variants={gridItemVariants}
+              whileHover={{ y: -6, scale: 1.03, boxShadow: "0px 10px 20px -5px rgba(0,0,0,0.1)" }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
             >
               <Link href={tool.href} passHref legacyBehavior>
-                <a target="_blank" rel="noopener noreferrer" className="block group">
-                  <Card className="overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-card h-full flex flex-col items-center justify-center p-6 aspect-square">
-                    <CardContent className="p-0 flex flex-col items-center justify-center text-center">
-                      <div className="relative w-16 h-16 sm:w-20 sm:h-20 mb-4 transition-transform duration-300 group-hover:scale-110">
-                        <Image
-                          src={tool.iconUrl}
-                          alt={tool.name}
-                          width={80}
-                          height={80}
-                          className="rounded-md object-contain"
-                          data-ai-hint={tool.imageHint}
-                        />
-                      </div>
-                      <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                        {tool.name}
-                      </p>
-                    </CardContent>
-                  </Card>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center text-center group"
+                  aria-label={tool.name}
+                >
+                  <div className="bg-card p-3 sm:p-4 rounded-xl shadow-md aspect-square w-full max-w-[70px] sm:max-w-[80px] md:max-w-[90px] flex items-center justify-center mb-2.5 transition-all duration-300 ease-out group-hover:shadow-lg group-hover:scale-105">
+                    <Image
+                      src={tool.iconUrl}
+                      alt={tool.name}
+                      width={40}
+                      height={40}
+                      className="object-contain transition-transform duration-300 ease-out"
+                      data-ai-hint={tool.imageHint}
+                    />
+                  </div>
+                  <p className="text-xs sm:text-sm text-muted-foreground group-hover:text-primary transition-colors duration-200">
+                    {tool.name}
+                  </p>
                 </a>
               </Link>
             </motion.div>

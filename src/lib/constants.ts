@@ -103,32 +103,20 @@ export interface Tool {
 }
 
 export const TOOLBOX_DATA: Tool[] = [
-  {
-    id: 'tool1',
-    name: 'Figma',
-    iconUrl: 'https://placehold.co/80x80.png', // Placeholder, replace with actual or better placeholder
-    imageHint: 'design tool',
-    href: '#',
-  },
-  {
-    id: 'tool2',
-    name: 'VS Code',
-    iconUrl: 'https://placehold.co/80x80.png',
-    imageHint: 'code editor',
-    href: '#',
-  },
-  {
-    id: 'tool3',
-    name: 'Raycast',
-    iconUrl: 'https://placehold.co/80x80.png',
-    imageHint: 'productivity tool',
-    href: '#',
-  },
-   {
-    id: 'tool4',
-    name: 'GitHub',
-    iconUrl: 'https://placehold.co/80x80.png',
-    imageHint: 'version control',
-    href: '#',
-  },
+  { id: 'raycast', name: 'Raycast', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'launcher productivity', href: '#' },
+  { id: 'arc', name: 'Arc', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'browser internet', href: '#' },
+  { id: 'vscode', name: 'VSCode', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'code editor', href: '#' },
+  { id: 'mymind', name: 'mymind', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'notes thoughts', href: '#' },
+  { id: 'obsidian', name: 'Obsidian', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'notes knowledge', href: '#' },
+  { id: 'notion', name: 'Notion', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'productivity workspace', href: '#' },
+  { id: 'tana', name: 'Tana', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'notes graph', href: '#' },
+  { id: 'spotify', name: 'Spotify', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'music streaming', href: '#' },
+  { id: 'figma', name: 'Figma', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'design tool', href: '#' },
+  { id: 'things3', name: 'Things 3', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'task manager', href: '#' },
+  { id: 'fantastical', name: 'Fantastical', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'calendar app', href: '#' },
+  { id: '1password', name: '1Password', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'password manager', href: '#' },
+  { id: 'framer', name: 'Framer', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'prototyping design', href: '#' },
+  { id: 'cleanshotx', name: 'Cleanshot X', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'screenshot tool', href: '#' },
+  { id: 'pixelsnap2', name: 'PixelSnap 2', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'measurement tool', href: '#' },
+  { id: 'linear', name: 'Linear', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'issue tracker', href: '#' },
 ];
