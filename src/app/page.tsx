@@ -7,7 +7,9 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <div className="w-full h-px bg-border my-8 sm:my-12 md:my-16"></div> {/* Separator Line */}
       <ToolboxSection />
+      <div className="w-full h-px bg-border my-8 sm:my-12 md:my-16"></div> {/* Separator Line */}
       <FeaturedProjectsSection />
     </>
   );
