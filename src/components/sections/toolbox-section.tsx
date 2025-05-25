@@ -4,7 +4,8 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { SECTION_IDS, TOOLBOX_DATA, HARDWARE_DATA } from '@/lib/constants';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+// Card related imports are no longer needed for the hardware part if it's fully custom
+// import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { ListChecks } from 'lucide-react';
 
 const sectionVariants = {
@@ -138,37 +139,36 @@ export function ToolboxSection() {
               Hardware
             </motion.h3>
             {HARDWARE_DATA.map((item) => (
-              <motion.div key={item.id} variants={hardwareCardVariants}>
-                <Card className="overflow-hidden shadow-lg rounded-lg">
-                  <div className="relative w-full h-56 sm:h-64">
-                    <Image
-                      src={item.imageUrl}
-                      alt={item.name}
-                      layout="fill"
-                      objectFit="cover"
-                      data-ai-hint={item.imageHint}
-                      className="rounded-t-lg"
-                    />
-                  </div>
-                  <CardHeader>
-                    <CardTitle className="text-xl sm:text-2xl font-semibold text-foreground">
-                      {item.name}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-sm text-muted-foreground mb-4">
-                      My primary machine for development and creative work.
-                    </CardDescription>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      {item.specs.map((spec, index) => (
-                        <li key={index} className="flex items-center">
-                          <ListChecks className="h-4 w-4 mr-2 text-primary/70 flex-shrink-0" />
-                          <span>{spec}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+              <motion.div 
+                key={item.id} 
+                variants={hardwareCardVariants} 
+                className="overflow-hidden shadow-lg rounded-lg bg-card" // Card-like styling on the motion.div
+              >
+                <div className="relative w-full h-56 sm:h-64">
+                  <Image
+                    src={item.imageUrl}
+                    alt={item.name}
+                    layout="fill"
+                    objectFit="cover"
+                    data-ai-hint={item.imageHint}
+                  />
+                </div>
+                <div className="p-6"> {/* Content padding */}
+                  <h4 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">
+                    {item.name}
+                  </h4>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    My primary machine for development and creative work.
+                  </p>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    {item.specs.map((spec, index) => (
+                      <li key={index} className="flex items-center">
+                        <ListChecks className="h-4 w-4 mr-2 text-primary/70 flex-shrink-0" />
+                        <span>{spec}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </motion.div>
             ))}
           </motion.div>
