@@ -44,7 +44,7 @@ const gridItemVariants = {
 };
 
 export function ToolboxSection() {
-  const headingText = "software\nI keep in my toolbox.";
+  const headingText = "Software\nI keep in my toolbox.";
 
   return (
     <motion.section
@@ -95,8 +95,8 @@ export function ToolboxSection() {
                 <Image
                   src={tool.iconUrl}
                   alt={`${tool.name} logo`} // Using alt text with "logo"
-                  width={40}
-                  height={40}
+                  width={44}
+                  height={44}
                   className="object-contain transition-transform duration-300 ease-out"
                   data-ai-hint={tool.imageHint}
                 />
