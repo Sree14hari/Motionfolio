@@ -99,13 +99,12 @@ export interface Tool {
   name: string;
   iconUrl: string;
   imageHint: string;
-  // href is removed as per previous request
 }
 
 export const TOOLBOX_DATA: Tool[] = [
-  { id: 'arc', name: 'Arc', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'arc browser logo' },
-  { id: 'vscode', name: 'VSCode', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'vscode logo' },
-  { id: 'figma', name: 'Figma', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'figma logo' },
-  { id: 'canva', name: 'Canva', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'canva logo' },
-  { id: 'msoffice', name: 'MS Office', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'microsoft office logo' },
+  { id: 'arc', name: 'Arc', iconUrl: 'https://img.icons8.com/?size=100&id=pxCU5vhxdBME&format=png&color=000000', imageHint: 'arc browser logo' },
+  { id: 'vscode', name: 'VSCode', iconUrl: 'https://img.icons8.com/?size=100&id=vwHLUxbq5jOv&format=png&color=000000', imageHint: 'vscode logo' },
+  { id: 'figma', name: 'Figma', iconUrl: 'https://img.icons8.com/?size=100&id=snB4bDeuO6gJ&format=png&color=000000', imageHint: 'figma logo' },
+  { id: 'canva', name: 'Canva', iconUrl: 'https://img.icons8.com/?size=100&id=iWw83PVcBpLw&format=png&color=000000', imageHint: 'canva logo' },
+  { id: 'msoffice', name: 'MS Office', iconUrl: 'https://img.icons8.com/?size=100&id=37619&format=png&color=000000', imageHint: 'microsoft office logo' },
 ];
