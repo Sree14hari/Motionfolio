@@ -7,6 +7,8 @@ export const SECTION_IDS = {
   CERTIFICATES: 'certificates',
   JOURNEY: 'journey',
   CONTACT: 'contact',
+  TOOLBOX: 'toolbox',
+  FEATURED_PROJECTS: 'featured-projects',
 } as const;
 
 // Define a type for individual section objects that includes an Icon and href
@@ -90,4 +92,43 @@ export const CONTACT_SECTION_SOCIAL_LINKS = [
   { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://www.linkedin.com/in/sree14hari/' },
   { name: 'GitHub', Icon: 'Github', href: 'https://github.com/Sree14hari' },
   { name: 'Instagram', Icon: 'Instagram', href: 'https://www.instagram.com/s_ree.har_i' },
+];
+
+export interface Tool {
+  id: string;
+  name: string;
+  iconUrl: string;
+  imageHint: string;
+  href: string;
+}
+
+export const TOOLBOX_DATA: Tool[] = [
+  {
+    id: 'tool1',
+    name: 'Figma',
+    iconUrl: 'https://placehold.co/80x80.png', // Placeholder, replace with actual or better placeholder
+    imageHint: 'design tool',
+    href: '#',
+  },
+  {
+    id: 'tool2',
+    name: 'VS Code',
+    iconUrl: 'https://placehold.co/80x80.png',
+    imageHint: 'code editor',
+    href: '#',
+  },
+  {
+    id: 'tool3',
+    name: 'Raycast',
+    iconUrl: 'https://placehold.co/80x80.png',
+    imageHint: 'productivity tool',
+    href: '#',
+  },
+   {
+    id: 'tool4',
+    name: 'GitHub',
+    iconUrl: 'https://placehold.co/80x80.png',
+    imageHint: 'version control',
+    href: '#',
+  },
 ];
