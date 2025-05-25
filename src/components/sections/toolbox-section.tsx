@@ -4,7 +4,6 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { SECTION_IDS, TOOLBOX_DATA } from '@/lib/constants';
-// Link import is removed as items are no longer links
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -45,7 +44,7 @@ const gridItemVariants = {
 };
 
 export function ToolboxSection() {
-  const headingText = "software\nI keep in my toolbox."; // Removed "Hardware &&"
+  const headingText = "software\nI keep in my toolbox.";
 
   return (
     <motion.section
@@ -77,18 +76,22 @@ export function ToolboxSection() {
 
         <motion.div
           variants={gridContainerVariants}
+          initial="hidden" // Ensure grid container also starts hidden for variants to apply
+          whileInView="visible" // Ensure grid container animates when in view
+          viewport={{ once: true, amount: 0.1 }} // Adjust viewport settings as needed for the grid
           className="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10"
         >
           {TOOLBOX_DATA.map((tool) => (
-            <motion.div // Changed from Link/motion.a to motion.div
+            <div // This div is now the static grid cell
               key={tool.id}
-              variants={gridItemVariants}
-              whileHover={{ y: -6, scale: 1.03, boxShadow: "0px 10px 20px -5px rgba(0,0,0,0.1)" }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              className="flex flex-col items-center text-center group" // Added group class here
+              className="flex flex-col items-center text-center group"
             >
-              {/* Removed href, target, rel, aria-label from the wrapper */}
-              <div className="bg-card p-3 sm:p-4 rounded-xl shadow-md aspect-square w-full max-w-[70px] sm:max-w-[80px] md:max-w-[90px] flex items-center justify-center mb-2.5 transition-all duration-300 ease-out group-hover:shadow-lg group-hover:scale-105">
+              <motion.div // This motion.div wraps only the icon card for animation
+                variants={gridItemVariants}
+                whileHover={{ y: -6, scale: 1.03, boxShadow: "0px 10px 20px -5px rgba(0,0,0,0.1)" }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                className="bg-card p-3 sm:p-4 rounded-xl shadow-md aspect-square w-full max-w-[70px] sm:max-w-[80px] md:max-w-[90px] flex items-center justify-center mb-2.5 transition-all duration-300 ease-out group-hover:shadow-lg group-hover:scale-105"
+              >
                 <Image
                   src={tool.iconUrl}
                   alt={tool.name}
@@ -97,11 +100,11 @@ export function ToolboxSection() {
                   className="object-contain transition-transform duration-300 ease-out"
                   data-ai-hint={tool.imageHint}
                 />
-              </div>
+              </motion.div>
               <p className="text-xs sm:text-sm text-muted-foreground group-hover:text-primary transition-colors duration-200">
                 {tool.name}
               </p>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
       </div>
