@@ -142,16 +142,16 @@ export function ToolboxSection() {
               <motion.div variants={hardwareContentVariants}>
                 <div className="relative w-full max-w-2xl mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border border-border">
                   <iframe 
-                    title="Vectary 3D Model" 
+                    title="ROG Laptop Render" 
                     frameBorder="0" 
                     allowFullScreen 
                     allow="autoplay; fullscreen; xr-spatial-tracking" 
-                    src="https://app.vectary.com/p/0FnNim8Sjnsi1uouUNxvH1?logo=0"
+                    src="https://sree14hari.github.io/ROG-RENDER/"
                     className="absolute top-0 left-0 w-full h-full"
                   >
                   </iframe>
                 </div>
-                {/* Removed Sketchfab attribution paragraph */}
+                
                 <div className="max-w-md mx-auto text-center md:text-left">
                   <h4 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 text-center">
                     {primaryHardware.name}
