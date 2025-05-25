@@ -4,7 +4,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { SECTION_IDS, TOOLBOX_DATA } from '@/lib/constants';
-import Link from 'next/link';
+// Link import is removed as items are no longer links
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -35,17 +35,17 @@ const gridContainerVariants = {
 };
 
 const gridItemVariants = {
-  hidden: { opacity: 0, scale: 0.85, y: 20 },
+  hidden: { opacity: 0, scale: 0.7, y: 30 }, // Adjusted for pop effect
   visible: {
     opacity: 1,
     scale: 1,
     y: 0,
-    transition: { duration: 0.4, ease: 'easeOut' },
+    transition: { type: "spring", stiffness: 250, damping: 12, duration: 0.3 }, // Spring animation for pop
   },
 };
 
 export function ToolboxSection() {
-  const headingText = "Hardware && software\nI keep in my toolbox.";
+  const headingText = "software\nI keep in my toolbox."; // Removed "Hardware &&"
 
   return (
     <motion.section
@@ -80,34 +80,27 @@ export function ToolboxSection() {
           className="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10"
         >
           {TOOLBOX_DATA.map((tool) => (
-            <motion.div
+            <motion.div // Changed from Link/motion.a to motion.div
               key={tool.id}
               variants={gridItemVariants}
               whileHover={{ y: -6, scale: 1.03, boxShadow: "0px 10px 20px -5px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              className="flex flex-col items-center text-center group" // Added group class here
             >
-              <Link href={tool.href} passHref legacyBehavior>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex flex-col items-center text-center group"
-                  aria-label={tool.name}
-                >
-                  <div className="bg-card p-3 sm:p-4 rounded-xl shadow-md aspect-square w-full max-w-[70px] sm:max-w-[80px] md:max-w-[90px] flex items-center justify-center mb-2.5 transition-all duration-300 ease-out group-hover:shadow-lg group-hover:scale-105">
-                    <Image
-                      src={tool.iconUrl}
-                      alt={tool.name}
-                      width={40}
-                      height={40}
-                      className="object-contain transition-transform duration-300 ease-out"
-                      data-ai-hint={tool.imageHint}
-                    />
-                  </div>
-                  <p className="text-xs sm:text-sm text-muted-foreground group-hover:text-primary transition-colors duration-200">
-                    {tool.name}
-                  </p>
-                </a>
-              </Link>
+              {/* Removed href, target, rel, aria-label from the wrapper */}
+              <div className="bg-card p-3 sm:p-4 rounded-xl shadow-md aspect-square w-full max-w-[70px] sm:max-w-[80px] md:max-w-[90px] flex items-center justify-center mb-2.5 transition-all duration-300 ease-out group-hover:shadow-lg group-hover:scale-105">
+                <Image
+                  src={tool.iconUrl}
+                  alt={tool.name}
+                  width={40}
+                  height={40}
+                  className="object-contain transition-transform duration-300 ease-out"
+                  data-ai-hint={tool.imageHint}
+                />
+              </div>
+              <p className="text-xs sm:text-sm text-muted-foreground group-hover:text-primary transition-colors duration-200">
+                {tool.name}
+              </p>
             </motion.div>
           ))}
         </motion.div>
