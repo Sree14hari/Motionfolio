@@ -99,13 +99,13 @@ export interface Tool {
   name: string;
   iconUrl: string;
   imageHint: string;
-  href: string;
+  // href is removed as per previous request
 }
 
 export const TOOLBOX_DATA: Tool[] = [
-  { id: 'arc', name: 'Arc', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'browser internet', href: '#' },
-  { id: 'vscode', name: 'VSCode', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'code editor', href: '#' },
-  { id: 'figma', name: 'Figma', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'design tool', href: '#' },
-  { id: 'canva', name: 'Canva', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'design graphic', href: '#' },
-  { id: 'msoffice', name: 'MS Office', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'office suite', href: '#' },
+  { id: 'arc', name: 'Arc', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'arc browser logo' },
+  { id: 'vscode', name: 'VSCode', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'vscode logo' },
+  { id: 'figma', name: 'Figma', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'figma logo' },
+  { id: 'canva', name: 'Canva', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'canva logo' },
+  { id: 'msoffice', name: 'MS Office', iconUrl: 'https://placehold.co/80x80.png', imageHint: 'microsoft office logo' },
 ];

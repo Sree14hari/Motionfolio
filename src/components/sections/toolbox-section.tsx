@@ -76,17 +76,17 @@ export function ToolboxSection() {
 
         <motion.div
           variants={gridContainerVariants}
-          initial="hidden" // Ensure grid container also starts hidden for variants to apply
-          whileInView="visible" // Ensure grid container animates when in view
-          viewport={{ once: true, amount: 0.1 }} // Adjust viewport settings as needed for the grid
-          className="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10"
+          initial="hidden" 
+          whileInView="visible" 
+          viewport={{ once: true, amount: 0.1 }} 
+          className="flex flex-wrap justify-center gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10" // Changed to flex for centering
         >
           {TOOLBOX_DATA.map((tool) => (
-            <div // This div is now the static grid cell
+            <div 
               key={tool.id}
               className="flex flex-col items-center text-center group"
             >
-              <motion.div // This motion.div wraps only the icon card for animation
+              <motion.div 
                 variants={gridItemVariants}
                 whileHover={{ y: -6, scale: 1.03, boxShadow: "0px 10px 20px -5px rgba(0,0,0,0.1)" }}
                 transition={{ type: "spring", stiffness: 300, damping: 15 }}
@@ -94,7 +94,7 @@ export function ToolboxSection() {
               >
                 <Image
                   src={tool.iconUrl}
-                  alt={tool.name}
+                  alt={`${tool.name} logo`} // Using alt text with "logo"
                   width={40}
                   height={40}
                   className="object-contain transition-transform duration-300 ease-out"
