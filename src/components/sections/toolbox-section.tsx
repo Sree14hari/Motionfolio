@@ -130,7 +130,7 @@ export function ToolboxSection() {
           </motion.div>
 
           {/* Hardware Section */}
-          <motion.div variants={contentColumnVariants}>
+          <motion.div variants={contentColumnVariants} className="mt-16 lg:mt-20">
             <motion.h3 
               variants={titleItemVariants} 
               className="text-2xl font-semibold text-primary text-center mb-8 sm:mb-10"
@@ -140,21 +140,18 @@ export function ToolboxSection() {
             
             {primaryHardware && (
               <motion.div variants={hardwareContentVariants}>
-                <div className="sketchfab-embed-wrapper relative w-full max-w-2xl mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border border-border">
+                <div className="relative w-full max-w-2xl mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border border-border">
                   <iframe 
-                    title="rog" 
+                    title="Vectary 3D Model" 
                     frameBorder="0" 
                     allowFullScreen 
                     allow="autoplay; fullscreen; xr-spatial-tracking" 
-                    src="https://sketchfab.com/models/a40c2384a71d4e76bcefbf324f284089/embed?autospin=1&autostart=1&preload=1&transparent=1&ui_hint=0"
+                    src="https://app.vectary.com/p/0FnNim8Sjnsi1uouUNxvH1"
                     className="absolute top-0 left-0 w-full h-full"
                   >
                   </iframe>
                 </div>
-                <div 
-                  className="text-xs text-muted-foreground/80 mb-6 text-center max-w-2xl mx-auto"
-                  dangerouslySetInnerHTML={{ __html: `<p style="font-size: 13px; font-weight: normal; margin: 5px; color: hsl(var(--muted-foreground));"> <a href="https://sketchfab.com/3d-models/rog-a40c2384a71d4e76bcefbf324f284089?utm_medium=embed&utm_campaign=share-popup&utm_content=a40c2384a71d4e76bcefbf324f284089" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> rog </a> by <a href="https://sketchfab.com/sreehari14shr?utm_medium=embed&utm_campaign=share-popup&utm_content=a40c2384a71d4e76bcefbf324f284089" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> sreehari14shr </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=a40c2384a71d4e76bcefbf324f284089" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));">Sketchfab</a></p>`}}
-                />
+                {/* Removed Sketchfab attribution paragraph */}
                 <div className="max-w-md mx-auto text-center md:text-left">
                   <h4 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 text-center">
                     {primaryHardware.name}
@@ -179,3 +176,4 @@ export function ToolboxSection() {
     </motion.section>
   );
 }
+
