@@ -2,10 +2,8 @@
 "use client";
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'; // Added import for motion
 import { SECTION_IDS, TOOLBOX_DATA, HARDWARE_DATA } from '@/lib/constants';
-// Card related imports are no longer needed for the hardware part if it's fully custom
-// import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { ListChecks } from 'lucide-react';
 
 const sectionVariants = {
@@ -55,7 +53,7 @@ const gridItemVariants = {
   },
 };
 
-const hardwareCardVariants = {
+const hardwareContentVariants = {
   hidden: { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
@@ -66,6 +64,7 @@ const hardwareCardVariants = {
 
 export function ToolboxSection() {
   const headingText = "Tools & Hardware\nI use daily.";
+  const primaryHardware = HARDWARE_DATA[0]; // Assuming there's at least one hardware item
 
   return (
     <motion.section
@@ -138,39 +137,50 @@ export function ToolboxSection() {
             >
               Hardware
             </motion.h3>
-            {HARDWARE_DATA.map((item) => (
-              <motion.div 
-                key={item.id} 
-                variants={hardwareCardVariants} 
-                className="overflow-hidden shadow-lg rounded-lg bg-card" // Card-like styling on the motion.div
-              >
-                <div className="relative w-full h-56 sm:h-64">
-                  <Image
-                    src={item.imageUrl}
-                    alt={item.name}
-                    layout="fill"
-                    objectFit="cover"
-                    data-ai-hint={item.imageHint}
-                  />
+            
+            {primaryHardware && (
+              <motion.div variants={hardwareContentVariants}>
+                <div className="sketchfab-embed-wrapper relative w-full aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border border-border">
+                  <iframe 
+                    title={primaryHardware.name + " 3D Model"}
+                    frameBorder="0" 
+                    allowFullScreen 
+                    // mozallowfullscreen="true" // Standard allowfullscreen should cover this
+                    // webkitallowfullscreen="true" // Standard allowfullscreen should cover this
+                    allow="autoplay; fullscreen; xr-spatial-tracking" 
+                    // The following attributes might cause React warnings or might not be standard boolean attributes.
+                    // For robustness, ensure they are either correctly cased or boolean if React expects that.
+                    // For this prototype, keeping them as strings or removing if they cause issues.
+                    // xr-spatial-tracking // This can be a string if it has a value, or just present for boolean
+                    // execution-while-out-of-viewport
+                    // execution-while-not-rendered
+                    // web-share
+                    src="https://sketchfab.com/models/51eca7b2e5884c4087f3499e523d5184/embed"
+                    className="absolute top-0 left-0 w-full h-full"
+                  >
+                  </iframe>
                 </div>
-                <div className="p-6"> {/* Content padding */}
-                  <h4 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">
-                    {item.name}
-                  </h4>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    My primary machine for development and creative work.
-                  </p>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    {item.specs.map((spec, index) => (
-                      <li key={index} className="flex items-center">
-                        <ListChecks className="h-4 w-4 mr-2 text-primary/70 flex-shrink-0" />
-                        <span>{spec}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <div 
+                  className="text-xs text-muted-foreground/80 mb-6"
+                  dangerouslySetInnerHTML={{ __html: \`<p style="font-size: 13px; font-weight: normal; margin: 5px; color: hsl(var(--muted-foreground));"> <a href="https://sketchfab.com/3d-models/asus-rog-strix-scar-17-2023-g733-gaming-laptop-51eca7b2e5884c4087f3499e523d5184?utm_medium=embed&utm_campaign=share-popup&utm_content=51eca7b2e5884c4087f3499e523d5184" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> Asus ROG Strix Scar 17 (2023) G733 Gaming Laptop </a> by <a href="https://sketchfab.com/ranahacs?utm_medium=embed&utm_campaign=share-popup&utm_content=51eca7b2e5884c4087f3499e523d5184" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> Ranaha Creative Studio </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=51eca7b2e5884c4087f3499e523d5184" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));">Sketchfab</a></p>\`}}
+                />
+
+                <h4 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">
+                  {primaryHardware.name}
+                </h4>
+                <p className="text-sm text-muted-foreground mb-4">
+                  My primary machine for development and creative work.
+                </p>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  {primaryHardware.specs.map((spec, index) => (
+                    <li key={index} className="flex items-center">
+                      <ListChecks className="h-4 w-4 mr-2 text-primary/70 flex-shrink-0" />
+                      <span>{spec}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
-            ))}
+            )}
           </motion.div>
         </div>
       </div>

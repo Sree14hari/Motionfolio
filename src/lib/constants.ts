@@ -112,8 +112,6 @@ export const TOOLBOX_DATA: Tool[] = [
 export interface HardwareItem {
   id: string;
   name: string;
-  imageUrl: string;
-  imageHint: string;
   specs: string[];
 }
 
@@ -121,8 +119,6 @@ export const HARDWARE_DATA: HardwareItem[] = [
   {
     id: 'laptop-rog-strix-g16',
     name: 'ROG Strix G16',
-    imageUrl: 'https://placehold.co/400x300.png', // Placeholder image
-    imageHint: 'gaming laptop',
     specs: [
       'Intel Core i9 Processor',
       'NVIDIA GeForce RTX 4070',
