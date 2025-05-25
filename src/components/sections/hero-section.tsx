@@ -22,7 +22,7 @@ interface Transform {
 }
 
 export function HeroSection() {
-  const headingText = "Hey, I'm Braydon!\nWelcome to my corner of\nthe internet!";
+  const headingText = "Hey, I'm Sreehari!\nWelcome to my corner of\nthe internet!";
   const taglineText = "I'm a front-end developer with a love for design and a knack for tinkering. This site is intentionally over-engineered and serves as my playground for experimenting with new ideas and seeing what sticks!";
 
   const isMobile = useIsMobile();
@@ -32,7 +32,7 @@ export function HeroSection() {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.4, ease: "easeOut" } // Reduced duration
+      transition: { duration: 0.4, ease: "easeOut" } 
     },
   };
 
@@ -41,7 +41,7 @@ export function HeroSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, ease: "easeOut", delay: 0.1 } // Reduced duration and delay
+      transition: { duration: 0.4, ease: "easeOut", delay: 0.1 } 
     },
   };
 
@@ -98,7 +98,7 @@ export function HeroSection() {
       y: activeTransforms[i]?.y ?? 0,
       scale: activeTransforms[i]?.scale ?? 1,
       rotate: activeTransforms[i]?.rotate ?? 0,
-      transition: { type: 'spring', stiffness: 100, damping: 15, delay: 0.2 + i * 0.08 } // Reduced delay
+      transition: { type: 'spring', stiffness: 100, damping: 15, delay: 0.2 + i * 0.08 } 
     }),
   };
 
@@ -146,7 +146,7 @@ export function HeroSection() {
         variants={contentVariants}
         initial="hidden"
         animate="visible"
-        style={{ transition: { delay: 0.15 } }} // Reduced delay to match faster content variant
+        style={{ transition: { delay: 0.15 } }} 
       >
         {taglineText}
       </motion.p>
