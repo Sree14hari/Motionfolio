@@ -2,9 +2,12 @@
 "use client";
 
 import Image from 'next/image';
-import { motion } from 'framer-motion'; // Added import for motion
+import { motion } from 'framer-motion';
 import { SECTION_IDS, TOOLBOX_DATA, HARDWARE_DATA } from '@/lib/constants';
 import { ListChecks } from 'lucide-react';
+// React Three Fiber and Drei imports are no longer needed here
+// import dynamic from 'next/dynamic';
+// import React, { Suspense, useState, useEffect } from 'react'; 
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -38,7 +41,7 @@ const gridContainerVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.07,
-      delayChildren: 0.1, // Delay after column/title animations
+      delayChildren: 0.1, 
     },
   },
 };
@@ -62,9 +65,24 @@ const hardwareContentVariants = {
   },
 };
 
+// LaptopViewer dynamic import removed
+// const LaptopViewer = dynamic(() => import('../three/laptop-viewer').then(mod => mod.default), {
+//   ssr: false,
+//   loading: () => (
+//     <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-lg border border-border bg-muted flex items-center justify-center">
+//       <p className="text-muted-foreground">Loading 3D Model...</p>
+//     </div>
+//   ),
+// });
+
 export function ToolboxSection() {
-  const headingText = "Tools & Hardware\nI use daily.";
-  const primaryHardware = HARDWARE_DATA[0]; // Assuming there's at least one hardware item
+  const headingText = "Software\nI use daily."; // Updated heading
+  const primaryHardware = HARDWARE_DATA.length > 0 ? HARDWARE_DATA[0] : null;
+
+  // const [isClient, setIsClient] = useState(false);
+  // useEffect(() => {
+  //   setIsClient(true);
+  // }, []);
 
   return (
     <motion.section
@@ -99,7 +117,7 @@ export function ToolboxSection() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
-              className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10"
+              className="flex flex-wrap justify-center gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10"
             >
               {TOOLBOX_DATA.map((tool) => (
                 <div
@@ -145,16 +163,7 @@ export function ToolboxSection() {
                     title={primaryHardware.name + " 3D Model"}
                     frameBorder="0" 
                     allowFullScreen 
-                    // mozallowfullscreen="true" // Standard allowfullscreen should cover this
-                    // webkitallowfullscreen="true" // Standard allowfullscreen should cover this
                     allow="autoplay; fullscreen; xr-spatial-tracking" 
-                    // The following attributes might cause React warnings or might not be standard boolean attributes.
-                    // For robustness, ensure they are either correctly cased or boolean if React expects that.
-                    // For this prototype, keeping them as strings or removing if they cause issues.
-                    // xr-spatial-tracking // This can be a string if it has a value, or just present for boolean
-                    // execution-while-out-of-viewport
-                    // execution-while-not-rendered
-                    // web-share
                     src="https://sketchfab.com/models/51eca7b2e5884c4087f3499e523d5184/embed"
                     className="absolute top-0 left-0 w-full h-full"
                   >
@@ -164,7 +173,6 @@ export function ToolboxSection() {
                   className="text-xs text-muted-foreground/80 mb-6"
                   dangerouslySetInnerHTML={{ __html: `<p style="font-size: 13px; font-weight: normal; margin: 5px; color: hsl(var(--muted-foreground));"> <a href="https://sketchfab.com/3d-models/asus-rog-strix-scar-17-2023-g733-gaming-laptop-51eca7b2e5884c4087f3499e523d5184?utm_medium=embed&utm_campaign=share-popup&utm_content=51eca7b2e5884c4087f3499e523d5184" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> Asus ROG Strix Scar 17 (2023) G733 Gaming Laptop </a> by <a href="https://sketchfab.com/ranahacs?utm_medium=embed&utm_campaign=share-popup&utm_content=51eca7b2e5884c4087f3499e523d5184" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> Ranaha Creative Studio </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=51eca7b2e5884c4087f3499e523d5184" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));">Sketchfab</a></p>`}}
                 />
-
                 <h4 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">
                   {primaryHardware.name}
                 </h4>
