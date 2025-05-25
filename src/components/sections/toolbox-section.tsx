@@ -146,7 +146,7 @@ export function ToolboxSection() {
                     frameBorder="0" 
                     allowFullScreen 
                     allow="autoplay; fullscreen; xr-spatial-tracking" 
-                    src="https://app.vectary.com/p/0FnNim8Sjnsi1uouUNxvH1"
+                    src="https://app.vectary.com/p/0FnNim8Sjnsi1uouUNxvH1?logo=0"
                     className="absolute top-0 left-0 w-full h-full"
                   >
                   </iframe>
@@ -176,4 +176,3 @@ export function ToolboxSection() {
     </motion.section>
   );
 }
-
