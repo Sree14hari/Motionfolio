@@ -44,7 +44,7 @@ export default function RootLayout({
           Small screens (<md): pt-16 (for AppBar h-16) + pb-16 (for BottomNavbar h-16)
           Medium screens and up (>=md): pt-16 (for Navbar h-16) + pb-0 (no BottomNavbar)
         */}
-        <main className="flex-grow pt-16 pb-16 md:pb-0"> {/* Changed pt-14 md:pt-16 to pt-16 */}
+        <main className="flex-grow pt-16 pb-16 md:pb-0 bg-card"> {/* Changed to bg-card */}
           {children}
         </main>
         <Footer />
