@@ -63,7 +63,7 @@ const hardwareContentVariants = {
 };
 
 export function ToolboxSection() {
-  const headingText = "Software and Hardware\nI use"; // Updated heading
+  const headingText = "Software and Hardware\nI use"; 
   const primaryHardware = HARDWARE_DATA.length > 0 ? HARDWARE_DATA[0] : null;
 
   return (
@@ -85,13 +85,12 @@ export function ToolboxSection() {
           </h2>
         </motion.div>
 
-        {/* Changed from grid md:grid-cols-2 to a single column flow */}
         <div className="space-y-12 lg:space-y-16"> 
           {/* Software Section */}
           <motion.div variants={contentColumnVariants}>
             <motion.h3 
               variants={titleItemVariants} 
-              className="text-2xl font-semibold text-primary text-center mb-8 sm:mb-10" // Removed md:text-left
+              className="text-2xl font-semibold text-primary text-center mb-8 sm:mb-10"
             >
               Software
             </motion.h3>
@@ -134,7 +133,7 @@ export function ToolboxSection() {
           <motion.div variants={contentColumnVariants}>
             <motion.h3 
               variants={titleItemVariants} 
-              className="text-2xl font-semibold text-primary text-center mb-8 sm:mb-10" // Removed md:text-left
+              className="text-2xl font-semibold text-primary text-center mb-8 sm:mb-10"
             >
               Hardware
             </motion.h3>
@@ -143,29 +142,29 @@ export function ToolboxSection() {
               <motion.div variants={hardwareContentVariants}>
                 <div className="sketchfab-embed-wrapper relative w-full max-w-2xl mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border border-border">
                   <iframe 
-                    title="Asus ROG Strix G15 - Gaming Laptop" 
+                    title="rog" 
                     frameBorder="0" 
                     allowFullScreen 
                     allow="autoplay; fullscreen; xr-spatial-tracking" 
-                    src="https://sketchfab.com/models/b6f23d94d36c44d1998e859b14a116a3/embed"
+                    src="https://sketchfab.com/models/a40c2384a71d4e76bcefbf324f284089/embed?autospin=1&autostart=1&preload=1&transparent=1&ui_hint=0"
                     className="absolute top-0 left-0 w-full h-full"
                   >
                   </iframe>
                 </div>
                 <div 
-                  className="text-xs text-muted-foreground/80 mb-6 text-center max-w-2xl mx-auto" // Added text-center and max-w for centering
-                  dangerouslySetInnerHTML={{ __html: `<p style="font-size: 13px; font-weight: normal; margin: 5px; color: hsl(var(--muted-foreground));"> <a href="https://sketchfab.com/3d-models/asus-rog-strix-g15-gaming-laptop-b6f23d94d36c44d1998e859b14a116a3?utm_medium=embed&utm_campaign=share-popup&utm_content=b6f23d94d36c44d1998e859b14a116a3" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> Asus ROG Strix G15 - Gaming Laptop </a> by <a href="https://sketchfab.com/MIEVisuals?utm_medium=embed&utm_campaign=share-popup&utm_content=b6f23d94d36c44d1998e859b14a116a3" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> MIE-Visuals </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=b6f23d94d36c44d1998e859b14a116a3" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));">Sketchfab</a></p>`}}
+                  className="text-xs text-muted-foreground/80 mb-6 text-center max-w-2xl mx-auto"
+                  dangerouslySetInnerHTML={{ __html: `<p style="font-size: 13px; font-weight: normal; margin: 5px; color: hsl(var(--muted-foreground));"> <a href="https://sketchfab.com/3d-models/rog-a40c2384a71d4e76bcefbf324f284089?utm_medium=embed&utm_campaign=share-popup&utm_content=a40c2384a71d4e76bcefbf324f284089" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> rog </a> by <a href="https://sketchfab.com/sreehari14shr?utm_medium=embed&utm_campaign=share-popup&utm_content=a40c2384a71d4e76bcefbf324f284089" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> sreehari14shr </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=a40c2384a71d4e76bcefbf324f284089" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));">Sketchfab</a></p>`}}
                 />
-                <div className="max-w-md mx-auto text-center md:text-left"> {/* Centering text for specs on small screens */}
-                  <h4 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 text-center"> {/* Centered laptop name */}
+                <div className="max-w-md mx-auto text-center md:text-left">
+                  <h4 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 text-center">
                     {primaryHardware.name}
                   </h4>
-                  <p className="text-sm text-muted-foreground mb-4 text-center"> {/* Centered description */}
+                  <p className="text-sm text-muted-foreground mb-4 text-center">
                     My primary machine for development and creative work.
                   </p>
-                  <ul className="space-y-2 text-sm text-muted-foreground max-w-xs mx-auto md:mx-0 md:max-w-none"> {/* Centering list on small screens */}
+                  <ul className="space-y-2 text-sm text-muted-foreground max-w-xs mx-auto md:mx-0 md:max-w-none">
                     {primaryHardware.specs.map((spec, index) => (
-                      <li key={index} className="flex items-center justify-center md:justify-start"> {/* Centering list items on small screens */}
+                      <li key={index} className="flex items-center justify-center md:justify-start">
                         <ListChecks className="h-4 w-4 mr-2 text-primary/70 flex-shrink-0" />
                         <span>{spec}</span>
                       </li>
@@ -180,5 +179,3 @@ export function ToolboxSection() {
     </motion.section>
   );
 }
-
-    
