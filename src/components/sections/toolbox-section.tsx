@@ -63,7 +63,7 @@ const hardwareContentVariants = {
 };
 
 export function ToolboxSection() {
-  const headingText = "Software and Hardware\nI use";
+  const headingText = "Software and Hardware"; // Updated heading
   const primaryHardware: HardwareItem | null = HARDWARE_DATA.length > 0 ? HARDWARE_DATA[0] : null;
 
   return (

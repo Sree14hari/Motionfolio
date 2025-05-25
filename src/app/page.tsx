@@ -25,9 +25,9 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <div className="w-full h-px bg-border my-8"></div> {/* Separator Line */}
+      <div className="w-full h-[2px] bg-border my-8"></div> {/* Separator Line */}
       <ToolboxSection />
-      <div className="w-full h-px bg-border my-8"></div> {/* Separator Line */}
+      <div className="w-full h-[2px] bg-border my-8"></div> {/* Separator Line */}
       <FeaturedProjectsSection />
     </>
   );
