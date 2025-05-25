@@ -5,9 +5,6 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { SECTION_IDS, TOOLBOX_DATA, HARDWARE_DATA } from '@/lib/constants';
 import { ListChecks } from 'lucide-react';
-// React Three Fiber and Drei imports are no longer needed here
-// import dynamic from 'next/dynamic';
-// import React, { Suspense, useState, useEffect } from 'react'; 
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -26,7 +23,7 @@ const titleItemVariants = {
   },
 };
 
-const columnVariants = {
+const contentColumnVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
@@ -66,7 +63,7 @@ const hardwareContentVariants = {
 };
 
 export function ToolboxSection() {
-  const headingText = "Software\nI use daily."; // Updated heading
+  const headingText = "Software and Hardware\nI use"; // Updated heading
   const primaryHardware = HARDWARE_DATA.length > 0 ? HARDWARE_DATA[0] : null;
 
   return (
@@ -88,12 +85,13 @@ export function ToolboxSection() {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
-          {/* Software Column */}
-          <motion.div variants={columnVariants}>
+        {/* Changed from grid md:grid-cols-2 to a single column flow */}
+        <div className="space-y-12 lg:space-y-16"> 
+          {/* Software Section */}
+          <motion.div variants={contentColumnVariants}>
             <motion.h3 
               variants={titleItemVariants} 
-              className="text-2xl font-semibold text-primary text-center md:text-left mb-8 sm:mb-10"
+              className="text-2xl font-semibold text-primary text-center mb-8 sm:mb-10" // Removed md:text-left
             >
               Software
             </motion.h3>
@@ -132,52 +130,48 @@ export function ToolboxSection() {
             </motion.div>
           </motion.div>
 
-          {/* Hardware Column */}
-          <motion.div variants={columnVariants}>
+          {/* Hardware Section */}
+          <motion.div variants={contentColumnVariants}>
             <motion.h3 
               variants={titleItemVariants} 
-              className="text-2xl font-semibold text-primary text-center md:text-left mb-8 sm:mb-10"
+              className="text-2xl font-semibold text-primary text-center mb-8 sm:mb-10" // Removed md:text-left
             >
               Hardware
             </motion.h3>
             
             {primaryHardware && (
               <motion.div variants={hardwareContentVariants}>
-                <div className="sketchfab-embed-wrapper relative w-full aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border border-border">
+                <div className="sketchfab-embed-wrapper relative w-full max-w-2xl mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border border-border">
                   <iframe 
                     title="Asus ROG Strix G15 - Gaming Laptop" 
                     frameBorder="0" 
                     allowFullScreen 
-                    // mozallowfullscreen="true"  // These are non-standard and often not needed
-                    // webkitallowfullscreen="true" // These are non-standard and often not needed
                     allow="autoplay; fullscreen; xr-spatial-tracking" 
-                    // xr-spatial-tracking // These are non-standard attributes
-                    // execution-while-out-of-viewport // These are non-standard attributes
-                    // execution-while-not-rendered  // These are non-standard attributes
-                    // web-share // This is a non-standard attribute
                     src="https://sketchfab.com/models/b6f23d94d36c44d1998e859b14a116a3/embed"
                     className="absolute top-0 left-0 w-full h-full"
                   >
                   </iframe>
                 </div>
                 <div 
-                  className="text-xs text-muted-foreground/80 mb-6"
+                  className="text-xs text-muted-foreground/80 mb-6 text-center max-w-2xl mx-auto" // Added text-center and max-w for centering
                   dangerouslySetInnerHTML={{ __html: `<p style="font-size: 13px; font-weight: normal; margin: 5px; color: hsl(var(--muted-foreground));"> <a href="https://sketchfab.com/3d-models/asus-rog-strix-g15-gaming-laptop-b6f23d94d36c44d1998e859b14a116a3?utm_medium=embed&utm_campaign=share-popup&utm_content=b6f23d94d36c44d1998e859b14a116a3" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> Asus ROG Strix G15 - Gaming Laptop </a> by <a href="https://sketchfab.com/MIEVisuals?utm_medium=embed&utm_campaign=share-popup&utm_content=b6f23d94d36c44d1998e859b14a116a3" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> MIE-Visuals </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=b6f23d94d36c44d1998e859b14a116a3" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));">Sketchfab</a></p>`}}
                 />
-                <h4 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">
-                  {primaryHardware.name}
-                </h4>
-                <p className="text-sm text-muted-foreground mb-4">
-                  My primary machine for development and creative work.
-                </p>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  {primaryHardware.specs.map((spec, index) => (
-                    <li key={index} className="flex items-center">
-                      <ListChecks className="h-4 w-4 mr-2 text-primary/70 flex-shrink-0" />
-                      <span>{spec}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="max-w-md mx-auto text-center md:text-left"> {/* Centering text for specs on small screens */}
+                  <h4 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 text-center"> {/* Centered laptop name */}
+                    {primaryHardware.name}
+                  </h4>
+                  <p className="text-sm text-muted-foreground mb-4 text-center"> {/* Centered description */}
+                    My primary machine for development and creative work.
+                  </p>
+                  <ul className="space-y-2 text-sm text-muted-foreground max-w-xs mx-auto md:mx-0 md:max-w-none"> {/* Centering list on small screens */}
+                    {primaryHardware.specs.map((spec, index) => (
+                      <li key={index} className="flex items-center justify-center md:justify-start"> {/* Centering list items on small screens */}
+                        <ListChecks className="h-4 w-4 mr-2 text-primary/70 flex-shrink-0" />
+                        <span>{spec}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </motion.div>
             )}
           </motion.div>
@@ -186,3 +180,5 @@ export function ToolboxSection() {
     </motion.section>
   );
 }
+
+    
