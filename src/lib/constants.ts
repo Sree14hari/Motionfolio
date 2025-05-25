@@ -108,3 +108,27 @@ export const TOOLBOX_DATA: Tool[] = [
   { id: 'canva', name: 'Canva', iconUrl: 'https://img.icons8.com/?size=100&id=iWw83PVcBpLw&format=png&color=000000', imageHint: 'canva logo' },
   { id: 'msoffice', name: 'MS Office', iconUrl: 'https://img.icons8.com/?size=100&id=37619&format=png&color=000000', imageHint: 'microsoft office logo' },
 ];
+
+export interface HardwareItem {
+  id: string;
+  name: string;
+  imageUrl: string;
+  imageHint: string;
+  specs: string[];
+}
+
+export const HARDWARE_DATA: HardwareItem[] = [
+  {
+    id: 'laptop-rog-strix-g16',
+    name: 'ROG Strix G16',
+    imageUrl: 'https://placehold.co/400x300.png', // Placeholder image
+    imageHint: 'gaming laptop',
+    specs: [
+      'Intel Core i9 Processor',
+      'NVIDIA GeForce RTX 4070',
+      '32GB DDR5 RAM',
+      '1TB PCIe 4.0 NVMe SSD',
+      '16" QHD+ 240Hz Display',
+    ],
+  },
+];
