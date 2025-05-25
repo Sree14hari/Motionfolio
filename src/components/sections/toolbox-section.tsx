@@ -85,7 +85,8 @@ export function ToolboxSection() {
           </h2>
         </motion.div>
 
-        <div className="space-y-12 lg:space-y-16"> 
+        {/* Main container for Software and Hardware sections */}
+        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-12 lg:gap-16 space-y-12 md:space-y-0">
           {/* Software Section */}
           <motion.div variants={contentColumnVariants}>
             <motion.h3 
@@ -130,7 +131,7 @@ export function ToolboxSection() {
           </motion.div>
 
           {/* Hardware Section */}
-          <motion.div variants={hardwareContentVariants} className="mt-16 lg:mt-20">
+          <motion.div variants={hardwareContentVariants}>
             <motion.h3 
               variants={titleItemVariants} 
               className="text-2xl font-semibold text-primary text-center mb-8 sm:mb-10"
@@ -153,7 +154,7 @@ export function ToolboxSection() {
                   </iframe>
                 </div>
                 
-                <div className="max-w-md mx-auto text-center">
+                <div className="text-center"> {/* Removed max-w-md mx-auto for better column flow */}
                   <h4 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 text-center">
                     {primaryHardware.name}
                   </h4>
