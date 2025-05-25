@@ -140,7 +140,7 @@ export function ToolboxSection() {
             
             {primaryHardware && (
               <motion.div variants={hardwareContentVariants}>
-                <div className="relative w-full max-w-2xl mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border border-border">
+                <div className="relative w-full max-w-2xl mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden">
                   <iframe 
                     title="ROG Laptop Render" 
                     frameBorder="0" 
@@ -148,7 +148,7 @@ export function ToolboxSection() {
                     allow="autoplay; fullscreen; xr-spatial-tracking" 
                     src="https://sree14hari.github.io/ROG-RENDER/"
                     className="absolute top-0 left-0 w-full h-full"
-                    scrolling="no" // Added scrolling="no"
+                    scrolling="no"
                   >
                   </iframe>
                 </div>
