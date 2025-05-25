@@ -110,7 +110,7 @@ export function ToolboxSection() {
                     variants={gridItemVariants}
                     whileHover={{ y: -6, scale: 1.03, boxShadow: "0px 10px 20px -5px rgba(0,0,0,0.1)" }}
                     transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                    className="bg-card p-3 sm:p-4 rounded-xl shadow-md aspect-square w-full max-w-[70px] sm:max-w-[80px] md:max-w-[90px] flex items-center justify-center mb-2.5 transition-all duration-300 ease-out group-hover:shadow-lg group-hover:scale-105 border"
+                    className="p-3 sm:p-4 rounded-xl shadow-md aspect-square w-full max-w-[70px] sm:max-w-[80px] md:max-w-[90px] flex items-center justify-center mb-2.5 transition-all duration-300 ease-out group-hover:shadow-lg group-hover:scale-105 border bg-card"
                   >
                     <Image
                       src={tool.iconUrl}
@@ -130,7 +130,7 @@ export function ToolboxSection() {
           </motion.div>
 
           {/* Hardware Section */}
-          <motion.div variants={hardwareContentVariants} className="mt-16 lg:mt-20"> {/* Added margin-top for spacing */}
+          <motion.div variants={hardwareContentVariants} className="mt-16 lg:mt-20">
             <motion.h3 
               variants={titleItemVariants} 
               className="text-2xl font-semibold text-primary text-center mb-8 sm:mb-10"
@@ -139,7 +139,7 @@ export function ToolboxSection() {
             </motion.h3>
             
             {primaryHardware && (
-              <motion.div variants={hardwareContentVariants}> {/* Ensuring this inner div also has variants */}
+              <motion.div variants={hardwareContentVariants}>
                 <div className="relative w-full max-w-2xl mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border border-border">
                   <iframe 
                     title="ROG Laptop Render" 
@@ -148,6 +148,7 @@ export function ToolboxSection() {
                     allow="autoplay; fullscreen; xr-spatial-tracking" 
                     src="https://sree14hari.github.io/ROG-RENDER/"
                     className="absolute top-0 left-0 w-full h-full"
+                    scrolling="no" // Added scrolling="no"
                   >
                   </iframe>
                 </div>
@@ -176,4 +177,3 @@ export function ToolboxSection() {
     </motion.section>
   );
 }
-
