@@ -1,74 +1,77 @@
 
 "use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+// import { useState } from 'react';
+// import { motion, AnimatePresence } from 'framer-motion';
 import { PROJECTS_DATA, SECTION_IDS, Project as ProjectType } from '@/lib/constants';
-import { ProjectCard } from './project-card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import Image from 'next/image';
-import { ExternalLink, Github, X } from 'lucide-react';
+// import { ProjectCard } from './project-card';
+// import { Button } from '@/components/ui/button';
+// import { Badge } from '@/components/ui/badge';
+// import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+// import Image from 'next/image';
+// import { ExternalLink, Github, X } from 'lucide-react';
 
 export function ProjectsSection() {
-  const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null);
+  // const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.05, // Reduced stagger
-        delayChildren: 0.1,  // Reduced delay
-      },
-    },
-  };
+  // const containerVariants = {
+  //   hidden: { opacity: 0 },
+  //   visible: {
+  //     opacity: 1,
+  //     transition: {
+  //       staggerChildren: 0.05, 
+  //       delayChildren: 0.1,  
+  //     },
+  //   },
+  // };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.3, ease: "easeOut" }, // Reduced duration
-    },
-  };
+  // const itemVariants = {
+  //   hidden: { opacity: 0, y: 20 },
+  //   visible: {
+  //     opacity: 1,
+  //     y: 0,
+  //     transition: { duration: 0.3, ease: "easeOut" }, 
+  //   },
+  // };
 
   return (
-    <motion.section
+    <section
       id={SECTION_IDS.PROJECTS}
       className="min-h-screen py-16 sm:py-24 bg-card"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
-      variants={containerVariants}
+      // initial="hidden"
+      // whileInView="visible"
+      // viewport={{ once: true, amount: 0.1 }}
+      // variants={containerVariants}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.h2 
+        <h2 
           className="text-3xl sm:text-4xl font-bold text-center mb-4 text-primary"
-          variants={itemVariants}
+          // variants={itemVariants}
         >
           My Projects
-        </motion.h2>
-        <motion.p 
+        </h2>
+        <p 
           className="text-lg text-muted-foreground text-center mb-12 sm:mb-16 max-w-2xl mx-auto"
-          variants={itemVariants}
+          // variants={itemVariants}
         >
-          Here's a selection of some projects I've worked on. Click on any project to see more details.
-        </motion.p>
+          Here's a selection of some projects I've worked on.
+        </p>
         
-        <motion.div 
+        <div 
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10"
-          variants={containerVariants} 
+          // variants={containerVariants} 
         >
           {PROJECTS_DATA.map((project) => (
-            <motion.div key={project.id} variants={itemVariants}>
-              <ProjectCard project={project} onOpenModal={() => setSelectedProject(project)} />
-            </motion.div>
+            <div key={project.id} /* variants={itemVariants} */ className="p-4 border rounded-lg shadow">
+              <h3 className="text-xl font-semibold">{project.title}</h3>
+              <p className="text-sm text-muted-foreground">{project.description}</p>
+              {/* Simplified content, removed ProjectCard and modal trigger */}
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
+      {/* Modal functionality removed for simplification
       <AnimatePresence>
         {selectedProject && (
           <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
@@ -77,7 +80,7 @@ export function ProjectsSection() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.2, ease: "easeOut" }} // Snappier modal
+                transition={{ duration: 0.2, ease: "easeOut" }} 
               >
                 <div className="relative w-full h-64 sm:h-80 md:h-96">
                   <Image
@@ -136,6 +139,7 @@ export function ProjectsSection() {
           </Dialog>
         )}
       </AnimatePresence>
-    </motion.section>
+      */}
+    </section>
   );
 }
