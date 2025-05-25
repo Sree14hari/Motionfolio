@@ -130,7 +130,7 @@ export function ToolboxSection() {
           </motion.div>
 
           {/* Hardware Section */}
-          <motion.div variants={contentColumnVariants} className="mt-16 lg:mt-20">
+          <motion.div variants={hardwareContentVariants} className="mt-16 lg:mt-20"> {/* Added margin-top for spacing */}
             <motion.h3 
               variants={titleItemVariants} 
               className="text-2xl font-semibold text-primary text-center mb-8 sm:mb-10"
@@ -139,7 +139,7 @@ export function ToolboxSection() {
             </motion.h3>
             
             {primaryHardware && (
-              <motion.div variants={hardwareContentVariants}>
+              <motion.div variants={hardwareContentVariants}> {/* Ensuring this inner div also has variants */}
                 <div className="relative w-full max-w-2xl mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border border-border">
                   <iframe 
                     title="ROG Laptop Render" 
@@ -152,16 +152,16 @@ export function ToolboxSection() {
                   </iframe>
                 </div>
                 
-                <div className="max-w-md mx-auto text-center md:text-left">
+                <div className="max-w-md mx-auto text-center">
                   <h4 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 text-center">
                     {primaryHardware.name}
                   </h4>
                   <p className="text-sm text-muted-foreground mb-4 text-center">
                     My primary machine for development and creative work.
                   </p>
-                  <ul className="space-y-2 text-sm text-muted-foreground max-w-xs mx-auto md:mx-0 md:max-w-none">
+                  <ul className="space-y-2 text-sm text-muted-foreground max-w-xs mx-auto">
                     {primaryHardware.specs.map((spec, index) => (
-                      <li key={index} className="flex items-center justify-center md:justify-start">
+                      <li key={index} className="flex items-center justify-center">
                         <ListChecks className="h-4 w-4 mr-2 text-primary/70 flex-shrink-0" />
                         <span>{spec}</span>
                       </li>
@@ -176,3 +176,4 @@ export function ToolboxSection() {
     </motion.section>
   );
 }
+
