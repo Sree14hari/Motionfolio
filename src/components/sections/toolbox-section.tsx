@@ -65,24 +65,9 @@ const hardwareContentVariants = {
   },
 };
 
-// LaptopViewer dynamic import removed
-// const LaptopViewer = dynamic(() => import('../three/laptop-viewer').then(mod => mod.default), {
-//   ssr: false,
-//   loading: () => (
-//     <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-lg border border-border bg-muted flex items-center justify-center">
-//       <p className="text-muted-foreground">Loading 3D Model...</p>
-//     </div>
-//   ),
-// });
-
 export function ToolboxSection() {
   const headingText = "Software\nI use daily."; // Updated heading
   const primaryHardware = HARDWARE_DATA.length > 0 ? HARDWARE_DATA[0] : null;
-
-  // const [isClient, setIsClient] = useState(false);
-  // useEffect(() => {
-  //   setIsClient(true);
-  // }, []);
 
   return (
     <motion.section
@@ -160,18 +145,24 @@ export function ToolboxSection() {
               <motion.div variants={hardwareContentVariants}>
                 <div className="sketchfab-embed-wrapper relative w-full aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border border-border">
                   <iframe 
-                    title={primaryHardware.name + " 3D Model"}
+                    title="Asus ROG Strix G15 - Gaming Laptop" 
                     frameBorder="0" 
                     allowFullScreen 
+                    // mozallowfullscreen="true"  // These are non-standard and often not needed
+                    // webkitallowfullscreen="true" // These are non-standard and often not needed
                     allow="autoplay; fullscreen; xr-spatial-tracking" 
-                    src="https://sketchfab.com/models/51eca7b2e5884c4087f3499e523d5184/embed"
+                    // xr-spatial-tracking // These are non-standard attributes
+                    // execution-while-out-of-viewport // These are non-standard attributes
+                    // execution-while-not-rendered  // These are non-standard attributes
+                    // web-share // This is a non-standard attribute
+                    src="https://sketchfab.com/models/b6f23d94d36c44d1998e859b14a116a3/embed"
                     className="absolute top-0 left-0 w-full h-full"
                   >
                   </iframe>
                 </div>
                 <div 
                   className="text-xs text-muted-foreground/80 mb-6"
-                  dangerouslySetInnerHTML={{ __html: `<p style="font-size: 13px; font-weight: normal; margin: 5px; color: hsl(var(--muted-foreground));"> <a href="https://sketchfab.com/3d-models/asus-rog-strix-scar-17-2023-g733-gaming-laptop-51eca7b2e5884c4087f3499e523d5184?utm_medium=embed&utm_campaign=share-popup&utm_content=51eca7b2e5884c4087f3499e523d5184" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> Asus ROG Strix Scar 17 (2023) G733 Gaming Laptop </a> by <a href="https://sketchfab.com/ranahacs?utm_medium=embed&utm_campaign=share-popup&utm_content=51eca7b2e5884c4087f3499e523d5184" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> Ranaha Creative Studio </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=51eca7b2e5884c4087f3499e523d5184" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));">Sketchfab</a></p>`}}
+                  dangerouslySetInnerHTML={{ __html: `<p style="font-size: 13px; font-weight: normal; margin: 5px; color: hsl(var(--muted-foreground));"> <a href="https://sketchfab.com/3d-models/asus-rog-strix-g15-gaming-laptop-b6f23d94d36c44d1998e859b14a116a3?utm_medium=embed&utm_campaign=share-popup&utm_content=b6f23d94d36c44d1998e859b14a116a3" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> Asus ROG Strix G15 - Gaming Laptop </a> by <a href="https://sketchfab.com/MIEVisuals?utm_medium=embed&utm_campaign=share-popup&utm_content=b6f23d94d36c44d1998e859b14a116a3" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));"> MIE-Visuals </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=b6f23d94d36c44d1998e859b14a116a3" target="_blank" rel="nofollow" style="font-weight: bold; color: hsl(var(--primary));">Sketchfab</a></p>`}}
                 />
                 <h4 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">
                   {primaryHardware.name}
