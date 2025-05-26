@@ -88,9 +88,9 @@ export const NAVBAR_SOCIAL_LINKS = [
 ];
 
 export const CONTACT_SECTION_SOCIAL_LINKS = [
-  { name: 'Email', Icon: 'Mail', href: 'mailto:hello@motionfolio.com' },
+  { name: 'Email', Icon: 'Mail', href: 'mailto:sreehari14shr@gmail.com' },
   { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://www.linkedin.com/in/sree14hari/' },
-  { name: 'GitHub', Icon: 'Github', href: 'https://github.com/Sree14hari' },
+  { name: 'Dribbble', Icon: 'Dribbble', href: '#' }, // Placeholder link for Dribbble
   { name: 'Instagram', Icon: 'Instagram', href: 'https://www.instagram.com/s_ree.har_i' },
 ];
 
@@ -124,7 +124,7 @@ export const HARDWARE_DATA: HardwareItem[] = [
       "13th Gen Intel® Core™ i7-13650HX Processor 2.6 GHz",
       "NVIDIA® GeForce RTX™ 4050 GPU",
       "ROG Boost: 2420MHz* at 140W",
-      "6GB GDDR6 GPU, 16GB DDR5 RAM",
+      "6GB GDDR6 GPU,16GB DDR5 RAM",
       "16\" QHD+ 240Hz Display",
     ],
   },
@@ -211,3 +211,4 @@ export const PROJECT_CATEGORIES: ProjectCategory[] = [
     href: '#',
   },
 ];
+
