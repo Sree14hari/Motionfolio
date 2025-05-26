@@ -42,9 +42,9 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* Variables for side patterns - Desktop values (lg screens and up) */
-    --gutter-width: 70px;
-    --purple-edge-width: 6px;
+    /* Variables for side patterns */
+    --gutter-width: 70px; /* Desktop value */
+    --purple-edge-width: 6px; /* Desktop value */
     --brand-purple-edge: 270 50% 20%; /* Dark purple for the very edge */
     --pattern-area-bg: 0 0% 96%; /* Background color of the patterned area (very light grey) */
     --pattern-stripe-color: 0 0% 92%; /* Color of the diagonal stripes (slightly darker grey) */
@@ -67,8 +67,7 @@
   body {
     background-color: hsl(var(--brand-purple-edge)); /* Dark purple for the absolute edges */
     @apply text-foreground font-sans;
-    position: relative; /* Context for pseudo-elements if they were absolute to body */
-                      /* Not strictly needed for fixed pseudo-elements to viewport */
+    position: relative; 
   }
 
   body::before,
@@ -79,7 +78,7 @@
     bottom: 0;
     width: calc(var(--gutter-width) - var(--purple-edge-width));
     background-color: hsl(var(--pattern-area-bg));
-    z-index: -1; /* Behind the main content wrapper, but on top of body's purple */
+    z-index: -1; 
   }
 
   body::before { /* Left pattern area */
@@ -116,8 +115,8 @@
     inset: 0; /* Covers the entire element */
     /* A subtle noise pattern using SVG. baseFrequency controls coarseness (lower = coarser). */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.03; /* Adjust for desired grain intensity. 0.02-0.05 is usually good. */
+    opacity: 0.08; /* Increased opacity for better visibility */
     pointer-events: none; /* Allows clicks to pass through to elements below */
-    z-index: -1; /* Places the grain behind the element's direct content */
+    z-index: -1; /* Places the grain behind the element's direct content, on top of its background */
   }
 }
