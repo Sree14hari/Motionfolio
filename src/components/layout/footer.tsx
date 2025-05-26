@@ -24,7 +24,7 @@ interface BuiltWithItem {
 }
 
 const builtWithData: BuiltWithItem[] = [
-  { text: 'Next.js' }, 
+  { text: 'Next.js', Icon: getIcon('Layers') }, 
   { text: 'Tailwind CSS', Icon: getIcon('Wind') },
   { text: 'Framer Motion', Icon: getIcon('Move') },
 ];
@@ -74,6 +74,7 @@ export function Footer() {
                 ) : null;
               })}
             </div>
+             {/* ThemeToggle was here, moved to FAB */}
           </motion.div>
 
           {/* Column 2: Built With */}
@@ -96,12 +97,12 @@ export function Footer() {
             variants={sectionVariants} 
             className={cn(
               "w-full max-w-[320px] mx-auto", 
-              "md:w-[320px] md:ml-auto md:mr-0"
+              "md:w-[320px] md:ml-auto md:mr-0" 
             )}
           >
             <div style={{ left: 0, width: '100%', height: '152px', position: 'relative', borderRadius: '12px', overflow: 'hidden' }}>
               <iframe 
-                src="https://open.spotify.com/embed/track/2plbrEY59IikOBgBGLjaoe?utm_source=oembed" // Reverted to "Dandelions"
+                src="https://open.spotify.com/embed/track/2plbrEY59IikOBgBGLjaoe?utm_source=oembed" 
                 style={{ top: 0, left: 0, width: '100%', height: '100%', position: 'absolute', border: 0 }} 
                 allow="autoplay; clipboard-write *; encrypted-media *; fullscreen *; picture-in-picture *;"
                 allowFullScreen
