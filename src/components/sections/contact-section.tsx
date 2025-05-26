@@ -30,7 +30,7 @@ export function ContactSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
+      transition: { duration: 0.4, ease: "easeOut" }, // Reduced duration
     },
   };
 
@@ -122,7 +122,6 @@ export function ContactSection() {
           </Card>
         </motion.div>
       </div>
-        {/* Removed the separator line that was here */}
     </motion.section>
   );
 }
