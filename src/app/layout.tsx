@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { APP_NAME } from '@/lib/constants';
 import { BottomNavbar } from '@/components/layout/bottom-navbar';
 import { AppBar } from '@/components/layout/app-bar';
+import { ThemeToggle } from '@/components/ui/theme-toggle'; // Import ThemeToggle
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -22,7 +23,7 @@ const geistMono = Geist_Mono({
 const dancingScript = Dancing_Script({
   variable: '--font-dancing-script',
   subsets: ['latin'],
-  weight: ['400', '700'], // You can adjust weights as needed
+  weight: ['400', '700'], 
 });
 
 export const metadata: Metadata = {
@@ -48,18 +49,29 @@ export default function RootLayout({
             backgroundColor: 'hsl(var(--background))' // Main light grey page background
           }}
         >
+          {/* Blur overlay layer - sits behind content, blurs body background */}
+          <div 
+            className="fixed inset-0 z-[-1] bg-white/5 backdrop-blur-lg"
+            style={{
+              marginLeft: 'var(--gutter-width)',
+              marginRight: 'var(--gutter-width)',
+            }}
+          />
+
           <AppBar /> {/* Mobile-only App Bar, AppBar height is h-16 (64px) */}
           <Navbar /> {/* Desktop-only Top navbar, Navbar height is h-16 (64px) */}
-          {/* 
-            Small screens (<md): pt-16 (for AppBar h-16) + pb-16 (for BottomNavbar h-16)
-            Medium screens and up (>=md): pt-16 (for Navbar h-16) + pb-0 (no BottomNavbar)
-          */}
-          <main className="flex-grow pt-16 pb-16 md:pb-0 bg-card"> {/* Changed to bg-card */}
+          
+          <main className="flex-grow pt-16 pb-16 md:pb-0 bg-card">
             {children}
           </main>
           <Footer />
           <BottomNavbar /> {/* Mobile-only Bottom navbar, h-16 */}
           <Toaster />
+
+          {/* Floating Action Button for Theme Toggle */}
+          <div className="fixed bottom-6 right-6 z-50">
+            <ThemeToggle />
+          </div>
         </div>
       </body>
     </html>

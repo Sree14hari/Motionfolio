@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import * as LucideIcons from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { ThemeToggle } from '@/components/ui/theme-toggle'; // Import ThemeToggle
+// ThemeToggle import removed
 
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
@@ -52,7 +52,7 @@ export function Footer() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-3 gap-8 items-start mb-10">
-          {/* Column 1: Social Icons & Theme Toggle */}
+          {/* Column 1: Social Icons */}
           <motion.div 
             variants={sectionVariants} 
             className="flex flex-col items-center md:items-start space-y-4"
@@ -75,15 +75,16 @@ export function Footer() {
                 ) : null;
               })}
             </div>
-            <div className="pt-2"> {/* Added padding top for spacing */}
-              <ThemeToggle />
-            </div>
+            {/* ThemeToggle removed from here */}
           </motion.div>
 
           {/* Column 2: Built With */}
           <motion.div 
             variants={sectionVariants} 
-            className="flex flex-col items-center md:items-end space-y-2 text-sm md:order-last lg:order-none"
+            className={cn(
+              "flex flex-col items-center space-y-2 text-sm",
+              "md:items-end" // Right-align on medium screens
+            )}
           >
             {builtWithData.map((item, index) => (
               <div key={index} className="flex items-center space-x-2 text-muted-foreground">
@@ -98,7 +99,9 @@ export function Footer() {
             variants={sectionVariants} 
             className={cn(
               "w-full max-w-[320px] mx-auto", 
-              "md:w-[320px] md:ml-auto md:mr-0 lg:mx-auto" 
+              "md:w-[320px] md:ml-auto md:mr-0 lg:mx-auto", // Centered on lg, right on md
+              "block" // Default to block
+              // "md:hidden lg:block" // Hides on md, shows on lg - Removed for consistent visibility
             )}
           >
             <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>
