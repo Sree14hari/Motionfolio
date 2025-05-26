@@ -47,7 +47,7 @@ function ProjectCategoryCard({ category, index }: ProjectCategoryCardProps) {
           <div className="bg-background p-4 rounded-xl shadow-lg transition-all duration-300 ease-in-out group-hover:shadow-2xl group-hover:-translate-y-1">
             {/* Folder Tab */}
             <div className="relative h-8 mb-2">
-              <div className="absolute left-0 top-0 h-8 w-2/5 bg-card rounded-t-md"></div>
+              <div className="absolute left-0 top-0 h-8 w-2/5 bg-card dark:bg-secondary rounded-t-md"></div>
               {IconComponent && (
                 <div className="absolute top-[-12px] right-4 h-10 w-10 bg-secondary rounded-full flex items-center justify-center shadow-md border-2 border-background group-hover:bg-primary transition-colors">
                   <IconComponent className="h-5 w-5 text-secondary-foreground group-hover:text-primary-foreground" />
@@ -105,10 +105,12 @@ export default function ProjectsPage() {
           Explore My Projects
         </motion.h1>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-          {PROJECT_CATEGORIES.map((category, index) => (
-            <ProjectCategoryCard key={category.id} category={category} index={index} />
-          ))}
+        <div className="flex justify-center"> 
+          <div className="inline-grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+            {PROJECT_CATEGORIES.map((category, index) => (
+              <ProjectCategoryCard key={category.id} category={category} index={index} />
+            ))}
+          </div>
         </div>
       </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
