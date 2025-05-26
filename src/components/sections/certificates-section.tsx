@@ -16,8 +16,8 @@ import ieeRagImage from '@/assets/certificate/iee_rag.jpg';
 import imageProImage from '@/assets/certificate/image_pro.jpg';
 import nConfImage from '@/assets/certificate/n_conf.jpg';
 import nitPythonImage from '@/assets/certificate/nit_python.jpg';
-// import nvidiaGenImage from '@/assets/certificate/nvidia_gen.jpg'; // Commented out due to "Module not found" error
-// import nvidiaNlsImage from '@/assets/certificate/nvidia_nls.jpg'; // Commented out due to "Module not found" error
+// import nvidiaGenImage from '@/assets/certificate/nvidia_gen.jpg'; // Using URL now
+// import nvidiaNlsImage from '@/assets/certificate/nvidia_nls.jpg'; // Using URL now
 import ragCompImage from '@/assets/certificate/rag_comp.jpg';
 import uiUxImage from '@/assets/certificate/ui_ux.jpg';
 
@@ -27,7 +27,7 @@ interface Certificate {
   title: string;
   issuer: string;
   date: string;
-  image: StaticImageData | string; // Allow string for placeholder
+  image: StaticImageData | string; // Allow string for URL
   imageAlt: string;
   imageHint: string;
   verifyUrl?: string;
@@ -96,20 +96,18 @@ const certificatesData: Certificate[] = [
     title: 'NVIDIA Generative AI',
     issuer: 'NVIDIA',
     date: 'Apr 2024',
-    // image: nvidiaGenImage, // Using placeholder due to import error
-    image: 'https://placehold.co/600x400.png', // Placeholder image
-    imageAlt: 'NVIDIA Generative AI Certificate - Placeholder',
+    image: 'https://i.postimg.cc/hv9Vv3FN/nvdia-gen.jpg', 
+    imageAlt: 'NVIDIA Generative AI Certificate',
     imageHint: 'ai certificate',
-    // verifyUrl: '#', // Add actual URL when image is fixed
+    // verifyUrl: '#', 
   },
   {
     id: 'cert-nvidia-nls',
     title: 'NVIDIA NLP Series',
     issuer: 'NVIDIA',
     date: 'May 2024',
-    // image: nvidiaNlsImage, // Using placeholder due to import error
-    image: 'https://placehold.co/600x400.png', // Placeholder image
-    imageAlt: 'NVIDIA NLP Certificate - Placeholder',
+    image: 'https://i.postimg.cc/15rpZTrq/nvdia-nls.jpg',
+    imageAlt: 'NVIDIA NLP Certificate',
     imageHint: 'nlp certificate',
   },
   {
