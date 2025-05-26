@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { SECTION_IDS } from '@/lib/constants'; // Assuming PROJECTS_DATA is not used for now
+import { SECTION_IDS } from '@/lib/constants'; 
 import { Button } from '@/components/ui/button';
 import { Code2, ExternalLink, Github } from 'lucide-react';
 
@@ -23,7 +23,7 @@ const featuredProjectData = [
     id: 'proj-baatcheet',
     title: 'BaatCheet',
     description: 'Secure peer-to-peer video communication',
-    imageUrl: 'https://placehold.co/600x400.png', // You might want a different placeholder for this
+    imageUrl: 'https://placehold.co/600x400.png', 
     imageHint: 'video communication app',
     sourceUrl: '#',
     liveUrl: '#',
@@ -58,9 +58,9 @@ export function FeaturedProjectsSection() {
       viewport={{ once: true, amount: 0.1 }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div variants={itemVariants} className="mb-12 sm:mb-16 text-left">
-          <p className="text-sm font-medium text-muted-foreground mb-1">My work</p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-primary">
+        <motion.div variants={itemVariants} className="mb-12 sm:mb-16 text-center">
+          {/* "My work" text removed */}
+          <h2 className="text-4xl sm:text-5xl font-bold text-foreground"> {/* Changed to text-foreground and centered */}
             Projects
           </h2>
         </motion.div>
