@@ -14,7 +14,7 @@ const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
 };
 
 const FOOTER_SOCIAL_LINKS = CONTACT_SECTION_SOCIAL_LINKS.filter(
-  link => ['GitHub', 'LinkedIn', 'Mail'].includes(link.name) 
+  link => ['GitHub', 'LinkedIn', 'Mail', 'Instagram'].includes(link.name) 
 ).map(link => link.name === 'Mail' ? { ...link, Icon: 'Mail' } : link);
 
 
@@ -82,7 +82,7 @@ export function Footer() {
           {/* Column 2: Built With */}
           <motion.div 
             variants={sectionVariants} 
-            className="flex flex-col items-center md:items-end space-y-2 text-sm md:order-last lg:order-none" // Ensure right alignment on md, default on lg
+            className="flex flex-col items-center md:items-end space-y-2 text-sm md:order-last lg:order-none"
           >
             {builtWithData.map((item, index) => (
               <div key={index} className="flex items-center space-x-2 text-muted-foreground">
@@ -97,15 +97,14 @@ export function Footer() {
             variants={sectionVariants} 
             className={cn(
               "w-full max-w-[320px] mx-auto", 
-              "md:w-[320px] md:mx-auto", // Center on md screens
-              "lg:w-[320px] lg:ml-auto lg:mr-0" // Original lg alignment
+              "md:w-[320px] md:mx-auto", 
+              "lg:w-[320px] lg:ml-auto lg:mr-0" 
             )}
           >
             <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>
               <iframe 
                 src="https://open.spotify.com/embed/track/2plbrEY59IikOBgBGLjaoe?utm_source=oembed" 
                 style={{ top: 0, left: 0, width: '100%', height: '100%', position: 'absolute', border: 0 }} 
-                allowFullScreen 
                 allow="clipboard-write *; encrypted-media *; fullscreen *; picture-in-picture *;"
                 title="Spotify Embed"
                 loading="lazy"
