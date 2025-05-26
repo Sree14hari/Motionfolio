@@ -1,3 +1,4 @@
+
 "use client";
 
 import { CONTACT_SECTION_SOCIAL_LINKS } from '@/lib/constants'; 
@@ -97,8 +98,7 @@ export function Footer() {
             variants={sectionVariants} 
             className={cn(
               "w-full max-w-[320px] mx-auto", 
-              "md:w-[320px] md:mx-auto", 
-              "lg:w-[320px] lg:ml-auto lg:mr-0" 
+              "md:w-[320px] md:ml-auto md:mr-0 lg:mx-auto" 
             )}
           >
             <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>

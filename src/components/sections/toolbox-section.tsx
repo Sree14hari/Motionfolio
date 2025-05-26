@@ -155,6 +155,7 @@ export function ToolboxSection() {
                     src="https://sree14hari.github.io/ROG-RENDER/"
                     className="absolute top-0 left-0 w-full h-full"
                     scrolling="no"
+                    loading="lazy"
                   >
                   </iframe>
                 </div>
@@ -168,7 +169,7 @@ export function ToolboxSection() {
                   </p>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     {primaryHardware.specs.map((spec, index) => (
-                      <li key={index} className="flex items-center justify-center">
+                      <li key={index} className="flex items-center justify-start">
                         <ListChecks className="h-4 w-4 mr-2 text-muted-foreground flex-shrink-0" />
                         <span>{spec}</span>
                       </li>
