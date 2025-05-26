@@ -129,7 +129,7 @@ export function FeaturedProjectsSection() {
 
         <motion.div variants={itemVariants} className="text-center">
           <Button asChild size="lg" variant="outline" className="group text-foreground hover:bg-muted hover:text-primary border-muted-foreground/50 hover:border-primary/50">
-            <Link href="/projects">
+            <Link href="https://github.com/Sree14hari" target="_blank" rel="noopener noreferrer">
               Load More Projects
               <Github className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1 text-muted-foreground group-hover:text-primary" />
             </Link>
