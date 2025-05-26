@@ -7,9 +7,10 @@ import { SECTION_IDS } from '@/lib/constants';
 import selfJpg from '@/assets/self.jpg';
 import { useIsMobile } from '@/hooks/use-mobile';
 import type { StaticImageData } from 'next/image'; // Import StaticImageData
+import { useEffect, useState } from 'react';
 
 interface GalleryImage {
-  src: string | StaticImageData; // Allow StaticImageData for imported images
+  src: string | StaticImageData;
   alt: string;
   hint: string;
   zIndex: string;
@@ -23,17 +24,22 @@ interface Transform {
 }
 
 export function HeroSection() {
-  const headingText = "Hey, I'm Sreehari!\nWelcome to my corner of\nthe internet!";
+  const headingText = "Hey, I'm Sreehari!\nWelcome to my corner of the internet!";
   const taglineText = "I'm a front-end developer with a love for design and a knack for tinkering. This site is intentionally over-engineered and serves as my playground for experimenting with new ideas and seeing what sticks!";
 
   const isMobile = useIsMobile();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const profilePicVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.4, ease: "easeOut" } 
+      transition: { duration: 0.4, ease: "easeOut" }
     },
   };
 
@@ -42,7 +48,7 @@ export function HeroSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, ease: "easeOut", delay: 0.1 } 
+      transition: { duration: 0.4, ease: "easeOut", delay: 0.1 }
     },
   };
 
@@ -70,26 +76,23 @@ export function HeroSection() {
     { x: 130, y: -5, rotate: 8, scale: 1 },   // Corresponds to original allImages[3]
   ];
 
-  let imagesToDisplay: GalleryImage[];
-  let activeTransforms: Transform[];
-  let imageWidth: number;
-  let imageHeight: number;
+  let imagesToDisplay: GalleryImage[] = [];
+  let activeTransforms: Transform[] = [];
+  let imageWidth: number = 160;
+  let imageHeight: number = 224;
 
-  if (isMobile === undefined) {
-    imagesToDisplay = []; // No images until mobile state is known
-    activeTransforms = [];
-    imageWidth = 160; 
-    imageHeight = 224; 
-  } else if (isMobile) {
-    imagesToDisplay = allImages.slice(1, 4); 
-    activeTransforms = galleryTransforms3;
-    imageWidth = 120;
-    imageHeight = 168;
-  } else {
-    imagesToDisplay = allImages;
-    activeTransforms = galleryTransforms5;
-    imageWidth = 160;
-    imageHeight = 224;
+  if (isClient && isMobile !== undefined) {
+    if (isMobile) {
+      imagesToDisplay = allImages.slice(1, 4);
+      activeTransforms = galleryTransforms3;
+      imageWidth = 120;
+      imageHeight = 168;
+    } else {
+      imagesToDisplay = allImages;
+      activeTransforms = galleryTransforms5;
+      imageWidth = 160;
+      imageHeight = 224;
+    }
   }
 
   const galleryItemInitial = { opacity: 0, y: 30, scale: 0.8, rotate: 0, x:0 };
@@ -101,7 +104,7 @@ export function HeroSection() {
       y: activeTransforms[i]?.y ?? 0,
       scale: activeTransforms[i]?.scale ?? 1,
       rotate: activeTransforms[i]?.rotate ?? 0,
-      transition: { type: 'spring', stiffness: 100, damping: 15, delay: 0.2 + i * 0.08 } 
+      transition: { type: 'spring', stiffness: 100, damping: 15, delay: 0.2 + i * 0.08 }
     }),
   };
 
@@ -111,7 +114,7 @@ export function HeroSection() {
       className="min-h-screen flex flex-col items-center justify-start text-center bg-card relative overflow-hidden p-6 md:p-8"
     >
       <motion.div
-        className="mb-6 sm:mb-8" 
+        className="mb-6 sm:mb-8"
         variants={profilePicVariants}
         initial="hidden"
         animate="visible"
@@ -149,7 +152,7 @@ export function HeroSection() {
         variants={contentVariants}
         initial="hidden"
         animate="visible"
-        style={{ transition: { delay: 0.15 } }} 
+        style={{ transition: { delay: 0.15 } }}
       >
         {taglineText}
       </motion.p>
@@ -157,7 +160,7 @@ export function HeroSection() {
       <motion.div
         className="relative flex justify-center items-start h-auto min-h-[320px] w-full max-w-3xl mt-4"
       >
-        {imagesToDisplay.map((img, index) => (
+        {isClient && imagesToDisplay.map((img, index) => (
           <motion.div
             key={img.alt}
             custom={index}
@@ -167,8 +170,8 @@ export function HeroSection() {
             className={`absolute ${img.zIndex}`}
             style={{ transformOrigin: 'center center' }}
             whileHover={{
-              scale: (activeTransforms[index]?.scale ?? 1) * 1.1,
-              y: (activeTransforms[index]?.y ?? 0) -10, // Lift image slightly on hover
+              scale: (activeTransforms[index]?.scale ?? 1) * 1.05, // Reduced hover scale slightly
+              y: (activeTransforms[index]?.y ?? 0) -10,
               zIndex: 30,
               transition: { type: "spring", stiffness: 300, damping: 10 }
             }}
