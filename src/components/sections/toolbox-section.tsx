@@ -5,6 +5,19 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { SECTION_IDS, TOOLBOX_DATA, HARDWARE_DATA, HardwareItem } from '@/lib/constants';
 import { ListChecks } from 'lucide-react';
+// import React, { Suspense, useState, useEffect } from 'react';
+// import dynamic from 'next/dynamic';
+
+// Dynamically import LaptopViewer with SSR disabled
+// const LaptopViewer = dynamic(() => import('@/components/three/laptop-viewer').then(mod => mod.default), {
+//   ssr: false,
+//   loading: () => (
+//     <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-lg border border-border bg-muted flex items-center justify-center">
+//       <p className="text-muted-foreground text-sm">Loading 3D Model...</p>
+//     </div>
+//   ),
+// });
+
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -32,17 +45,6 @@ const contentColumnVariants = {
   },
 };
 
-const stackContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1, // Stagger for each card
-      delayChildren: 0.1,
-    },
-  },
-};
-
 const cardItemVariants = {
   hidden: { opacity: 0, scale: 0.8, y: 20 },
   visible: {
@@ -65,6 +67,12 @@ const hardwareContentVariants = {
 export function ToolboxSection() {
   const headingText = "Software and Hardware"; // Updated heading
   const primaryHardware: HardwareItem | null = HARDWARE_DATA.length > 0 ? HARDWARE_DATA[0] : null;
+  // const [isClient, setIsClient] = useState(false);
+
+  // useEffect(() => {
+  //   setIsClient(true);
+  // }, []);
+
 
   return (
     <motion.section
@@ -96,7 +104,7 @@ export function ToolboxSection() {
               Software
             </motion.h3>
             <motion.div
-              variants={stackContainerVariants}
+              variants={contentColumnVariants} // Reuse for staggering children if needed, or a new one
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
@@ -108,14 +116,14 @@ export function ToolboxSection() {
                   variants={cardItemVariants}
                   whileHover={{ y: -5, scale: 1.03, boxShadow: "0px 10px 20px -5px rgba(0,0,0,0.1)" }}
                   transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                  className="flex items-center p-4 rounded-lg shadow-md bg-muted border border-border/30 space-x-4 cursor-default" // Added cursor-default as they are not links
+                  className="flex items-center p-4 rounded-lg shadow-md bg-muted border border-border/30 space-x-4 cursor-default"
                 >
                   <div className="p-2 bg-card rounded-md shadow-sm flex-shrink-0">
                     <Image
                       src={tool.iconUrl}
                       alt={`${tool.name} logo`}
-                      width={32} // Adjusted icon size
-                      height={32} // Adjusted icon size
+                      width={44} 
+                      height={44} 
                       className="object-contain"
                       data-ai-hint={tool.imageHint}
                     />
@@ -138,6 +146,7 @@ export function ToolboxSection() {
             {primaryHardware && (
               <motion.div variants={hardwareContentVariants}>
                 <div className="relative w-full max-w-md mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden">
+                  {/* {isClient && <LaptopViewer />} */}
                   <iframe
                     title="ROG Laptop Render"
                     frameBorder="0"
@@ -149,7 +158,7 @@ export function ToolboxSection() {
                   >
                   </iframe>
                 </div>
-
+                
                 <div className="text-center max-w-md mx-auto">
                   <h4 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">
                     {primaryHardware.name}
@@ -160,7 +169,7 @@ export function ToolboxSection() {
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     {primaryHardware.specs.map((spec, index) => (
                       <li key={index} className="flex items-center justify-center">
-                        <ListChecks className="h-4 w-4 mr-2 text-primary/70 flex-shrink-0" />
+                        <ListChecks className="h-4 w-4 mr-2 text-muted-foreground flex-shrink-0" />
                         <span>{spec}</span>
                       </li>
                     ))}

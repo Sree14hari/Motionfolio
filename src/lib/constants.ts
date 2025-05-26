@@ -120,7 +120,8 @@ export const HARDWARE_DATA: HardwareItem[] = [
     id: 'laptop-rog-strix-g16',
     name: 'ROG Strix G16',
     specs: [
-      '13th Gen Intel® Core™ i7-13650HX Processor 2.6 GHz (24M Cache, up to 4.9 GHz, 14 cores: 6 P-cores and 8 E-cores)',
+      '13th Gen Intel® Core™ i7-13650HX Processor 2.6 GHz (24M',
+      'Cache, up to 4.9 GHz, 14 cores: 6 P-cores and 8 E-cores)',
       'NVIDIA® GeForce RTX™ 4050 Laptop GPU, 6GB GDDR6',
       'ROG Boost: 2420MHz* at 140W',
       '16GB DDR5 RAM',
