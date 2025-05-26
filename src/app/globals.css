@@ -50,6 +50,33 @@
     --pattern-stripe-color: 0 0% 92%; /* Color of the diagonal stripes (slightly darker grey) */
   }
 
+  .dark {
+    --background: 240 10% 3.9%; /* Dark Blue Grey */
+    --foreground: 0 0% 98%; /* Almost White */
+    --card: 240 10% 3.9%; /* Dark Blue Grey */
+    --card-foreground: 0 0% 98%; /* Almost White */
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 210 40% 98%; /* Lighter Blue for Primary */
+    --primary-foreground: 240 5.9% 10%; /* Darker for text on Lighter Blue */
+    --secondary: 240 3.7% 15.9%; /* Darker Secondary */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%; /* Lighter Muted Text */
+    --accent: 210 40% 98%; /* Lighter Blue Accent */
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 62.8% 30.6%; /* Darker Red */
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%; /* Darker Border */
+    --input: 240 3.7% 15.9%;
+    --ring: 210 40% 98%; /* Lighter Blue Ring */
+
+    /* Dark mode side patterns - can be same as light or adjusted */
+    --brand-purple-edge: 270 50% 10%; /* Even darker purple for dark mode */
+    --pattern-area-bg: 240 10% 5%; /* Darker pattern area */
+    --pattern-stripe-color: 240 10% 8%; /* Darker stripes */
+  }
+
   /* Override variables for small and medium screens to remove gutters */
   @media (max-width: 1023px) { /* Less than lg breakpoint (1024px) */
     :root {

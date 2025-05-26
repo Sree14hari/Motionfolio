@@ -1,4 +1,3 @@
-
 "use client";
 
 import { CONTACT_SECTION_SOCIAL_LINKS } from '@/lib/constants'; 
@@ -7,16 +6,16 @@ import { motion } from 'framer-motion';
 import * as LucideIcons from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { ThemeToggle } from '@/components/ui/theme-toggle'; // Import ThemeToggle
 
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
   return IconComponent || null;
 };
 
-// Filter for specific footer social links if needed, or use all from constants
 const FOOTER_SOCIAL_LINKS = CONTACT_SECTION_SOCIAL_LINKS.filter(
-  link => ['GitHub', 'LinkedIn', 'Email'].includes(link.name)
-).map(link => link.name === 'Email' ? { ...link, Icon: 'Mail' } : link);
+  link => ['GitHub', 'LinkedIn', 'Mail'].includes(link.name) 
+).map(link => link.name === 'Mail' ? { ...link, Icon: 'Mail' } : link);
 
 
 interface BuiltWithItem {
@@ -25,7 +24,7 @@ interface BuiltWithItem {
 }
 
 const builtWithData: BuiltWithItem[] = [
-  { text: 'Next.js' }, // Icon removed to match image
+  { text: 'Next.js' }, 
   { text: 'Tailwind CSS', Icon: getIcon('Wind') },
   { text: 'Framer Motion', Icon: getIcon('Move') },
 ];
@@ -52,7 +51,7 @@ export function Footer() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-3 gap-8 items-start mb-10">
-          {/* Column 1: Social Icons */}
+          {/* Column 1: Social Icons & Theme Toggle */}
           <motion.div 
             variants={sectionVariants} 
             className="flex flex-col items-center md:items-start space-y-4"
@@ -75,12 +74,15 @@ export function Footer() {
                 ) : null;
               })}
             </div>
+            <div className="pt-2"> {/* Added padding top for spacing */}
+              <ThemeToggle />
+            </div>
           </motion.div>
 
           {/* Column 2: Built With */}
           <motion.div 
             variants={sectionVariants} 
-            className="flex flex-col items-center md:items-start space-y-2 text-sm"
+            className="flex flex-col items-center md:items-end space-y-2 text-sm md:order-last lg:order-none" // Ensure right alignment on md, default on lg
           >
             {builtWithData.map((item, index) => (
               <div key={index} className="flex items-center space-x-2 text-muted-foreground">
@@ -95,7 +97,8 @@ export function Footer() {
             variants={sectionVariants} 
             className={cn(
               "w-full max-w-[320px] mx-auto", 
-              "md:w-[320px] md:mx-0 md:ml-auto md:mr-0" 
+              "md:w-[320px] md:mx-auto", // Center on md screens
+              "lg:w-[320px] lg:ml-auto lg:mr-0" // Original lg alignment
             )}
           >
             <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>
