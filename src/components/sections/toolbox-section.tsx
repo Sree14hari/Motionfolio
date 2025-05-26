@@ -5,19 +5,8 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { SECTION_IDS, TOOLBOX_DATA, HARDWARE_DATA, HardwareItem } from '@/lib/constants';
 import { ListChecks } from 'lucide-react';
-import React, { Suspense, useState, useEffect } from 'react'; // Added useState, useEffect
-// Dynamically import LaptopViewer with SSR disabled
-import dynamic from 'next/dynamic';
+import React, { Suspense, useState, useEffect } from 'react'; 
 import { cn } from '@/lib/utils';
-
-// const LaptopViewer = dynamic(() => import('@/components/three/laptop-viewer').then(mod => mod.default), {
-//   ssr: false,
-//   loading: () => (
-//     <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-lg border border-border bg-muted flex items-center justify-center">
-//       <p className="text-muted-foreground text-sm">Loading 3D Model...</p>
-//     </div>
-//   ),
-// });
 
 
 const sectionVariants = {
@@ -68,13 +57,7 @@ const hardwareContentVariants = {
 export function ToolboxSection() {
   const headingText = "Software and Hardware";
   const primaryHardware: HardwareItem | null = HARDWARE_DATA.length > 0 ? HARDWARE_DATA[0] : null;
-  // const [isClient, setIsClient] = useState(false);
-
-  // useEffect(() => {
-  //   setIsClient(true);
-  // }, []);
-
-
+  
   return (
     <motion.section
       id={SECTION_IDS.TOOLBOX}
@@ -120,7 +103,7 @@ export function ToolboxSection() {
                     variants={cardItemVariants}
                     whileHover={{ y: -5, scale: 1.03, boxShadow: "0px 10px 20px -5px rgba(0,0,0,0.1)" }}
                     transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                    className="flex items-center justify-center p-3 rounded-lg shadow-md bg-muted border border-border/30 aspect-square w-20 h-20 cursor-default" 
+                    className="flex items-center justify-center p-3 rounded-lg shadow-md bg-muted border border-border/30 aspect-square w-24 md:w-20 cursor-default" 
                   >
                     <Image
                       src={tool.iconUrl}
@@ -170,9 +153,9 @@ export function ToolboxSection() {
                   <p className="text-sm text-muted-foreground mb-4">
                     My primary machine for development and creative work.
                   </p>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
+                  <ul className="space-y-2 text-sm">
                     {primaryHardware.specs.map((spec, idx) => (
-                      <li key={idx} className="flex items-center justify-start text-left">
+                      <li key={idx} className="flex items-center justify-start text-left text-muted-foreground">
                         <ListChecks className="h-4 w-4 mr-2 text-muted-foreground flex-shrink-0" />
                         <span>{spec}</span>
                       </li>
@@ -187,3 +170,4 @@ export function ToolboxSection() {
     </motion.section>
   );
 }
+
