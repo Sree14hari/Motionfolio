@@ -43,9 +43,9 @@ const nextConfig: NextConfig = {
       // This ensures that direct imports (without "?url") are not handled by this rule
       // and can be picked up by the @svgr/webpack rule below.
       defaultSvgLoaderRule.resourceQuery = /url/;
-      // We remove the issuer condition, as this rule is now specific to "?url" imports
-      // which are typically for asset URLs, not component usage within JS/TSX.
-      delete defaultSvgLoaderRule.issuer;
+      // We DO NOT remove the issuer condition, as the original issuer might be important
+      // for the default loader's intended scope. Our SVGR rule has its own issuer.
+      // delete defaultSvgLoaderRule.issuer; 
     }
 
     // Add a new rule for @svgr/webpack to handle direct SVG imports as React components.

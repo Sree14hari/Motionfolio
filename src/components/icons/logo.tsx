@@ -1,6 +1,5 @@
-// @ts-ignore next-line
+
 import LogoLight from '@/assets/logo.svg';
-// @ts-ignore next-line
 import LogoDark from '@/assets/logow.svg';
 import type { SVGProps } from 'react';
 
