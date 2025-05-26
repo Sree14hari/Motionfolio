@@ -53,7 +53,10 @@ export function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-3 gap-8 items-start mb-10">
           {/* Column 1: Social Icons */}
-          <motion.div variants={sectionVariants} className="flex flex-col items-center md:items-start space-y-4">
+          <motion.div 
+            variants={sectionVariants} 
+            className="flex flex-col items-center md:items-start space-y-4"
+          >
             <div className="flex space-x-4">
               {FOOTER_SOCIAL_LINKS.map((link) => {
                 const IconComponent = getIcon(link.Icon);
@@ -75,7 +78,10 @@ export function Footer() {
           </motion.div>
 
           {/* Column 2: Built With */}
-          <motion.div variants={sectionVariants} className="flex flex-col items-center md:items-start space-y-2 text-sm">
+          <motion.div 
+            variants={sectionVariants} 
+            className="flex flex-col items-center md:items-start space-y-2 text-sm"
+          >
             {builtWithData.map((item, index) => (
               <div key={index} className="flex items-center space-x-2 text-muted-foreground">
                 {item.Icon && <item.Icon size={18} strokeWidth={1.5} />}
@@ -88,17 +94,17 @@ export function Footer() {
           <motion.div 
             variants={sectionVariants} 
             className={cn(
-              "w-full max-w-[320px] mx-auto", // Centered on small screens
-              "md:ml-auto md:mr-0" // Right-aligned in its column on medium+
+              "w-full max-w-[320px] mx-auto", 
+              "md:w-[320px] md:mx-0 md:ml-auto md:mr-0" 
             )}
           >
             <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>
               <iframe 
-                src="https://open.spotify.com/embed/track/0c39x5nS3S0k7Jk1NUI2A7?utm_source=oembed" 
+                src="https://open.spotify.com/embed/track/2plbrEY59IikOBgBGLjaoe?utm_source=oembed" 
                 style={{ top: 0, left: 0, width: '100%', height: '100%', position: 'absolute', border: 0 }} 
                 allowFullScreen 
                 allow="clipboard-write *; encrypted-media *; fullscreen *; picture-in-picture *;"
-                title="Spotify Embed: Die With A Smile"
+                title="Spotify Embed"
                 loading="lazy"
               ></iframe>
             </div>
