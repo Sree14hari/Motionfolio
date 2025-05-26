@@ -42,7 +42,7 @@ export function Footer() {
 
   return (
     <motion.footer 
-      className="py-12 md:py-16 bg-background text-foreground border-t border-border" // Updated background, text, and border colors
+      className="py-12 md:py-16 bg-background text-foreground border-t border-border"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
@@ -62,7 +62,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, color: "hsl(var(--primary))" }}
-                    className="text-muted-foreground hover:text-primary p-1" // Updated text color
+                    className="text-muted-foreground hover:text-primary p-1"
                     aria-label={`My ${link.name} profile`}
                   >
                     <IconComponent size={28} strokeWidth={1.5} />
@@ -75,7 +75,7 @@ export function Footer() {
           {/* Column 2: Built With */}
           <motion.div variants={sectionVariants} className="flex flex-col items-center md:items-start space-y-2 text-sm">
             {builtWithData.map((item, index) => (
-              <div key={index} className="flex items-center space-x-2 text-muted-foreground"> {/* Updated text color */}
+              <div key={index} className="flex items-center space-x-2 text-muted-foreground">
                 {item.Icon && <item.Icon size={18} strokeWidth={1.5} />}
                 <span>{item.text}</span>
               </div>
@@ -84,27 +84,28 @@ export function Footer() {
 
           {/* Column 3: Spotify Embed */}
           <motion.div variants={sectionVariants} className="w-full max-w-sm mx-auto md:mx-0 md:justify-self-end">
-            <iframe
-              title="Spotify Embed: Die With A Smile - Lady Gaga, Bruno Mars"
-              style={{ borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }} // Adjusted shadow for light bg
-              src="https://open.spotify.com/embed/track/0c39x5nS3S0k7Jk1NUI2A7?utm_source=generator" // Standard Spotify embed URL
-              width="100%"
-              height="152" 
-              frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-            ></iframe>
+            {/* Updated Spotify Embed Structure */}
+            <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>
+              <iframe 
+                src="https://open.spotify.com/embed/track/2plbrEY59IikOBgBGLjaoe?utm_source=oembed" 
+                style={{ top: 0, left: 0, width: '100%', height: '100%', position: 'absolute', border: '0' }} 
+                allowFullScreen 
+                allow="clipboard-write *; encrypted-media *; fullscreen *; picture-in-picture *;"
+                title="Spotify Embed"
+                loading="lazy"
+              ></iframe>
+            </div>
           </motion.div>
         </div>
 
         {/* Copyright */}
-        <motion.div variants={sectionVariants} className="text-center border-t border-border pt-8 mt-8"> {/* Updated border color */}
+        <motion.div variants={sectionVariants} className="text-center border-t border-border pt-8 mt-8">
           {currentYear !== null ? (
-            <p className="text-xs text-muted-foreground"> {/* Updated text color */}
+            <p className="text-xs text-muted-foreground">
               &copy; {currentYear} Sreehari. All rights reserved.
             </p>
           ) : (
-            <p className="text-xs text-muted-foreground">&nbsp;</p> // Updated text color
+            <p className="text-xs text-muted-foreground">&nbsp;</p>
           )}
         </motion.div>
       </div>
