@@ -36,6 +36,7 @@ export interface Project {
   tags: string[];
   liveUrl?: string;
   sourceUrl?: string;
+  icon?: string; // Optional icon for project card
 }
 
 export const PROJECTS_DATA: Project[] = [
@@ -48,6 +49,7 @@ export const PROJECTS_DATA: Project[] = [
     imageHint: 'crop management app',
     tags: ['Flutter', 'Mobile App', 'Agriculture'],
     sourceUrl: 'https://github.com/Sree14hari/CROPMATE-APP.git',
+    icon: 'Github',
   },
   {
     id: 'proj-weather',
@@ -58,6 +60,7 @@ export const PROJECTS_DATA: Project[] = [
     imageHint: 'weather forecast app',
     tags: ['Flutter', 'Mobile App', 'API', 'Weather'],
     sourceUrl: 'https://github.com/Sree14hari/Weather-App.git',
+    icon: 'Github',
   },
   {
     id: 'proj-flutter-portfolio',
@@ -68,6 +71,7 @@ export const PROJECTS_DATA: Project[] = [
     imageHint: 'flutter portfolio app',
     tags: ['Flutter', 'Portfolio', 'Mobile App', 'Web'],
     sourceUrl: 'https://github.com/Sree14hari/Portfolio-flutter.git',
+    icon: 'Github',
   },
   {
     id: 'proj-image-diffuser',
@@ -78,16 +82,23 @@ export const PROJECTS_DATA: Project[] = [
     imageHint: 'python ai logo',
     tags: ['Python', 'AI', 'Backend', 'API', 'Generative AI'],
     sourceUrl: 'https://github.com/Sree14hari/image-diffuser-backend.git',
+    icon: 'Github',
   },
 ];
 
-export const NAVBAR_SOCIAL_LINKS = [
+export interface SocialLink {
+  name: string;
+  Icon: string;
+  href: string;
+}
+
+export const NAVBAR_SOCIAL_LINKS: SocialLink[] = [
   { name: 'Instagram', Icon: 'Instagram', href: 'https://www.instagram.com/s_ree.har_i' },
   { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://www.linkedin.com/in/sree14hari/' },
   { name: 'GitHub', Icon: 'Github', href: 'https://github.com/Sree14hari' },
 ];
 
-export const CONTACT_SECTION_SOCIAL_LINKS = [
+export const CONTACT_SECTION_SOCIAL_LINKS: SocialLink[] = [
   { name: 'Email', Icon: 'Mail', href: 'mailto:sreehari14shr@gmail.com' },
   { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://www.linkedin.com/in/sree14hari/' },
   { name: 'Dribbble', Icon: 'Dribbble', href: '#' }, // Placeholder link for Dribbble
@@ -136,12 +147,11 @@ export interface FooterLinkItem {
   Icon?: string;
 }
 
-export const FOOTER_SOCIAL_LINKS: FooterLinkItem[] = [
-  { name: 'GitHub', Icon: 'Github', href: 'https://github.com/Sree14hari' },
-  { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://www.linkedin.com/in/sree14hari/' },
-  { name: 'Instagram', Icon: 'Instagram', href: 'https://www.instagram.com/s_ree.har_i' },
-  { name: 'Dribbble', Icon: 'Dribbble', href: '#' },
-];
+// Filtered specifically for footer display
+export const FOOTER_SOCIAL_LINKS: FooterLinkItem[] = CONTACT_SECTION_SOCIAL_LINKS.filter(link =>
+  ['GitHub', 'LinkedIn', 'Instagram', 'Dribbble'].includes(link.name)
+);
+
 
 // This constant is no longer used by the /projects page, but kept for reference or other uses.
 export interface ProjectCategory {
@@ -212,3 +222,4 @@ export const PROJECT_CATEGORIES: ProjectCategory[] = [
   },
 ];
 
+    
