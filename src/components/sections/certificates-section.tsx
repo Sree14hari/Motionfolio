@@ -44,7 +44,7 @@ const certificatesData: Certificate[] = [
     image: ciscoCyberImage,
     imageAlt: 'Cisco Cybersecurity Certificate',
     imageHint: 'cybersecurity certificate',
-    verifyUrl: '#',
+    verifyUrl: 'https://www.credly.com/badges/6628f5ff-6b71-4ac5-b0a9-52086c2c4806',
   },
   {
     id: 'cert-flutter',
@@ -54,7 +54,7 @@ const certificatesData: Certificate[] = [
     image: flutterImage,
     imageAlt: 'Flutter Development Certificate',
     imageHint: 'flutter certificate',
-    verifyUrl: '#',
+    // verifyUrl: '#', // Removed, will get "View" button
   },
   {
     id: 'cert-iee-rag',
@@ -100,7 +100,6 @@ const certificatesData: Certificate[] = [
     image: 'https://i.postimg.cc/hv9Vv3FN/nvdia-gen.jpg', 
     imageAlt: 'NVIDIA Generative AI Certificate',
     imageHint: 'ai certificate',
-    // verifyUrl: '#', 
   },
   {
     id: 'cert-nvidia-nls',
@@ -174,55 +173,78 @@ export function CertificatesSection() {
           className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
           variants={sectionVariants}
         >
-          {certificatesData.map((cert) => (
-            <motion.div key={cert.id} variants={itemVariants}>
-              <Card className="overflow-hidden shadow-lg h-full flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-                <div className="relative w-full h-40 md:h-56 bg-muted border-b">
-                  <Image
-                    src={cert.image}
-                    alt={cert.imageAlt}
-                    layout="fill"
-                    objectFit="contain"
-                    className="p-2"
-                    data-ai-hint={cert.imageHint}
-                    {...(typeof cert.image !== 'string' && cert.image.src ? { placeholder: 'blur' } : {})}
-                  />
-                </div>
-                <CardHeader>
-                  <CardTitle className={cn(
-                    "font-semibold text-foreground",
-                    "text-lg md:text-xl" 
-                  )}>{cert.title}</CardTitle>
-                  <CardDescription className="text-sm text-muted-foreground">
-                    Issued by: {cert.issuer}
-                  </CardDescription>
-                  <p className="text-xs text-muted-foreground/80">Date: {cert.date}</p>
-                </CardHeader>
-                <CardContent className="mt-auto flex-grow flex items-end">
-                  <div className="flex space-x-2 md:space-x-3 w-full">
-                    {cert.verifyUrl && (
-                      <Button asChild variant="outline" size="sm" className="flex-1 group text-xs sm:text-sm">
-                        <a href={cert.verifyUrl} target="_blank" rel="noopener noreferrer">
-                          <ShieldCheck className="mr-1.5 h-3.5 w-3.5 sm:mr-2 sm:h-4 sm:w-4 transition-transform group-hover:scale-110" /> Verify
-                        </a>
-                      </Button>
-                    )}
-                    {cert.downloadUrl && (
-                      <Button asChild variant="secondary" size="sm" className="flex-1 group text-xs sm:text-sm">
-                        <a href={cert.downloadUrl} target="_blank" rel="noopener noreferrer">
-                          <Download className="mr-1.5 h-3.5 w-3.5 sm:mr-2 sm:h-4 sm:w-4 transition-transform group-hover:scale-110" /> Download
-                        </a>
-                      </Button>
-                    )}
-                    {!cert.verifyUrl && !cert.downloadUrl && (
-                       <div className="w-full text-center text-sm text-muted-foreground py-2">
-                       </div>
-                    )}
+          {certificatesData.map((cert) => {
+            const isCiscoCert = cert.id === 'cert-cisco-cyber';
+            const hasPrimaryAction = (isCiscoCert && cert.verifyUrl) || !isCiscoCert;
+            const hasDownloadAction = !!cert.downloadUrl;
+            
+            let primaryActionContent = null;
+            if (isCiscoCert && cert.verifyUrl) {
+              primaryActionContent = (
+                <Button asChild variant="outline" size="sm" className={cn(hasDownloadAction ? 'flex-1' : 'w-full', 'group text-xs sm:text-sm')}>
+                  <a href={cert.verifyUrl} target="_blank" rel="noopener noreferrer">
+                    <ShieldCheck className="mr-1.5 h-3.5 w-3.5 sm:mr-2 sm:h-4 sm:w-4 transition-transform group-hover:scale-110" /> Verify
+                  </a>
+                </Button>
+              );
+            } else if (!isCiscoCert) { // For others, add View button
+              const viewHref = typeof cert.image === 'string' ? cert.image : (cert.image as StaticImageData).src;
+              primaryActionContent = (
+                <Button asChild variant="outline" size="sm" className={cn(hasDownloadAction ? 'flex-1' : 'w-full', 'group text-xs sm:text-sm')}>
+                  <a href={viewHref} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="mr-1.5 h-3.5 w-3.5 sm:mr-2 sm:h-4 sm:w-4 transition-transform group-hover:scale-110" /> View
+                  </a>
+                </Button>
+              );
+            }
+
+            const downloadActionContent = hasDownloadAction ? (
+              <Button asChild variant="secondary" size="sm" className={cn(hasPrimaryAction ? 'flex-1' : 'w-full', 'group text-xs sm:text-sm')}>
+                <a href={cert.downloadUrl!} target="_blank" rel="noopener noreferrer">
+                  <Download className="mr-1.5 h-3.5 w-3.5 sm:mr-2 sm:h-4 sm:w-4 transition-transform group-hover:scale-110" /> Download
+                </a>
+              </Button>
+            ) : null;
+
+            return (
+              <motion.div key={cert.id} variants={itemVariants}>
+                <Card className="overflow-hidden shadow-lg h-full flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                  <div className="relative w-full h-40 md:h-56 bg-muted border-b">
+                    <Image
+                      src={cert.image}
+                      alt={cert.imageAlt}
+                      layout="fill"
+                      objectFit="contain"
+                      className="p-2"
+                      data-ai-hint={cert.imageHint}
+                      {...(typeof cert.image !== 'string' && cert.image.src ? { placeholder: 'blur' } : {})}
+                    />
                   </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+                  <CardHeader>
+                    <CardTitle className={cn(
+                      "font-semibold text-foreground",
+                      "text-lg md:text-xl" 
+                    )}>{cert.title}</CardTitle>
+                    <CardDescription className="text-sm text-muted-foreground">
+                      Issued by: {cert.issuer}
+                    </CardDescription>
+                    <p className="text-xs text-muted-foreground/80">Date: {cert.date}</p>
+                  </CardHeader>
+                  <CardContent className="mt-auto flex-grow flex items-end">
+                    <div className="flex space-x-2 md:space-x-3 w-full">
+                      {primaryActionContent}
+                      {downloadActionContent}
+                      {!primaryActionContent && !downloadActionContent && (
+                        <div className="w-full text-center text-sm text-muted-foreground py-2">
+                          {/* Certificate details available above */}
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
