@@ -2,7 +2,7 @@
 "use client"; // Keep as client component if HeroSection or FeaturedProjectsSection use client features like Framer Motion
 
 import { HeroSection } from '@/components/sections/hero-section';
-import { ToolboxSection } from '@/components/sections/toolbox-section'; // Reverted to static import
+import { ToolboxSection } from '@/components/sections/toolbox-section'; 
 import { FeaturedProjectsSection } from '@/components/sections/featured-projects-section';
 // import dynamic from 'next/dynamic'; // No longer needed for ToolboxSection directly
 
@@ -25,9 +25,9 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <div className="w-full h-[2px] bg-border my-8"></div> {/* Separator Line */}
+      <div className="w-full h-px bg-border my-8"></div> {/* Separator Line */}
       <ToolboxSection />
-      <div className="w-full h-[2px] bg-border my-8"></div> {/* Separator Line */}
+      <div className="w-full h-px bg-border my-8"></div> {/* Separator Line */}
       <FeaturedProjectsSection />
     </>
   );

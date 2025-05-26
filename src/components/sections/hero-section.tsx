@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { SECTION_IDS } from '@/lib/constants';
 import selfJpg from '@/assets/self.jpg';
-import type { StaticImageData } from 'next/image'; // Import StaticImageData
+import type { StaticImageData } from 'next/image'; 
 import { useEffect, useState } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -163,10 +163,10 @@ export function HeroSection() {
           </div>
         </motion.div>
 
-        <div className="w-full h-[2px] bg-border"></div>
+        <div className="w-full h-px bg-border"></div>
 
         <motion.h1
-          className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground whitespace-pre-line mt-6 sm:mb-8"
+          className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground whitespace-pre-line mt-6 sm:mt-8"
           variants={contentVariants}
           initial="hidden"
           animate="visible"
@@ -174,7 +174,7 @@ export function HeroSection() {
           {headingText}
         </motion.h1>
 
-        <div className="w-full h-[2px] bg-border mt-6 sm:mt-8"></div>
+        <div className="w-full h-px bg-border mt-6 sm:mt-8"></div>
         
         <motion.p
           className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mt-6 sm:mt-8 mb-4"
@@ -185,6 +185,7 @@ export function HeroSection() {
         >
           {taglineText}
         </motion.p>
+        <div className="w-full h-px bg-border mt-4 mb-6 sm:mt-6 sm:mb-8"></div> {/* Line below tagline */}
         {/* Placeholder for gallery to maintain space or show loading */}
         <div className="relative flex justify-center items-start h-[250px] sm:h-[280px] md:h-[320px] w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mt-4">
           {/* Optionally, a loading spinner or skeleton here */}
@@ -219,10 +220,10 @@ export function HeroSection() {
         </div>
       </motion.div>
 
-      <div className="w-full h-[2px] bg-border"></div>
+      <div className="w-full h-px bg-border"></div>
 
       <motion.h1
-        className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground whitespace-pre-line mt-6 sm:mb-8"
+        className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground whitespace-pre-line mt-6 sm:mt-8"
         variants={contentVariants}
         initial="hidden"
         animate="visible"
@@ -230,10 +231,10 @@ export function HeroSection() {
         {headingText}
       </motion.h1>
 
-      <div className="w-full h-[2px] bg-border mt-6 sm:mt-8"></div>
+      <div className="w-full h-px bg-border mt-6 sm:mt-8"></div>
       
       <motion.p
-        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mt-6 sm:mt-8" // Removed mb-4
+        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mt-6 sm:mt-8 mb-4" 
         variants={contentVariants}
         initial="hidden"
         animate="visible"
@@ -242,7 +243,7 @@ export function HeroSection() {
         {taglineText}
       </motion.p>
 
-      <div className="w-full h-[2px] bg-border mt-6 sm:mt-8"></div>
+      <div className="w-full h-px bg-border mt-4 mb-6 sm:mt-6 sm:mb-8"></div> {/* Line below tagline */}
 
       {/* Gallery removed for now
       <motion.div
@@ -283,4 +284,3 @@ export function HeroSection() {
     </section>
   );
 }
-
