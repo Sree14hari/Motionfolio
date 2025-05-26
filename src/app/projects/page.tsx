@@ -16,14 +16,14 @@ interface ProjectCardProps {
 
 function ProjectCard({ project, index }: ProjectCardProps) {
   const cardVariants = {
-    hidden: { opacity: 0, y: 20 }, // Simpler initial state
+    hidden: { opacity: 0, y: 20 }, 
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.3, // Faster tween animation
+        duration: 0.3, 
         ease: "easeOut",
-        delay: index * 0.05, // Shorter stagger
+        delay: index * 0.05, 
       },
     },
   };
@@ -33,35 +33,38 @@ function ProjectCard({ project, index }: ProjectCardProps) {
       variants={cardVariants}
       className="group relative"
     >
-      <Link href={project.sourceUrl || '#'} passHref legacyBehavior target="_blank" rel="noopener noreferrer">
-        <a className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg">
-          <div className="bg-card p-4 rounded-lg shadow-md border transition-all duration-300 ease-in-out group-hover:shadow-xl group-hover:-translate-y-1">
-            <div className="relative h-8 mb-2">
-              <div className={cn(
-                "absolute left-0 top-0 h-8 w-2/5 rounded-t-md",
-                "bg-background dark:bg-secondary" 
-              )}></div>
-              <div className="absolute top-[-12px] right-4 h-10 w-10 bg-secondary rounded-full flex items-center justify-center shadow-md border-2 border-background group-hover:bg-primary transition-colors">
-                <Github className="h-5 w-5 text-secondary-foreground group-hover:text-primary-foreground" />
-              </div>
+      <Link 
+        href={project.sourceUrl || '#'} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg"
+      >
+        <div className="bg-card p-4 rounded-lg shadow-md border transition-all duration-300 ease-in-out group-hover:shadow-xl group-hover:-translate-y-1">
+          <div className="relative h-8 mb-2">
+            <div className={cn(
+              "absolute left-0 top-0 h-8 w-2/5 rounded-t-md",
+              "bg-background dark:bg-secondary" 
+            )}></div>
+            <div className="absolute top-[-12px] right-4 h-10 w-10 bg-secondary rounded-full flex items-center justify-center shadow-md border-2 border-background group-hover:bg-primary transition-colors">
+              <Github className="h-5 w-5 text-secondary-foreground group-hover:text-primary-foreground" />
             </div>
-
-            <div className="relative w-full aspect-[16/10] rounded-md overflow-hidden bg-muted mb-3 border border-border">
-              <Image
-                src={project.imageUrl}
-                alt={`${project.title} preview`}
-                layout="fill"
-                objectFit="cover"
-                data-ai-hint={project.imageHint || 'project image'}
-                className="transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-
-            <h3 className="text-center text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-              {project.title}
-            </h3>
           </div>
-        </a>
+
+          <div className="relative w-full aspect-[16/10] rounded-md overflow-hidden bg-muted mb-3 border border-border">
+            <Image
+              src={project.imageUrl}
+              alt={`${project.title} preview`}
+              layout="fill"
+              objectFit="cover"
+              data-ai-hint={project.imageHint || 'project image'}
+              className="transition-transform duration-300 group-hover:scale-105"
+            />
+          </div>
+
+          <h3 className="text-center text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+            {project.title}
+          </h3>
+        </div>
       </Link>
     </motion.div>
   );
@@ -73,7 +76,7 @@ export default function ProjectsPage() {
     visible: {
       opacity: 1,
       transition: {
-        delayChildren: 0.1, // Faster start for title
+        delayChildren: 0.1, 
       },
     },
   };

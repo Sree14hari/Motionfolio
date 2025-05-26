@@ -30,13 +30,12 @@ export function Navbar() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" passHref legacyBehavior>
-            <motion.a
-              className="flex items-center"
+          <Link href="/" className="flex items-center">
+            <motion.div // Wrapped Logo in motion.div for hover effect if needed, or apply directly to Link
               whileHover={{ scale: 1.05 }}
             >
               <Logo width={36} height={36} />
-            </motion.a>
+            </motion.div>
           </Link>
 
           {/* Centered Nav Links (Desktop) */}
@@ -50,8 +49,8 @@ export function Navbar() {
               {SECTIONS.map((section) => {
                 const isActive = pathname === section.href;
                 return (
-                  <Link href={section.href} key={section.id} passHref legacyBehavior>
-                    <motion.a
+                  <Link href={section.href} key={section.id} passHref>
+                    <motion.a // motion.a is a custom component rendering an <a>
                       className={cn(
                         "px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ease-in-out",
                         isActive
