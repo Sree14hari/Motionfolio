@@ -4,9 +4,64 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { SECTION_IDS, PROJECTS_DATA } from '@/lib/constants'; 
+import { SECTION_IDS, PROJECTS_DATA, type Project } from '@/lib/constants'; 
 import { Button } from '@/components/ui/button';
-import { Code2, ExternalLink, Github } from 'lucide-react';
+import { Github } from 'lucide-react'; // Only Github icon is needed for the folder card
+import { cn } from '@/lib/utils';
+
+interface FeaturedProjectCardProps {
+  project: Project;
+}
+
+function FeaturedProjectCard({ project }: FeaturedProjectCardProps) {
+  // Replicating the folder-style card from /projects page
+  return (
+    <motion.div
+      className="group relative h-full" // Added h-full for consistent card height in grid
+      variants={{ // Using itemVariants from the parent section
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.4, ease: 'easeOut' },
+        },
+      }}
+      whileHover={{ y: -5 }} // Simpler hover from parent, card style has its own too
+    >
+      <Link href={project.sourceUrl || '#'} passHref legacyBehavior target="_blank" rel="noopener noreferrer">
+        <a className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg h-full">
+          <div className="bg-card p-4 rounded-lg shadow-md border transition-all duration-300 ease-in-out group-hover:shadow-xl group-hover:-translate-y-1 h-full flex flex-col">
+            <div className="relative h-8 mb-2">
+              <div className={cn(
+                "absolute left-0 top-0 h-8 w-2/5 rounded-t-md",
+                "bg-background dark:bg-secondary" 
+              )}></div>
+              <div className="absolute top-[-12px] right-4 h-10 w-10 bg-secondary rounded-full flex items-center justify-center shadow-md border-2 border-background group-hover:bg-primary transition-colors">
+                <Github className="h-5 w-5 text-secondary-foreground group-hover:text-primary-foreground" />
+              </div>
+            </div>
+
+            <div className="relative w-full aspect-[16/10] rounded-md overflow-hidden bg-muted mb-3 border border-border">
+              <Image
+                src={project.imageUrl}
+                alt={`${project.title} preview`}
+                layout="fill"
+                objectFit="cover"
+                data-ai-hint={project.imageHint || 'project image'}
+                className="transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+
+            <h3 className="text-center text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-auto"> 
+              {project.title}
+            </h3>
+          </div>
+        </a>
+      </Link>
+    </motion.div>
+  );
+}
+
 
 export function FeaturedProjectsSection() {
   const sectionVariants = {
@@ -17,7 +72,7 @@ export function FeaturedProjectsSection() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants = { // This will be passed to each card's motion.div if not defined inside the card
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
@@ -26,12 +81,12 @@ export function FeaturedProjectsSection() {
     },
   };
 
-  const featuredProjects = PROJECTS_DATA.slice(0, 2); // Display the first two projects
+  const featuredProjects = PROJECTS_DATA.slice(0, 2); 
 
   return (
     <motion.section
       id={SECTION_IDS.FEATURED_PROJECTS}
-      className="py-16 sm:py-24 bg-card"
+      className="py-16 sm:py-24 bg-card" // Section background
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
@@ -39,65 +94,23 @@ export function FeaturedProjectsSection() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div variants={itemVariants} className="mb-12 sm:mb-16 text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground"> {/* Centered and black */}
+          <h2 className="text-4xl sm:text-5xl font-bold text-foreground"> 
             Projects
           </h2>
         </motion.div>
 
         {featuredProjects.length > 0 ? (
           <motion.div
-            variants={sectionVariants} 
-            className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16" // Updated grid classes
+            variants={sectionVariants} // Container for cards can also use sectionVariants for staggered children
+            className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16" 
           >
-            {featuredProjects.map((project) => (
-              <motion.div
-                key={project.id}
-                variants={itemVariants}
-                className="bg-background p-1 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 group"
-                whileHover={{ y: -5 }}
-              >
-                <div className="rounded-lg overflow-hidden">
-                  <div className="relative w-full aspect-[16/10] bg-muted">
-                    <Image
-                      src={project.imageUrl}
-                      alt={project.title}
-                      layout="fill"
-                      objectFit="cover"
-                      data-ai-hint={project.imageHint}
-                      className="transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-4 sm:p-6 bg-card rounded-b-lg"> {/* Adjusted padding for smaller cards */}
-                    <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">{project.title}</h3>
-                    <p className="text-muted-foreground text-sm mb-4 min-h-[40px]">{project.description}</p>
-                    <div className="flex items-center justify-end space-x-2 sm:space-x-3"> {/* Adjusted spacing for icons */}
-                      {project.sourceUrl && (
-                        <motion.a
-                          href={project.sourceUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 bg-muted hover:bg-secondary text-foreground rounded-full transition-colors"
-                          whileHover={{ scale: 1.1, y: -2 }}
-                          aria-label="View source code"
-                        >
-                          <Code2 size={18} /> {/* Slightly smaller icon */}
-                        </motion.a>
-                      )}
-                      {project.liveUrl && (
-                        <motion.a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 bg-muted hover:bg-secondary text-foreground rounded-full transition-colors"
-                          whileHover={{ scale: 1.1, y: -2 }}
-                          aria-label="View live project"
-                        >
-                          <ExternalLink size={18} /> {/* Slightly smaller icon */}
-                        </motion.a>
-                      )}
-                    </div>
-                  </div>
-                </div>
+            {featuredProjects.map((project, index) => (
+              // Pass itemVariants to ensure each card animates with this variant
+              // Or, if FeaturedProjectCard defines its own variants, it will use those.
+              // For consistency, ensure FeaturedProjectCard's motion.div uses `variants={itemVariants}`
+              // if you want the parent to control the stagger. Let's assume itemVariants is used.
+               <motion.div key={project.id} variants={itemVariants} className="h-full"> 
+                <FeaturedProjectCard project={project} />
               </motion.div>
             ))}
           </motion.div>
@@ -109,7 +122,7 @@ export function FeaturedProjectsSection() {
 
         <motion.div variants={itemVariants} className="text-center">
           <Button asChild size="lg" variant="outline" className="group text-foreground hover:bg-muted hover:text-primary border-muted-foreground/50 hover:border-primary/50">
-            <Link href="/projects"> {/* Updated to link to /projects page */}
+            <Link href="/projects"> 
               Load More Projects
               <Github className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1 text-muted-foreground group-hover:text-primary" />
             </Link>
