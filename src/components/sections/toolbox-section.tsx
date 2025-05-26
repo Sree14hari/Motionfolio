@@ -41,17 +41,17 @@ const contentColumnVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: 'easeOut', delay: 0.2 },
+    transition: { duration: 0.5, ease: 'easeOut', delay: 0.2, staggerChildren: 0.1 }, // Added staggerChildren
   },
 };
 
 const cardItemVariants = {
-  hidden: { opacity: 0, scale: 0.8, y: 20 },
+  hidden: { opacity: 0, scale: 0.9, y: 20 },
   visible: {
     opacity: 1,
     scale: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 200, damping: 12, duration: 0.3 },
+    transition: { type: "spring", stiffness: 260, damping: 15, duration: 0.4 },
   },
 };
 
@@ -99,16 +99,16 @@ export function ToolboxSection() {
           <motion.div variants={contentColumnVariants}>
             <motion.h3
               variants={titleItemVariants}
-              className="text-2xl font-semibold text-primary text-center mb-8 sm:mb-10"
+              className="text-2xl font-semibold text-primary text-center mb-6 sm:mb-8" // Added some bottom margin
             >
               Software
             </motion.h3>
             <motion.div
-              variants={contentColumnVariants} // Reuse for staggering children if needed, or a new one
+              variants={contentColumnVariants} 
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
-              className="flex flex-col space-y-4" // Vertical stack
+              className="grid grid-cols-2 gap-4 md:flex md:flex-col md:space-y-4" // Changed layout here
             >
               {TOOLBOX_DATA.map((tool) => (
                 <motion.div
@@ -138,13 +138,14 @@ export function ToolboxSection() {
           <motion.div variants={hardwareContentVariants}>
             <motion.h3
               variants={titleItemVariants}
-              className="text-2xl font-semibold text-primary text-center mb-8 sm:mb-10"
+              className="text-2xl font-semibold text-primary text-center mb-6 sm:mb-8" // Added some bottom margin
             >
               Hardware
             </motion.h3>
 
             {primaryHardware && (
-              <motion.div variants={hardwareContentVariants}>
+              <motion.div variants={hardwareContentVariants} className="flex flex-col items-center"> {/* Centering content */}
+                {/* <div className="relative w-full max-w-md mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border border-border bg-muted"> */}
                 <div className="relative w-full max-w-md mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden">
                   {/* {isClient && <LaptopViewer />} */}
                   <iframe
@@ -169,7 +170,7 @@ export function ToolboxSection() {
                   </p>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     {primaryHardware.specs.map((spec, index) => (
-                      <li key={index} className="flex items-center justify-start">
+                      <li key={index} className="flex items-center justify-start text-left"> {/* Changed to justify-start and text-left */}
                         <ListChecks className="h-4 w-4 mr-2 text-muted-foreground flex-shrink-0" />
                         <span>{spec}</span>
                       </li>
@@ -184,3 +185,4 @@ export function ToolboxSection() {
     </motion.section>
   );
 }
+
