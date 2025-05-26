@@ -49,7 +49,7 @@ export function Footer() {
       variants={sectionVariants}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-3 gap-8 items-start mb-10"> {/* Changed md:grid-cols-3 to lg:grid-cols-3 */}
+        <div className="grid lg:grid-cols-3 gap-8 items-start mb-10">
           {/* Column 1: Social Icons */}
           <motion.div variants={sectionVariants} className="flex flex-col items-center md:items-start space-y-4">
             <div className="flex space-x-4">
@@ -85,15 +85,15 @@ export function Footer() {
           {/* Column 3: Spotify Embed */}
           <motion.div 
             variants={sectionVariants} 
-            className="w-full max-w-[320px] mx-auto lg:w-[320px] lg:ml-auto lg:mr-0" // Updated classes
+            className="w-full max-w-[320px] mx-auto lg:w-[320px] lg:ml-auto lg:mr-0"
           >
             <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>
               <iframe 
-                src="https://open.spotify.com/embed/track/0c39x5nS3S0k7Jk1NUI2A7?utm_source=oembed" // Changed to oembed
+                src="https://open.spotify.com/embed/track/2plbrEY59IikOBgBGLjaoe?utm_source=oembed" 
                 style={{ top: 0, left: 0, width: '100%', height: '100%', position: 'absolute', border: '0' }} 
                 allowFullScreen 
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                title="Spotify Embed - Die With A Smile"
+                allow="clipboard-write *; encrypted-media *; fullscreen *; picture-in-picture *;"
+                title="Spotify Embed"
                 loading="lazy"
               ></iframe>
             </div>
