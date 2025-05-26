@@ -12,8 +12,8 @@ interface LogoProps extends Omit<ImageProps, 'src' | 'alt'> {
 
 export function Logo({ 
   alt = "MotionFolio Logo", 
-  width = 36, // Default height
-  height = 36, // Default height
+  width = 36, 
+  height = 36, 
   className, 
   ...rest 
 }: LogoProps) {
@@ -24,7 +24,7 @@ export function Logo({
       width={width}
       height={height}
       className={className}
-      priority // Logos in navbars are usually high priority
+      // priority prop removed
       {...rest}
     />
   );
