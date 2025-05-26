@@ -120,11 +120,11 @@ export const HARDWARE_DATA: HardwareItem[] = [
     id: 'laptop-rog-strix-g16',
     name: 'ROG Strix G16',
     specs: [
-      "13th Gen Intel® Core™ i7-13650HX Processor 2.6 GHz",
-      "NVIDIA® GeForce RTX™ 4050 GPU",
-      "ROG Boost: 2420MHz* at 140W",
-      "6GB GDDR6 GPU, 16GB DDR5 RAM",
-      "16\" QHD+ 240Hz Display",
+        "13th Gen Intel® Core™ i7-13650HX Processor 2.6 GHz",
+        "NVIDIA® GeForce RTX™ 4050 GPU",
+        "ROG Boost: 2420MHz* at 140W",
+        "6GB GDDR6 GPU, 16GB DDR5 RAM",
+        "16\" QHD+ 240Hz Display",
     ],
   },
 ];
@@ -135,19 +135,6 @@ export interface FooterLinkItem {
 }
 
 export const FOOTER_GENERAL_LINKS: FooterLinkItem[] = SECTIONS.map(section => ({ name: section.name, href: section.href }));
-
-export const FOOTER_SPECIFICS_LINKS: FooterLinkItem[] = [
-  { name: 'Toolbox', href: '#toolbox' }, // Assuming toolbox is part of the home page
-  { name: 'Speaking', href: '#' }, // Placeholder
-  { name: 'Products', href: '#' }, // Placeholder
-  { name: 'Community Wall', href: '#' }, // Placeholder
-];
-
-export const FOOTER_EXTRA_LINKS: FooterLinkItem[] = [
-  { name: 'Changelog', href: '#' }, // Placeholder
-  { name: 'Connections', href: '#' }, // Placeholder
-  { name: 'Links', href: '#' }, // Placeholder
-];
 
 export const FOOTER_SOCIAL_LINKS = [
   { name: 'GitHub', Icon: 'Github', href: 'https://github.com/Sree14hari' },

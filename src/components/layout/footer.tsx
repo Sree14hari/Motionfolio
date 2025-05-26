@@ -9,12 +9,11 @@ import Link from 'next/link';
 import { Logo } from '@/components/icons/logo';
 import { 
   FOOTER_GENERAL_LINKS, 
-  FOOTER_SPECIFICS_LINKS, 
-  FOOTER_EXTRA_LINKS,
   FOOTER_SOCIAL_LINKS,
   FooterLinkItem
 } from '@/lib/constants';
 import { cn } from '@/lib/utils';
+import { ThemeToggle } from '@/components/ui/theme-toggle'; // Keep for FAB
 
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
@@ -58,6 +57,7 @@ export function Footer() {
   };
 
   const bioText = "I'm Sreehari - a 3rd-year CSE (AI-ML) undergrad. Thanks for checking out my site!";
+  const spotifyTrackId = "2plbrEY59IikOBgBGLjaoe"; // Dandelions by Ruth B. (was working)
 
   return (
     <motion.footer 
@@ -69,7 +69,7 @@ export function Footer() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top section with columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
           {/* Column 1: Logo, Bio, Copyright, Socials */}
           <div className="space-y-4">
             <Link href="/" passHref legacyBehavior>
@@ -103,14 +103,25 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Column 2: General Links */}
+          {/* Column 2: Spotify Embed */}
+          <motion.div 
+            className="w-full max-w-[320px] mx-auto md:mx-auto" // Centered in its column
+            variants={sectionVariants} // Re-use variant or create a new one
+          >
+            <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>
+              <iframe
+                title="Spotify Embed Player"
+                src={`https://open.spotify.com/embed/track/${spotifyTrackId}?utm_source=generator`}
+                style={{ top: 0, left: 0, width: '100%', height: '100%', position: 'absolute', border: '0' }}
+                allowFullScreen
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+              ></iframe>
+            </div>
+          </motion.div>
+
+          {/* Column 3: General Links */}
           <FooterLinkColumn title="General" links={FOOTER_GENERAL_LINKS} />
-
-          {/* Column 3: Specifics Links */}
-          <FooterLinkColumn title="Specifics" links={FOOTER_SPECIFICS_LINKS} />
-
-          {/* Column 4: Extra Links */}
-          <FooterLinkColumn title="Extra" links={FOOTER_EXTRA_LINKS} />
         </div>
 
         {/* Bottom Decorative Separator */}
