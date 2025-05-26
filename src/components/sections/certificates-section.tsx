@@ -183,7 +183,7 @@ export function CertificatesSection() {
               primaryActionContent = (
                 <Button asChild variant="outline" size="sm" className={cn(hasDownloadAction ? 'flex-1' : 'w-full', 'group text-xs sm:text-sm')}>
                   <a href={cert.verifyUrl} target="_blank" rel="noopener noreferrer">
-                    <ShieldCheck className="mr-1.5 h-3.5 w-3.5 sm:mr-2 sm:h-4 sm:w-4 transition-transform group-hover:scale-110" /> Verify
+                    <ShieldCheck className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" /> Verify
                   </a>
                 </Button>
               );
@@ -192,7 +192,7 @@ export function CertificatesSection() {
               primaryActionContent = (
                 <Button asChild variant="outline" size="sm" className={cn(hasDownloadAction ? 'flex-1' : 'w-full', 'group text-xs sm:text-sm')}>
                   <a href={viewHref} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="mr-1.5 h-3.5 w-3.5 sm:mr-2 sm:h-4 sm:w-4 transition-transform group-hover:scale-110" /> View
+                    <ExternalLink className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" /> View
                   </a>
                 </Button>
               );
@@ -201,14 +201,14 @@ export function CertificatesSection() {
             const downloadActionContent = hasDownloadAction ? (
               <Button asChild variant="secondary" size="sm" className={cn(hasPrimaryAction ? 'flex-1' : 'w-full', 'group text-xs sm:text-sm')}>
                 <a href={cert.downloadUrl!} target="_blank" rel="noopener noreferrer">
-                  <Download className="mr-1.5 h-3.5 w-3.5 sm:mr-2 sm:h-4 sm:w-4 transition-transform group-hover:scale-110" /> Download
+                  <Download className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" /> Download
                 </a>
               </Button>
             ) : null;
 
             return (
               <motion.div key={cert.id} variants={itemVariants}>
-                <Card className="overflow-hidden shadow-lg h-full flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                <Card className="overflow-hidden shadow-md h-full flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
                   <div className="relative w-full h-40 md:h-56 bg-muted border-b">
                     <Image
                       src={cert.image}
@@ -253,3 +253,4 @@ export function CertificatesSection() {
     </motion.section>
   );
 }
+
