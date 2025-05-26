@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Award, Download, ExternalLink, ShieldCheck } from 'lucide-react';
 
 // Import certificate images from src/assets/certificates/
+// PLEASE ENSURE THESE FILES EXIST AT THESE EXACT PATHS WITH CORRECT CASING AND EXTENSIONS
 import ciscoCyberImage from '@/assets/certificates/cisco_cyber.jpg';
 import flutterImage from '@/assets/certificates/flutter.jpg';
 import ieeRagImage from '@/assets/certificates/iee_rag.jpg';
@@ -58,7 +59,7 @@ const certificatesData: Certificate[] = [
     issuer: 'IEEE',
     date: 'Dec 2023',
     image: ieeRagImage,
-    imageAlt: 'IEEE RAG Certificate',
+    imageAlt: 'IEEE RAG Workshop Certificate',
   },
   {
     id: 'cert-image-pro',
@@ -66,7 +67,7 @@ const certificatesData: Certificate[] = [
     issuer: 'Coursera',
     date: 'Jan 2024',
     image: imageProImage,
-    imageAlt: 'Image Processing Certificate',
+    imageAlt: 'Image Processing with Python Certificate',
   },
   {
     id: 'cert-n-conf',
@@ -74,7 +75,7 @@ const certificatesData: Certificate[] = [
     issuer: 'NVIDIA',
     date: 'Feb 2024',
     image: nConfImage,
-    imageAlt: 'N Conference Certificate',
+    imageAlt: 'NVIDIA N Conference Participation Certificate',
   },
   {
     id: 'cert-nit-python',
@@ -82,7 +83,7 @@ const certificatesData: Certificate[] = [
     issuer: 'NIT',
     date: 'Mar 2024',
     image: nitPythonImage,
-    imageAlt: 'NIT Python Certificate',
+    imageAlt: 'NIT Python Programming Certificate',
   },
   {
     id: 'cert-nvidia-gen',
@@ -98,7 +99,7 @@ const certificatesData: Certificate[] = [
     issuer: 'NVIDIA',
     date: 'May 2024',
     image: nvidiaNlsImage,
-    imageAlt: 'NVIDIA NLP Certificate',
+    imageAlt: 'NVIDIA NLP Series Certificate',
   },
   {
     id: 'cert-rag-comp',
@@ -113,8 +114,8 @@ const certificatesData: Certificate[] = [
     title: 'UI/UX Design Fundamentals',
     issuer: 'Design Academy',
     date: 'Jul 2024',
-    image: uiUxImage, // Assuming ui_ux.jpg from ui_ux.jpq
-    imageAlt: 'UI/UX Design Certificate',
+    image: uiUxImage, 
+    imageAlt: 'UI/UX Design Fundamentals Certificate',
   },
 ];
 
@@ -123,17 +124,17 @@ export function CertificatesSection() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+      transition: { staggerChildren: 0.05, delayChildren: 0.1 }, // Faster animations
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    hidden: { opacity: 0, y: 20, scale: 0.95 }, // Simplified initial state
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.3, ease: "easeOut" },
+      transition: { duration: 0.3, ease: "easeOut" }, // Faster tween animation
     },
   };
 
@@ -159,7 +160,7 @@ export function CertificatesSection() {
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={sectionVariants}
+          variants={sectionVariants} // Re-using sectionVariants for stagger effect on children
         >
           {certificatesData.map((cert) => (
             <motion.div key={cert.id} variants={itemVariants}>
@@ -171,7 +172,7 @@ export function CertificatesSection() {
                     layout="fill"
                     objectFit="contain"
                     className="p-2"
-                    placeholder="blur" // Added for better UX with local images
+                    placeholder="blur" 
                   />
                 </div>
                 <CardHeader>
@@ -199,7 +200,7 @@ export function CertificatesSection() {
                     )}
                     {!cert.verifyUrl && !cert.downloadUrl && (
                        <div className="w-full text-center text-sm text-muted-foreground py-2">
-                         {/* Placeholder if no actions */}
+                         {/* Placeholder if no actions. You can add a message like "Details available upon request." */}
                        </div>
                     )}
                   </div>
