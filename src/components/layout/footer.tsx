@@ -7,12 +7,13 @@ import type { LucideProps } from 'lucide-react';
 import Link from 'next/link';
 // import { Logo } from '@/components/icons/logo'; // Logo import removed
 import {
-  FOOTER_SOCIAL_LINKS,
+  CONTACT_SECTION_SOCIAL_LINKS, // Changed to use specific social links for footer
   FooterLinkItem,
-  SECTIONS, // Assuming SECTIONS is where Home, Journey etc. are defined
-  SectionConfig
+  // SECTIONS, // No longer used for general links
+  // SectionConfig
 } from '@/lib/constants';
 import { cn } from '@/lib/utils';
+import { Logo } from '@/components/icons/logo';
 
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
@@ -26,35 +27,12 @@ interface BuiltWithItem {
 }
 
 const builtWithData: BuiltWithItem[] = [
-  { name: 'Next.js', Icon: 'Layers', href: 'https://nextjs.org' }, // Using Layers as a generic framework icon
+  { name: 'Next.js', Icon: 'Layers', href: 'https://nextjs.org' },
   { name: 'Tailwind CSS', Icon: 'Wind', href: 'https://tailwindcss.com' },
   { name: 'Framer Motion', Icon: 'Move', href: 'https://www.framer.com/motion/' },
 ];
 
-interface FooterLinkColumnProps {
-  title: string;
-  links: SectionConfig[]; // Using SectionConfig as it has name and href
-}
-
-function FooterLinkColumn({ title, links }: FooterLinkColumnProps) {
-  return (
-    <div className="space-y-3">
-      <h5 className="text-sm font-semibold text-foreground">{title}</h5>
-      <ul className="space-y-2 text-sm">
-        {links.map((link) => (
-          <li key={link.id}>
-            <Link href={link.href} passHref legacyBehavior>
-              <a className="text-muted-foreground hover:text-primary transition-colors">
-                {link.name}
-              </a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
+// Removed FooterLinkColumn as "General" links are removed
 
 export function Footer() {
   const [currentYear, setCurrentYear] = useState<number | null>(null);
@@ -71,7 +49,8 @@ export function Footer() {
   const bioText = "I'm Sreehari - a 3rd-year CSE (AI-ML) undergrad. Thanks for checking out my site!";
   const spotifyTrackId = "2plbrEY59IikOBgBGLjaoe"; // Dandelions by Ruth B. (working)
 
-  const relevantSocialLinks = FOOTER_SOCIAL_LINKS.filter(link =>
+  // Using specific social links for footer
+  const relevantSocialLinks = CONTACT_SECTION_SOCIAL_LINKS.filter(link =>
     ['GitHub', 'LinkedIn', 'Instagram', 'Dribbble'].includes(link.name)
   );
 
@@ -85,11 +64,15 @@ export function Footer() {
       variants={sectionVariants}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top section with columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+        {/* Top section with columns - changed to 2 columns on md+ */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
           {/* Column 1: Bio, Copyright, Socials */}
           <div className="space-y-4 md:text-left text-center">
-            {/* Logo removed */}
+             <Link href="/" passHref legacyBehavior>
+              <a className="inline-block mb-2">
+                <Logo width={40} height={40} className="text-foreground dark:text-white mx-auto md:mx-0" />
+              </a>
+            </Link>
             <p className="text-sm text-muted-foreground">{bioText}</p>
             {currentYear !== null && (
               <p className="text-xs text-muted-foreground/80">
@@ -116,47 +99,49 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Spotify Embed */}
-          <motion.div
-            className="w-full max-w-[320px] mx-auto"
-            variants={sectionVariants}
-          >
-            <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>
-              <iframe
-                title="Spotify Embed Player"
-                src={`https://open.spotify.com/embed/track/${spotifyTrackId}?utm_source=oembed`}
-                style={{ top: 0, left: 0, width: '100%', height: '100%', position: 'absolute', border: '0' }}
-                allowFullScreen
-                allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-              ></iframe>
-            </div>
-          </motion.div>
+          {/* Column 2: Spotify Embed and Built With (stacked) */}
+          <div className="flex flex-col items-center md:items-center space-y-6"> {/* Centering content in the second column */}
+            <motion.div
+              className="w-full max-w-[320px] mx-auto" // Spotify embed centered
+              variants={sectionVariants}
+            >
+              <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>
+                <iframe
+                  title="Spotify Embed Player"
+                  src={`https://open.spotify.com/embed/track/${spotifyTrackId}?utm_source=oembed`}
+                  style={{ top: 0, left: 0, width: '100%', height: '100%', position: 'absolute', border: '0' }}
+                  allowFullScreen
+                  allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                ></iframe>
+              </div>
+            </motion.div>
 
-          {/* Column 3: Built With */}
-           <motion.div
-            className="flex flex-col items-center md:items-end space-y-3"
-            variants={sectionVariants}
-          >
-            <h5 className="text-sm font-semibold text-foreground">Built with</h5>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              {builtWithData.map((item) => {
-                const IconComponent = item.Icon ? getIcon(item.Icon) : null;
-                return (
-                  <li key={item.name} className="flex items-center md:justify-end">
-                    {IconComponent && <IconComponent className="mr-2 h-4 w-4 text-muted-foreground" />}
-                    {item.href ? (
-                      <a href={item.href} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                        {item.name}
-                      </a>
-                    ) : (
-                      <span>{item.name}</span>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </motion.div>
+            {/* "Built With" Section - hidden on mobile, flex on md+ */}
+            <motion.div
+              className="hidden md:flex md:flex-col md:items-center md:space-y-3" // Centered on md+
+              variants={sectionVariants}
+            >
+              <h5 className="text-sm font-semibold text-foreground">Built with</h5>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {builtWithData.map((item) => {
+                  const IconComponent = item.Icon ? getIcon(item.Icon) : null;
+                  return (
+                    <li key={item.name} className="flex items-center justify-center md:justify-start"> {/* Centered text on md+ */}
+                      {IconComponent && <IconComponent className="mr-2 h-4 w-4 text-muted-foreground" />}
+                      {item.href ? (
+                        <a href={item.href} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                          {item.name}
+                        </a>
+                      ) : (
+                        <span>{item.name}</span>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </motion.div>
+          </div>
         </div>
 
         {/* Bottom Decorative Separator */}
@@ -167,11 +152,11 @@ export function Footer() {
               backgroundImage: `repeating-linear-gradient(
                 -45deg,
                 hsl(var(--border)),
-                hsl(var(--border)) 1px,
-                transparent 1px,
-                transparent 5px
+                hsl(var(--border)) 2px, /* Thicker stripes */
+                transparent 2px, /* Adjusted gap */
+                transparent 5px /* Adjusted gap */
               )`,
-              opacity: 0.5,
+              opacity: 0.6, // Slightly increased opacity
             }}
           />
         </div>
