@@ -1,24 +1,63 @@
 
 "use client";
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import { SECTION_IDS, CONTACT_SECTION_SOCIAL_LINKS } from '@/lib/constants';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import * as LucideIcons from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
-import { Mail } from 'lucide-react'; // Explicit import for title icon
-import { useToast } from "@/hooks/use-toast"; // Import useToast
+import { Mail, Send, Loader2 } from 'lucide-react'; 
+import { useToast } from "@/hooks/use-toast";
 
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
   return IconComponent || null;
 };
 
+const formSchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters." }).max(50, { message: "Name must be at most 50 characters." }),
+  email: z.string().email({ message: "Invalid email address." }),
+  message: z.string().min(10, { message: "Message must be at least 10 characters." }).max(500, { message: "Message must be at most 500 characters." }),
+});
+
+type ContactFormValues = z.infer<typeof formSchema>;
+
 export function ContactSection() {
-  const { toast } = useToast(); // Initialize useToast
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const form = useForm<ContactFormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
+
+  const onSubmit: SubmitHandler<ContactFormValues> = async (data) => {
+    setIsSubmitting(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500)); 
+    
+    console.log("Form data submitted:", data); // You would send this data to your backend
+    
+    toast({
+      title: "Message Sent!",
+      description: "Thanks for reaching out. I'll get back to you soon.",
+      variant: "default",
+    });
+    form.reset(); // Reset form fields
+    setIsSubmitting(false);
+  };
 
   const sectionVariants = {
     hidden: { opacity: 0 },
@@ -44,18 +83,6 @@ export function ContactSection() {
       scale: 1,
       transition: { duration: 0.3, ease: "easeOut" },
     },
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent default form submission
-    // Simulate form submission
-    toast({
-      title: "Message Sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
-      variant: "default", // or "success" if you have that variant styled
-    });
-    // Optionally, you could reset form fields here
-    // e.g., e.currentTarget.reset();
   };
 
   return (
@@ -84,29 +111,70 @@ export function ContactSection() {
               </motion.div>
             </CardHeader>
             <CardContent className="p-6 sm:p-8 bg-card">
-              <motion.form
-                variants={itemVariants}
-                className="space-y-6"
-                onSubmit={handleSubmit} // Use the new handleSubmit function
-              >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <Form {...form}>
+                <motion.form
+                  variants={itemVariants}
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="space-y-6"
+                >
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="sr-only">Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Your Name" {...field} className="text-base" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="sr-only">Email</FormLabel>
+                          <FormControl>
+                            <Input type="email" placeholder="Your Email" {...field} className="text-base" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="sr-only">Message</FormLabel>
+                        <FormControl>
+                          <Textarea placeholder="Your Message" rows={5} {...field} className="text-base" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                   <motion.div variants={itemVariants}>
-                    <Input type="text" placeholder="Your Name" aria-label="Your Name" className="text-base" />
+                    <Button type="submit" className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 transition-colors group" size="lg" disabled={isSubmitting}>
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          Send Message
+                          <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        </>
+                      )}
+                    </Button>
                   </motion.div>
-                  <motion.div variants={itemVariants}>
-                    <Input type="email" placeholder="Your Email" aria-label="Your Email" className="text-base" />
-                  </motion.div>
-                </div>
-                <motion.div variants={itemVariants}>
-                  <Textarea placeholder="Your Message" rows={5} aria-label="Your Message" className="text-base" />
-                </motion.div>
-                <motion.div variants={itemVariants}>
-                  <Button type="submit" className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 transition-colors group" size="lg">
-                    Send Message
-                    <LucideIcons.Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </motion.div>
-              </motion.form>
+                </motion.form>
+              </Form>
 
               <motion.div variants={itemVariants} className="mt-10 sm:mt-12 text-center">
                 <p className="text-sm text-muted-foreground mb-4">Or connect with me on social media:</p>
@@ -120,7 +188,7 @@ export function ContactSection() {
                         target="_blank"
                         rel="noopener noreferrer"
                         variants={socialIconVariants}
-                        initial="hidden" // These will be controlled by the parent's stagger
+                        initial="hidden"
                         animate="visible"
                         whileHover={{ scale: 1.2, y: -2, color: "hsl(var(--primary))" }}
                         transition={{ type: 'spring', stiffness: 300 }}
@@ -140,3 +208,5 @@ export function ContactSection() {
     </motion.section>
   );
 }
+
+    
