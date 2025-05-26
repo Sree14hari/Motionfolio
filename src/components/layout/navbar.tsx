@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -7,7 +8,7 @@ import { SECTIONS, NAVBAR_SOCIAL_LINKS } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import * as LucideIcons from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
-// import { Logo } from '@/components/icons/logo'; // Logo import removed
+import { Logo } from '@/components/icons/logo';
 
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
@@ -34,10 +35,7 @@ export function Navbar() {
               className="flex items-center"
               whileHover={{ scale: 1.05 }}
             >
-              {/* Placeholder for Logo or App Name if needed in the future */}
-              <span className="text-lg font-bold text-foreground dark:text-white">
-                {/* MotionFolio */}
-              </span>
+              <Logo width={36} height={36} />
             </motion.a>
           </Link>
 

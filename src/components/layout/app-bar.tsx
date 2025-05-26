@@ -1,11 +1,13 @@
+
 "use client";
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { NAVBAR_SOCIAL_LINKS } from '@/lib/constants';
 import * as LucideIcons from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 import { cn } from '@/lib/utils';
-// import { Logo } from '@/components/icons/logo'; // Logo import removed
+import { Logo } from '@/components/icons/logo';
 
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
@@ -22,10 +24,11 @@ export function AppBar() {
     >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Placeholder for Logo or App Name if needed in the future */}
-          <div className="text-lg font-bold text-foreground">
-            {/* MotionFolio */}
-          </div>
+          <Link href="/" passHref legacyBehavior>
+            <a className="flex items-center">
+              <Logo width={36} height={36} />
+            </a>
+          </Link>
 
           <div className={cn(
             "flex items-center space-x-1 px-3 py-1.5 rounded-full shadow-sm",
