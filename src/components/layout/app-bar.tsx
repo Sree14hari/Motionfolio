@@ -23,7 +23,7 @@ export function AppBar() {
     >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          <Logo className="h-9 w-auto" /> {/* Sizing defined here, color comes from SVG */}
+          <Logo className="h-9 w-auto text-foreground dark:text-white" /> {/* Apply color via className */}
 
           <div className={cn(
             "flex items-center space-x-1 px-3 py-1.5 rounded-full shadow-sm",

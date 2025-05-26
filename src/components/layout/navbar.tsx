@@ -33,10 +33,10 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" passHref legacyBehavior>
             <motion.a
-              className="flex items-center transition-colors" // Removed color classes, SVG handles it
+              className="flex items-center" // Removed color classes
               whileHover={{ scale: 1.05 }}
             >
-              <Logo className="h-8 w-auto" /> {/* Sizing defined here */}
+              <Logo className="h-8 w-auto text-foreground dark:text-white" /> {/* Apply color via className */}
             </motion.a>
           </Link>
 

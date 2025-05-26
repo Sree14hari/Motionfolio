@@ -1,29 +1,22 @@
+// src/components/icons/logo.tsx
+"use client";
 
-import LogoLight from '@/assets/logo.svg';
-import LogoDark from '@/assets/logow.svg';
 import type { SVGProps } from 'react';
+import LogoComponent from '@/assets/logo.svg'; // Direct import for SVGR
+// import LogoDarkComponent from '@/assets/logow.svg'; // No longer used
 
 interface LogoProps extends Omit<SVGProps<SVGSVGElement>, 'alt'> {
   alt?: string;
-  // Removed width and height from props as sizing is typically handled by className
-  // If explicit width/height props are needed, they can be re-added.
 }
 
 export function Logo({ className, alt = "Logo", ...rest }: LogoProps) {
-  // The className prop will typically include Tailwind sizing utilities like h-8 w-auto
-  // Both SVGs will be rendered, and CSS will control visibility.
+  // The className prop should include Tailwind sizing and text color utilities
+  // e.g., "h-8 w-auto text-foreground dark:text-white"
   return (
-    <div className={className} aria-label={alt}>
-      <LogoLight 
-        className="block dark:hidden h-full w-full" // Ensure SVG fills the container
-        aria-hidden="true" // Hide from screen readers as only one is effectively visible
-        {...rest} 
-      />
-      <LogoDark 
-        className="hidden dark:block h-full w-full" // Ensure SVG fills the container
-        aria-hidden="true"
-        {...rest} 
-      />
-    </div>
+    <LogoComponent 
+      className={className} // Apply className directly to the SVG component
+      aria-label={alt}
+      {...rest} 
+    />
   );
 }
