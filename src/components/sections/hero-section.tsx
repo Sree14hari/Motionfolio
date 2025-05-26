@@ -27,9 +27,9 @@ interface Transform {
 
 const galleryImageData: Omit<GalleryImage, 'id'>[] = [
   { src: "https://i.postimg.cc/kG1kjmNF/PXL-20250223-134508159-441290144-1465373175.jpg", alt: "Gallery image 1: Fun moment", hint: "personal activity", zIndex: "z-0" },
-  { src: "https://i.postimg.cc/W1jN3WTV/IMG-20250311-184430-815-292984781.jpg", alt: "Gallery image 2: Exploring", hint: "travel adventure", zIndex: "z-10" },
-  { src: "https://i.postimg.cc/rwTDnmsX/IMG-20250201-091854-995-709592560.jpg", alt: "Gallery image 3: Genesis event badge", hint: "professional headshot", zIndex: "z-20" },
-  { src: "https://i.postimg.cc/Y0Q8Yx1G/Screenshot-20250315-091344-Instagram-992781481.jpg", alt: "Gallery image 4: Group photo", hint: "social event", zIndex: "z-10" },
+  { src: "https://i.postimg.cc/C1CkcqR8/PXL-20250223-134925254-1976385255.jpg", alt: "Gallery image 2: Exploring", hint: "travel adventure", zIndex: "z-10" },
+  { src: "https://i.postimg.cc/zGLh9ML8/PXL-20250307-154437525-1572406705.jpg", alt: "Gallery image 3: Genesis event badge", hint: "professional headshot", zIndex: "z-20" },
+  { src: "https://i.postimg.cc/0QZr6d6V/photo-2025-05-26-16-25-47.jpg", alt: "Gallery image 4: Group photo", hint: "social event", zIndex: "z-10" },
   { src: "https://i.postimg.cc/QtFC9K45/IMG-20250314-134009-347-611735110.jpg", alt: "Gallery image 5: Candid", hint: "candid moment", zIndex: "z-0" },
 ];
 
@@ -245,7 +245,6 @@ export function HeroSection() {
             className={`absolute ${image.zIndex} pointer-events-none`} 
             custom={index} // Pass index to variants
             variants={galleryItemVariants}
-            // whileHover is removed as per 'untouchable' request
             style={{
               transformOrigin: 'center center',
             }}
