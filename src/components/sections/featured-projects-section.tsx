@@ -4,31 +4,11 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { SECTION_IDS } from '@/lib/constants'; 
+import { SECTION_IDS, PROJECTS_DATA } from '@/lib/constants'; 
 import { Button } from '@/components/ui/button';
 import { Code2, ExternalLink, Github } from 'lucide-react';
 
-// Placeholder for a single project to demonstrate the new card structure
-const featuredProjectData = [
-  {
-    id: 'proj-lo62',
-    title: 'Project LO62',
-    description: 'My first ever electric vehicle project',
-    imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'electric vehicle project',
-    sourceUrl: '#',
-    liveUrl: '#',
-  },
-  {
-    id: 'proj-baatcheet',
-    title: 'BaatCheet',
-    description: 'Secure peer-to-peer video communication',
-    imageUrl: 'https://placehold.co/600x400.png', 
-    imageHint: 'video communication app',
-    sourceUrl: '#',
-    liveUrl: '#',
-  },
-];
+// No longer using local featuredProjectData, will use PROJECTS_DATA from constants
 
 export function FeaturedProjectsSection() {
   const sectionVariants = {
@@ -48,6 +28,8 @@ export function FeaturedProjectsSection() {
     },
   };
 
+  const featuredProjects = PROJECTS_DATA.slice(0, 2); // Display the first two projects
+
   return (
     <motion.section
       id={SECTION_IDS.FEATURED_PROJECTS}
@@ -59,22 +41,22 @@ export function FeaturedProjectsSection() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div variants={itemVariants} className="mb-12 sm:mb-16 text-center">
-          {/* "My work" text removed */}
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground"> {/* Changed to text-foreground and centered */}
+          <h2 className="text-4xl sm:text-5xl font-bold text-foreground"> {/* Centered and black */}
             Projects
           </h2>
         </motion.div>
 
-        {featuredProjectData.length > 0 ? (
+        {featuredProjects.length > 0 ? (
           <motion.div
-            variants={sectionVariants} // Use sectionVariants for staggering children
+            variants={sectionVariants} 
             className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 mb-12 sm:mb-16"
           >
-            {featuredProjectData.map((project, index) => (
+            {featuredProjects.map((project) => (
               <motion.div
                 key={project.id}
-                variants={itemVariants} // Each card uses itemVariants
-                className="bg-background p-1 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
+                variants={itemVariants}
+                className="bg-background p-1 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 group"
+                whileHover={{ y: -5 }}
               >
                 <div className="rounded-lg overflow-hidden">
                   <div className="relative w-full aspect-[16/10] bg-muted">
@@ -84,10 +66,10 @@ export function FeaturedProjectsSection() {
                       layout="fill"
                       objectFit="cover"
                       data-ai-hint={project.imageHint}
-                      className="transition-transform duration-300 hover:scale-105"
+                      className="transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
-                  <div className="p-6 bg-card rounded-b-lg"> {/* Changed to bg-card */}
+                  <div className="p-6 bg-card rounded-b-lg">
                     <h3 className="text-2xl font-semibold text-foreground mb-2">{project.title}</h3>
                     <p className="text-muted-foreground text-sm mb-4 min-h-[40px]">{project.description}</p>
                     <div className="flex items-center justify-end space-x-3">
@@ -129,7 +111,7 @@ export function FeaturedProjectsSection() {
 
         <motion.div variants={itemVariants} className="text-center">
           <Button asChild size="lg" variant="outline" className="group text-foreground hover:bg-muted hover:text-primary border-muted-foreground/50 hover:border-primary/50">
-            <Link href="https://github.com/Sree14hari" target="_blank" rel="noopener noreferrer">
+            <Link href="/projects"> {/* Updated to link to /projects page */}
               Load More Projects
               <Github className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1 text-muted-foreground group-hover:text-primary" />
             </Link>
@@ -139,5 +121,3 @@ export function FeaturedProjectsSection() {
     </motion.section>
   );
 }
-
-    
