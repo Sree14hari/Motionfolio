@@ -43,19 +43,23 @@ function ProjectCategoryCard({ category, index }: ProjectCategoryCardProps) {
       className="group relative"
     >
       <Link href={category.href} passHref legacyBehavior>
-        <a className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-xl">
-          <div className="bg-background p-4 rounded-xl shadow-lg transition-all duration-300 ease-in-out group-hover:shadow-2xl group-hover:-translate-y-1">
+        <a className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg">
+          {/* Main card structure with page background color */}
+          <div className="bg-background p-4 rounded-lg shadow-md transition-all duration-300 ease-in-out group-hover:shadow-xl group-hover:-translate-y-1">
             {/* Folder Tab */}
             <div className="relative h-8 mb-2">
+              {/* Tab background: white in light, dark-grey in dark */}
               <div className="absolute left-0 top-0 h-8 w-2/5 bg-card dark:bg-secondary rounded-t-md"></div>
               {IconComponent && (
+                // Icon circle background: theme.secondary in light, theme.secondary in dark (matching tab). Border matches card body.
                 <div className="absolute top-[-12px] right-4 h-10 w-10 bg-secondary rounded-full flex items-center justify-center shadow-md border-2 border-background group-hover:bg-primary transition-colors">
+                  {/* Icon color: secondary-foreground (dark on light, light on dark) */}
                   <IconComponent className="h-5 w-5 text-secondary-foreground group-hover:text-primary-foreground" />
                 </div>
               )}
             </div>
 
-            {/* Preview Image Area */}
+            {/* Preview Image Area: div background is theme.muted, image itself is light grey placeholder */}
             <div className="relative w-full aspect-[16/10] rounded-md overflow-hidden bg-muted mb-3 border border-border">
               <Image
                 src={category.previewImageUrl}
@@ -67,7 +71,7 @@ function ProjectCategoryCard({ category, index }: ProjectCategoryCardProps) {
               />
             </div>
 
-            {/* Title */}
+            {/* Title text: theme.foreground (dark on light, light on dark) */}
             <h3 className="text-center text-sm font-medium text-foreground group-hover:text-primary transition-colors">
               {category.title}
             </h3>
@@ -119,3 +123,4 @@ export default function ProjectsPage() {
     </motion.div>
   );
 }
+
