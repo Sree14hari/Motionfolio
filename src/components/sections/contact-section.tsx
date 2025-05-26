@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import * as LucideIcons from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 import { Mail } from 'lucide-react'; // Explicit import for title icon
+import { useToast } from "@/hooks/use-toast"; // Import useToast
 
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
@@ -17,6 +18,8 @@ const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
 };
 
 export function ContactSection() {
+  const { toast } = useToast(); // Initialize useToast
+
   const sectionVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -30,7 +33,7 @@ export function ContactSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, ease: "easeOut" }, // Reduced duration
+      transition: { duration: 0.4, ease: "easeOut" },
     },
   };
 
@@ -41,6 +44,18 @@ export function ContactSection() {
       scale: 1,
       transition: { duration: 0.3, ease: "easeOut" },
     },
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent default form submission
+    // Simulate form submission
+    toast({
+      title: "Message Sent!",
+      description: "Thanks for reaching out. I'll get back to you soon.",
+      variant: "default", // or "success" if you have that variant styled
+    });
+    // Optionally, you could reset form fields here
+    // e.g., e.currentTarget.reset();
   };
 
   return (
@@ -72,7 +87,7 @@ export function ContactSection() {
               <motion.form
                 variants={itemVariants}
                 className="space-y-6"
-                onSubmit={(e) => e.preventDefault()} // Prevent default form submission
+                onSubmit={handleSubmit} // Use the new handleSubmit function
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <motion.div variants={itemVariants}>
