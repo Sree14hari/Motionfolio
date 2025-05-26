@@ -17,7 +17,7 @@ import imageProImage from '@/assets/certificate/image_pro.jpg';
 import nConfImage from '@/assets/certificate/n_conf.jpg';
 import nitPythonImage from '@/assets/certificate/nit_python.jpg';
 // import nvidiaGenImage from '@/assets/certificate/nvidia_gen.jpg'; // Commented out due to "Module not found" error
-import nvidiaNlsImage from '@/assets/certificate/nvidia_nls.jpg';
+// import nvidiaNlsImage from '@/assets/certificate/nvidia_nls.jpg'; // Commented out due to "Module not found" error
 import ragCompImage from '@/assets/certificate/rag_comp.jpg';
 import uiUxImage from '@/assets/certificate/ui_ux.jpg';
 
@@ -107,8 +107,9 @@ const certificatesData: Certificate[] = [
     title: 'NVIDIA NLP Series',
     issuer: 'NVIDIA',
     date: 'May 2024',
-    image: nvidiaNlsImage,
-    imageAlt: 'NVIDIA NLP Certificate',
+    // image: nvidiaNlsImage, // Using placeholder due to import error
+    image: 'https://placehold.co/600x400.png', // Placeholder image
+    imageAlt: 'NVIDIA NLP Certificate - Placeholder',
     imageHint: 'nlp certificate',
   },
   {
