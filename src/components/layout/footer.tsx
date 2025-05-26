@@ -1,7 +1,7 @@
 
 "use client";
 
-import { CONTACT_SECTION_SOCIAL_LINKS } from '@/lib/constants'; // Using CONTACT_SECTION_SOCIAL_LINKS as it contains Mail
+import { CONTACT_SECTION_SOCIAL_LINKS } from '@/lib/constants'; 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import * as LucideIcons from 'lucide-react';
@@ -13,10 +13,9 @@ const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   return IconComponent || null;
 };
 
-// Filtered social links for the footer
 const FOOTER_SOCIAL_LINKS = CONTACT_SECTION_SOCIAL_LINKS.filter(
   link => ['GitHub', 'LinkedIn', 'Email'].includes(link.name)
-).map(link => link.name === 'Email' ? { ...link, Icon: 'Mail' } : link); // Ensure Email uses Mail icon
+).map(link => link.name === 'Email' ? { ...link, Icon: 'Mail' } : link);
 
 interface BuiltWithItem {
   text: string;
@@ -24,7 +23,7 @@ interface BuiltWithItem {
 }
 
 const builtWithData: BuiltWithItem[] = [
-  { text: 'Next.js', Icon: getIcon('Baseline') }, // Using Baseline as a placeholder for Next.js logo
+  { text: 'Next.js', Icon: getIcon('Baseline') }, 
   { text: 'Tailwind CSS', Icon: getIcon('Wind') },
   { text: 'Framer Motion', Icon: getIcon('Move') },
 ];
@@ -43,7 +42,7 @@ export function Footer() {
 
   return (
     <motion.footer 
-      className="py-12 md:py-16 bg-foreground text-background border-t border-background/10"
+      className="py-12 md:py-16 bg-background text-foreground border-t border-border" // Updated background, text, and border colors
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
@@ -63,7 +62,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, color: "hsl(var(--primary))" }}
-                    className="text-background/80 hover:text-background p-1"
+                    className="text-muted-foreground hover:text-primary p-1" // Updated text color
                     aria-label={`My ${link.name} profile`}
                   >
                     <IconComponent size={28} strokeWidth={1.5} />
@@ -76,7 +75,7 @@ export function Footer() {
           {/* Column 2: Built With */}
           <motion.div variants={sectionVariants} className="flex flex-col items-center md:items-start space-y-2 text-sm">
             {builtWithData.map((item, index) => (
-              <div key={index} className="flex items-center space-x-2 text-background/80">
+              <div key={index} className="flex items-center space-x-2 text-muted-foreground"> {/* Updated text color */}
                 {item.Icon && <item.Icon size={18} strokeWidth={1.5} />}
                 <span>{item.text}</span>
               </div>
@@ -87,10 +86,10 @@ export function Footer() {
           <motion.div variants={sectionVariants} className="w-full max-w-sm mx-auto md:mx-0 md:justify-self-end">
             <iframe
               title="Spotify Embed: Die With A Smile - Lady Gaga, Bruno Mars"
-              style={{ borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.2)' }}
-              src="https://open.spotify.com/embed/track/0c39x5nS3S0k7Jk1NUI2A7?utm_source=generator&theme=1" // theme=1 for dark theme
+              style={{ borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }} // Adjusted shadow for light bg
+              src="https://open.spotify.com/embed/track/0c39x5nS3S0k7Jk1NUI2A7?utm_source=generator" // Removed &theme=1 for default light theme
               width="100%"
-              height="152" // Standard compact player height
+              height="152" 
               frameBorder="0"
               allowFullScreen={false}
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
@@ -100,13 +99,13 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <motion.div variants={sectionVariants} className="text-center border-t border-background/10 pt-8 mt-8">
+        <motion.div variants={sectionVariants} className="text-center border-t border-border pt-8 mt-8"> {/* Updated border color */}
           {currentYear !== null ? (
-            <p className="text-xs text-background/60">
+            <p className="text-xs text-muted-foreground"> {/* Updated text color */}
               &copy; {currentYear} Sreehari. All rights reserved.
             </p>
           ) : (
-            <p className="text-xs text-background/60">&nbsp;</p>
+            <p className="text-xs text-muted-foreground">&nbsp;</p> // Updated text color
           )}
         </motion.div>
       </div>
