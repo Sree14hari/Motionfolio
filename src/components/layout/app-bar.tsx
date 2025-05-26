@@ -2,10 +2,11 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Logo } from '@/components/icons/logo'; // Import the Logo component
+import { Logo } from '@/components/icons/logo'; 
 import { NAVBAR_SOCIAL_LINKS } from '@/lib/constants';
 import * as LucideIcons from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
@@ -21,10 +22,13 @@ export function AppBar() {
       className="md:hidden fixed top-0 left-0 right-0 z-40 bg-card/25 backdrop-blur-lg shadow-md"
     >
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16"> {/* Changed justify-start to justify-between */}
-          <Logo className="h-9 w-auto text-primary" />
+        <div className="flex items-center justify-between h-16">
+          <Logo className="h-9 w-auto" /> {/* Sizing defined here, color comes from SVG */}
 
-          <div className="flex items-center space-x-1 bg-foreground/15 text-foreground px-3 py-1.5 rounded-full shadow-sm">
+          <div className={cn(
+            "flex items-center space-x-1 px-3 py-1.5 rounded-full shadow-sm",
+            "bg-foreground/15 text-foreground dark:bg-background/20 dark:text-foreground" 
+          )}>
             {NAVBAR_SOCIAL_LINKS.map((link) => {
               const IconComponent = getIcon(link.Icon);
               return IconComponent ? (

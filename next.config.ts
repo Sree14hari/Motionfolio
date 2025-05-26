@@ -32,32 +32,29 @@ const nextConfig: NextConfig = {
     ],
   },
   webpack(config) {
-    // Grab the existing rule that handles SVG imports
-    const fileLoaderRule = config.module.rules.find((rule: any) =>
-      rule.test?.test?.('.svg')
+    // Find the existing default rule for SVG files.
+    // This rule is usually responsible for handling SVGs as static assets.
+    const defaultSvgLoaderRule = config.module.rules.find(
+      (rule: any) => rule.test && typeof rule.test.test === 'function' && rule.test.test('.svg')
     );
 
-    config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports ending in ?url
-      {
-        ...fileLoaderRule,
-        test: /\.svg$/i,
-        resourceQuery: /url/, // *.svg?url
-      },
-      // Convert all other *.svg imports to React components
-      {
-        test: /\.svg$/i,
-        issuer: fileLoaderRule.issuer,
-        resourceQuery: { not: [...(fileLoaderRule.resourceQuery?.not || []), /url/] }, // exclude if *.svg?url
-        use: ['@svgr/webpack'],
-      }
-    );
-
-    // Modify the file loader rule to ignore *.svg, since we have it handled now.
-    if (fileLoaderRule) {
-      fileLoaderRule.exclude = /\.svg$/i;
+    if (defaultSvgLoaderRule) {
+      // Modify the default SVG loader rule to only process SVGs imported with "?url".
+      // This ensures that direct imports (without "?url") are not handled by this rule
+      // and can be picked up by the @svgr/webpack rule below.
+      defaultSvgLoaderRule.resourceQuery = /url/;
+      // We remove the issuer condition, as this rule is now specific to "?url" imports
+      // which are typically for asset URLs, not component usage within JS/TSX.
+      delete defaultSvgLoaderRule.issuer;
     }
-    
+
+    // Add a new rule for @svgr/webpack to handle direct SVG imports as React components.
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/, // Only apply to SVGs imported from JS/TSX files.
+      resourceQuery: { not: /url/ }, // Exclude SVGs imported with "?url".
+      use: ['@svgr/webpack'],
+    });
 
     return config;
   },

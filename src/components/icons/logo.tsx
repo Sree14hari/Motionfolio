@@ -1,18 +1,30 @@
 // @ts-ignore next-line
-import LogoSvg from '@/assets/logo.svg?url'; // Use ?url for Next.js to handle SVG as a URL for Image component
-import Image from 'next/image';
-import type { ImageProps } from 'next/image';
+import LogoLight from '@/assets/logo.svg';
+// @ts-ignore next-line
+import LogoDark from '@/assets/logow.svg';
+import type { SVGProps } from 'react';
 
-interface LogoProps extends Omit<ImageProps, 'src' | 'alt'> {
-  // You can add any custom props for your Logo component here
+interface LogoProps extends Omit<SVGProps<SVGSVGElement>, 'alt'> {
   alt?: string;
+  // Removed width and height from props as sizing is typically handled by className
+  // If explicit width/height props are needed, they can be re-added.
 }
 
-export function Logo(props: LogoProps) {
-  // If you need to style the SVG directly (e.g., fill, stroke),
-  // you might need to import it as a ReactComponent using @svgr/webpack
-  // For now, we'll use next/image which is good for optimization.
-  // The SVG's internal 'currentColor' will try to inherit color.
-  const { alt = "Logo", ...rest } = props;
-  return <Image src={LogoSvg as string} alt={alt} {...rest} unoptimized />;
+export function Logo({ className, alt = "Logo", ...rest }: LogoProps) {
+  // The className prop will typically include Tailwind sizing utilities like h-8 w-auto
+  // Both SVGs will be rendered, and CSS will control visibility.
+  return (
+    <div className={className} aria-label={alt}>
+      <LogoLight 
+        className="block dark:hidden h-full w-full" // Ensure SVG fills the container
+        aria-hidden="true" // Hide from screen readers as only one is effectively visible
+        {...rest} 
+      />
+      <LogoDark 
+        className="hidden dark:block h-full w-full" // Ensure SVG fills the container
+        aria-hidden="true"
+        {...rest} 
+      />
+    </div>
+  );
 }

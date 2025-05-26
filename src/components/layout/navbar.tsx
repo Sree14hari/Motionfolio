@@ -33,10 +33,10 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" passHref legacyBehavior>
             <motion.a
-              className="flex items-center text-foreground hover:text-primary transition-colors"
+              className="flex items-center transition-colors" // Removed color classes, SVG handles it
               whileHover={{ scale: 1.05 }}
             >
-              <Logo className="h-8 w-auto" /> 
+              <Logo className="h-8 w-auto" /> {/* Sizing defined here */}
             </motion.a>
           </Link>
 
@@ -53,7 +53,7 @@ export function Navbar() {
                       className={cn(
                         "px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ease-in-out",
                         isActive
-                          ? "bg-background text-primary font-semibold shadow-sm dark:bg-transparent dark:shadow-none" // Active link style updated for dark mode
+                          ? "bg-background text-primary font-semibold shadow-sm dark:bg-transparent dark:shadow-none" 
                           : "text-muted-foreground hover:text-primary",
                         "focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-1 focus:ring-offset-card"
                       )}
@@ -94,4 +94,3 @@ export function Navbar() {
     </motion.nav>
   );
 }
-
