@@ -8,8 +8,6 @@ import { SECTION_IDS, PROJECTS_DATA } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 import { Code2, ExternalLink, Github } from 'lucide-react';
 
-// No longer using local featuredProjectData, will use PROJECTS_DATA from constants
-
 export function FeaturedProjectsSection() {
   const sectionVariants = {
     hidden: { opacity: 0 },
@@ -49,7 +47,7 @@ export function FeaturedProjectsSection() {
         {featuredProjects.length > 0 ? (
           <motion.div
             variants={sectionVariants} 
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 mb-12 sm:mb-16"
+            className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16" // Updated grid classes
           >
             {featuredProjects.map((project) => (
               <motion.div
@@ -69,10 +67,10 @@ export function FeaturedProjectsSection() {
                       className="transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
-                  <div className="p-6 bg-card rounded-b-lg">
-                    <h3 className="text-2xl font-semibold text-foreground mb-2">{project.title}</h3>
+                  <div className="p-4 sm:p-6 bg-card rounded-b-lg"> {/* Adjusted padding for smaller cards */}
+                    <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">{project.title}</h3>
                     <p className="text-muted-foreground text-sm mb-4 min-h-[40px]">{project.description}</p>
-                    <div className="flex items-center justify-end space-x-3">
+                    <div className="flex items-center justify-end space-x-2 sm:space-x-3"> {/* Adjusted spacing for icons */}
                       {project.sourceUrl && (
                         <motion.a
                           href={project.sourceUrl}
@@ -82,7 +80,7 @@ export function FeaturedProjectsSection() {
                           whileHover={{ scale: 1.1, y: -2 }}
                           aria-label="View source code"
                         >
-                          <Code2 size={20} />
+                          <Code2 size={18} /> {/* Slightly smaller icon */}
                         </motion.a>
                       )}
                       {project.liveUrl && (
@@ -94,7 +92,7 @@ export function FeaturedProjectsSection() {
                           whileHover={{ scale: 1.1, y: -2 }}
                           aria-label="View live project"
                         >
-                          <ExternalLink size={20} />
+                          <ExternalLink size={18} /> {/* Slightly smaller icon */}
                         </motion.a>
                       )}
                     </div>
