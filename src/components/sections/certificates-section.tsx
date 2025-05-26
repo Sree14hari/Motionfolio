@@ -7,6 +7,7 @@ import { SECTION_IDS } from '@/lib/constants';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Award, Download, ExternalLink, ShieldCheck } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 // Import certificate images from src/assets/certificate/ (SINGULAR)
 // PLEASE ENSURE THESE FILES EXIST AT THESE EXACT PATHS WITH CORRECT CASING AND EXTENSIONS
@@ -170,13 +171,13 @@ export function CertificatesSection() {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
           variants={sectionVariants}
         >
           {certificatesData.map((cert) => (
             <motion.div key={cert.id} variants={itemVariants}>
               <Card className="overflow-hidden shadow-lg h-full flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-                <div className="relative w-full h-56 bg-muted border-b">
+                <div className="relative w-full h-40 md:h-56 bg-muted border-b">
                   <Image
                     src={cert.image}
                     alt={cert.imageAlt}
@@ -188,25 +189,28 @@ export function CertificatesSection() {
                   />
                 </div>
                 <CardHeader>
-                  <CardTitle className="text-xl font-semibold text-foreground">{cert.title}</CardTitle>
+                  <CardTitle className={cn(
+                    "font-semibold text-foreground",
+                    "text-lg md:text-xl" 
+                  )}>{cert.title}</CardTitle>
                   <CardDescription className="text-sm text-muted-foreground">
                     Issued by: {cert.issuer}
                   </CardDescription>
                   <p className="text-xs text-muted-foreground/80">Date: {cert.date}</p>
                 </CardHeader>
                 <CardContent className="mt-auto flex-grow flex items-end">
-                  <div className="flex space-x-3 w-full">
+                  <div className="flex space-x-2 md:space-x-3 w-full">
                     {cert.verifyUrl && (
-                      <Button asChild variant="outline" className="flex-1 group">
+                      <Button asChild variant="outline" size="sm" className="flex-1 group text-xs sm:text-sm">
                         <a href={cert.verifyUrl} target="_blank" rel="noopener noreferrer">
-                          <ShieldCheck className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" /> Verify
+                          <ShieldCheck className="mr-1.5 h-3.5 w-3.5 sm:mr-2 sm:h-4 sm:w-4 transition-transform group-hover:scale-110" /> Verify
                         </a>
                       </Button>
                     )}
                     {cert.downloadUrl && (
-                      <Button asChild variant="secondary" className="flex-1 group">
+                      <Button asChild variant="secondary" size="sm" className="flex-1 group text-xs sm:text-sm">
                         <a href={cert.downloadUrl} target="_blank" rel="noopener noreferrer">
-                          <Download className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" /> Download
+                          <Download className="mr-1.5 h-3.5 w-3.5 sm:mr-2 sm:h-4 sm:w-4 transition-transform group-hover:scale-110" /> Download
                         </a>
                       </Button>
                     )}
