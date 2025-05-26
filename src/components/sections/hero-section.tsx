@@ -5,10 +5,9 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { SECTION_IDS } from '@/lib/constants';
 import selfJpg from '@/assets/self.jpg';
-import type { StaticImageData } from 'next/image'; 
+import type { StaticImageData } from 'next/image';
 import { useEffect, useState } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
-
 
 // Data for the gallery images
 interface GalleryImage {
@@ -36,7 +35,6 @@ const galleryImageData: Omit<GalleryImage, 'transformDesktop' | 'transformMobile
   { src: "https://i.postimg.cc/QtFC9K45/IMG-20250314-134009-347-611735110.jpg", alt: "Gallery image 5: Candid", hint: "candid moment", zIndex: "z-0" },
 ];
 
-
 // Transforms for the 5-image layout (desktop)
 const galleryTransforms5: Transform[] = [
   { x: -220, y: -15, rotate: -15, scale: 1 },
@@ -53,13 +51,20 @@ const galleryTransforms3: Transform[] = [
   { x: 130, y: -5, rotate: 10, scale: 1 }, // Corresponds to galleryImages[3]
 ];
 
-
 const fullGalleryData: GalleryImage[] = galleryImageData.map((img, index) => ({
   ...img,
   id: `gallery-img-${index}`,
   transformDesktop: galleryTransforms5[index],
 }));
 
+const techIcons = [
+  { src: "https://img.icons8.com/?size=100&id=13441&format=png&color=000000", alt: "HTML5", hint: "html5 logo" },
+  { src: "https://img.icons8.com/?size=100&id=7I3BjCqe9rjG&format=png&color=000000", alt: "CSS3", hint: "css3 logo" },
+  { src: "https://img.icons8.com/?size=100&id=7AFcZ2zirX6Y&format=png&color=000000", alt: "JavaScript", hint: "javascript logo" },
+  { src: "https://img.icons8.com/?size=100&id=62452&format=png&color=000000", alt: "React", hint: "react logo" },
+  { src: "https://img.icons8.com/?size=100&id=40670&format=png&color=000000", alt: "Node.js", hint: "nodejs logo" },
+  { src: "https://img.icons8.com/?size=100&id=WCL5hPLvhUjQ&format=png&color=000000", alt: "Python", hint: "python logo" },
+];
 
 export function HeroSection() {
   const headingText = "Hey, I'm Sreehari!\nWelcome to my corner of the internet!";
@@ -88,7 +93,6 @@ export function HeroSection() {
     }
   }, [isMobile]);
 
-
   const profilePicVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: {
@@ -106,7 +110,7 @@ export function HeroSection() {
       transition: { duration: 0.3, ease: "easeOut", delay: 0.2 }
     },
   };
-  
+
   const galleryContainerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -119,9 +123,9 @@ export function HeroSection() {
     hidden: (i: number) => ({
       opacity: 0,
       scale: 0.5,
-      x: activeTransforms[i]?.x ?? 0, 
-      y: (activeTransforms[i]?.y ?? 0) + 50, 
-      rotate: activeTransforms[i]?.rotate ?? 0, 
+      x: activeTransforms[i]?.x ?? 0,
+      y: (activeTransforms[i]?.y ?? 0) + 50,
+      rotate: activeTransforms[i]?.rotate ?? 0,
     }),
     visible: (i: number) => ({
       opacity: 1,
@@ -131,6 +135,15 @@ export function HeroSection() {
       rotate: activeTransforms[i]?.rotate ?? 0,
       transition: { type: 'spring', stiffness: 260, damping: 20, delay: i * 0.1 },
     }),
+  };
+
+  const iconStripVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.3, ease: "easeOut", delay: 0.4 } // Delay after tagline
+    },
   };
 
 
@@ -175,7 +188,7 @@ export function HeroSection() {
         </motion.h1>
 
         <div className="w-full h-px bg-border mt-6 sm:mt-8"></div>
-        
+
         <motion.p
           className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mt-6 sm:mt-8 mb-4"
           variants={contentVariants}
@@ -186,7 +199,8 @@ export function HeroSection() {
           {taglineText}
         </motion.p>
         <div className="w-full h-px bg-border mt-4 mb-6 sm:mt-6 sm:mb-8"></div> {/* Line below tagline */}
-        {/* Placeholder for gallery to maintain space or show loading */}
+        {/* Placeholder for icon strip and gallery */}
+        <div className="h-[48px] w-full mt-2 mb-4"></div> {/* Placeholder for icon strip height */}
         <div className="relative flex justify-center items-start h-[250px] sm:h-[280px] md:h-[320px] w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mt-4">
           {/* Optionally, a loading spinner or skeleton here */}
         </div>
@@ -232,22 +246,46 @@ export function HeroSection() {
       </motion.h1>
 
       <div className="w-full h-px bg-border mt-6 sm:mt-8"></div>
-      
+
       <motion.p
-        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mt-6 sm:mt-8 mb-4" 
+        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mt-6 sm:mt-8 mb-4"
         variants={contentVariants}
         initial="hidden"
         animate="visible"
-        style={{ transition: { delay: 0.25 } }} 
+        style={{ transition: { delay: 0.25 } }}
       >
         {taglineText}
       </motion.p>
 
       <div className="w-full h-px bg-border mt-4 mb-6 sm:mt-6 sm:mb-8"></div> {/* Line below tagline */}
 
-      {/* Gallery removed for now
+      {/* Tech Icon Strip */}
       <motion.div
-        className="relative flex justify-center items-start h-[250px] sm:h-[280px] md:h-[320px] w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mt-4"
+        className="w-full overflow-hidden py-2"
+        variants={iconStripVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <div className="flex whitespace-nowrap animate-marquee">
+          {[...techIcons, ...techIcons].map((icon, index) => (
+            <div key={index} className="inline-block mx-4 flex-shrink-0">
+              <Image
+                src={icon.src}
+                alt={icon.alt}
+                width={48}
+                height={48}
+                className="object-contain"
+                data-ai-hint={icon.hint}
+                unoptimized
+              />
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Restored Gallery */}
+      <motion.div
+        className="relative flex justify-center items-start h-[250px] sm:h-[280px] md:h-[320px] w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mt-6 sm:mt-8"
         variants={galleryContainerVariants}
         initial="hidden"
         animate="visible"
@@ -255,14 +293,10 @@ export function HeroSection() {
         {activeImages.map((image, index) => (
           <motion.div
             key={image.id}
-            className={`absolute ${image.zIndex} cursor-pointer`}
+            className={`absolute ${image.zIndex} pointer-events-none`} // Added pointer-events-none
             custom={index}
             variants={galleryItemVariants}
-            whileHover={{ 
-              scale: (activeTransforms[index]?.scale ?? 1) * 1.05, // Scale up from its current animated scale
-              y: (activeTransforms[index]?.y ?? 0) -10, // Lift up
-              zIndex: 30 
-            }}
+            // whileHover prop removed
             transition={{ type: "spring", stiffness: 300, damping: 10 }}
             style={{
               transformOrigin: 'center center',
@@ -280,7 +314,6 @@ export function HeroSection() {
           </motion.div>
         ))}
       </motion.div>
-      */}
     </section>
   );
 }
