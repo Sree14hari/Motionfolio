@@ -1,2 +1,2 @@
-// Logo component removed
+// This component has been removed.
 export {};

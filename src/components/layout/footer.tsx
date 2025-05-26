@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -6,10 +5,12 @@ import { motion } from 'framer-motion';
 import * as LucideIcons from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 import Link from 'next/link';
-// import { Logo } from '@/components/icons/logo'; // Logo removed
-import { 
+// import { Logo } from '@/components/icons/logo'; // Logo import removed
+import {
   FOOTER_SOCIAL_LINKS,
   FooterLinkItem,
+  SECTIONS, // Assuming SECTIONS is where Home, Journey etc. are defined
+  SectionConfig
 } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
@@ -20,7 +21,7 @@ const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
 
 interface BuiltWithItem {
   name: string;
-  Icon?: string; 
+  Icon?: string;
   href?: string;
 }
 
@@ -29,6 +30,31 @@ const builtWithData: BuiltWithItem[] = [
   { name: 'Tailwind CSS', Icon: 'Wind', href: 'https://tailwindcss.com' },
   { name: 'Framer Motion', Icon: 'Move', href: 'https://www.framer.com/motion/' },
 ];
+
+interface FooterLinkColumnProps {
+  title: string;
+  links: SectionConfig[]; // Using SectionConfig as it has name and href
+}
+
+function FooterLinkColumn({ title, links }: FooterLinkColumnProps) {
+  return (
+    <div className="space-y-3">
+      <h5 className="text-sm font-semibold text-foreground">{title}</h5>
+      <ul className="space-y-2 text-sm">
+        {links.map((link) => (
+          <li key={link.id}>
+            <Link href={link.href} passHref legacyBehavior>
+              <a className="text-muted-foreground hover:text-primary transition-colors">
+                {link.name}
+              </a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 
 export function Footer() {
   const [currentYear, setCurrentYear] = useState<number | null>(null);
@@ -45,8 +71,13 @@ export function Footer() {
   const bioText = "I'm Sreehari - a 3rd-year CSE (AI-ML) undergrad. Thanks for checking out my site!";
   const spotifyTrackId = "2plbrEY59IikOBgBGLjaoe"; // Dandelions by Ruth B. (working)
 
+  const relevantSocialLinks = FOOTER_SOCIAL_LINKS.filter(link =>
+    ['GitHub', 'LinkedIn', 'Instagram', 'Dribbble'].includes(link.name)
+  );
+
+
   return (
-    <motion.footer 
+    <motion.footer
       className="py-12 md:py-16 bg-background text-foreground border-t border-border"
       initial="hidden"
       whileInView="visible"
@@ -59,19 +90,14 @@ export function Footer() {
           {/* Column 1: Bio, Copyright, Socials */}
           <div className="space-y-4 md:text-left text-center">
             {/* Logo removed */}
-            {/* <Link href="/" passHref legacyBehavior>
-              <a className="inline-block mb-2">
-                <Logo className="h-8 w-auto text-primary" />
-              </a>
-            </Link> */}
             <p className="text-sm text-muted-foreground">{bioText}</p>
             {currentYear !== null && (
-              <p className="text-xs text-muted-foreground/80"> 
+              <p className="text-xs text-muted-foreground/80">
                 &copy; {currentYear} Sreehari
               </p>
             )}
             <div className="flex items-center space-x-1 bg-foreground text-background px-3 py-1.5 rounded-full shadow-sm w-fit mx-auto md:mx-0">
-              {FOOTER_SOCIAL_LINKS.map((link) => {
+              {relevantSocialLinks.map((link) => {
                 const IconComponent = getIcon(link.Icon);
                 return IconComponent ? (
                   <motion.a
@@ -80,7 +106,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.15, opacity: 0.85 }}
-                    className="p-1.5" 
+                    className="p-1.5"
                     aria-label={`My ${link.name} profile`}
                   >
                     <IconComponent size={18} strokeWidth={2} />
@@ -90,9 +116,9 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Spotify Embed - Centered on all screens if not in 3-col */}
-          <motion.div 
-            className="w-full max-w-[320px] mx-auto" 
+          {/* Column 2: Spotify Embed */}
+          <motion.div
+            className="w-full max-w-[320px] mx-auto"
             variants={sectionVariants}
           >
             <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>
@@ -106,9 +132,9 @@ export function Footer() {
               ></iframe>
             </div>
           </motion.div>
-          
-          {/* Column 3: Built With - Right aligned on md+, centered on small */}
-           <motion.div 
+
+          {/* Column 3: Built With */}
+           <motion.div
             className="flex flex-col items-center md:items-end space-y-3"
             variants={sectionVariants}
           >
@@ -135,7 +161,7 @@ export function Footer() {
 
         {/* Bottom Decorative Separator */}
         <div className="relative h-12 mt-8 mb-4">
-          <div 
+          <div
             className="absolute inset-0"
             style={{
               backgroundImage: `repeating-linear-gradient(
