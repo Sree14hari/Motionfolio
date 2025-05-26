@@ -43,7 +43,7 @@ export function Footer() {
 
   return (
     <motion.footer 
-      className="py-12 md:py-16 bg-background text-foreground border-t border-border" // Light background, dark text
+      className="py-12 md:py-16 bg-background text-foreground border-t border-border"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
@@ -80,7 +80,7 @@ export function Footer() {
           <motion.div 
             variants={sectionVariants} 
             className={cn(
-              "flex flex-col items-center md:items-start space-y-2 text-sm text-muted-foreground" 
+              "flex flex-col items-center md:items-start space-y-2 text-sm text-muted-foreground"
             )}
           >
             {builtWithData.map((item, index) => (
@@ -101,10 +101,11 @@ export function Footer() {
           >
             <div style={{ left: 0, width: '100%', height: '152px', position: 'relative', borderRadius: '12px', overflow: 'hidden' }}>
               <iframe 
-                src="https://open.spotify.com/embed/track/0c39x5nS3S0k7Jk1NUI2A7?utm_source=generator" // Die With A Smile, light theme by default
+                src="https://open.spotify.com/embed/track/2plbrEY59IikOBgBGLjaoe?utm_source=oembed" // Reverted to "Dandelions"
                 style={{ top: 0, left: 0, width: '100%', height: '100%', position: 'absolute', border: 0 }} 
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                title="Spotify Embed - Die With A Smile"
+                allow="autoplay; clipboard-write *; encrypted-media *; fullscreen *; picture-in-picture *;"
+                allowFullScreen
+                title="Spotify Embed"
                 loading="lazy"
               ></iframe>
             </div>
