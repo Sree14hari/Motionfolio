@@ -119,9 +119,9 @@ export function HeroSection() {
     hidden: (i: number) => ({
       opacity: 0,
       scale: 0.5,
-      x: activeTransforms[i]?.x ?? 0, // Start from its target x for a more direct pop-in
-      y: (activeTransforms[i]?.y ?? 0) + 50, // Start slightly lower
-      rotate: activeTransforms[i]?.rotate ?? 0, // Start with target rotation
+      x: activeTransforms[i]?.x ?? 0, 
+      y: (activeTransforms[i]?.y ?? 0) + 50, 
+      rotate: activeTransforms[i]?.rotate ?? 0, 
     }),
     visible: (i: number) => ({
       opacity: 1,
@@ -136,8 +136,7 @@ export function HeroSection() {
 
   // Fallback for when isMobile is undefined to prevent layout shift
   if (isMobile === undefined) {
-    // You can render a minimal placeholder or nothing to avoid SSR/client mismatch issues.
-    // For simplicity, let's just render the non-image parts and a placeholder for the gallery.
+    // Render a minimal placeholder or nothing to avoid SSR/client mismatch issues.
     return (
       <section
         id={SECTION_IDS.HERO}
@@ -164,7 +163,7 @@ export function HeroSection() {
           </div>
         </motion.div>
 
-        <div className="w-full h-px bg-border"></div>
+        <div className="w-full h-[2px] bg-border"></div>
 
         <motion.h1
           className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground whitespace-pre-line mt-6 sm:mb-8"
@@ -175,7 +174,7 @@ export function HeroSection() {
           {headingText}
         </motion.h1>
 
-        <div className="w-full h-px bg-border"></div>
+        <div className="w-full h-[2px] bg-border mt-6 sm:mt-8"></div>
         
         <motion.p
           className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mt-6 sm:mt-8 mb-4"
@@ -220,10 +219,10 @@ export function HeroSection() {
         </div>
       </motion.div>
 
-      <div className="w-full h-px bg-border"></div>
+      <div className="w-full h-[2px] bg-border"></div>
 
       <motion.h1
-        className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground whitespace-pre-line mt-6 sm:mt-8"
+        className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground whitespace-pre-line mt-6 sm:mb-8"
         variants={contentVariants}
         initial="hidden"
         animate="visible"
@@ -231,10 +230,10 @@ export function HeroSection() {
         {headingText}
       </motion.h1>
 
-      <div className="w-full h-px bg-border mt-6 sm:mt-8"></div>
+      <div className="w-full h-[2px] bg-border mt-6 sm:mt-8"></div>
       
       <motion.p
-        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mt-6 sm:mt-8 mb-4" // Removed whitespace-pre-line
+        className="text-base sm:text-lg text-muted-foreground max-w-xl md:max-w-2xl mx-auto mt-6 sm:mt-8" // Removed mb-4
         variants={contentVariants}
         initial="hidden"
         animate="visible"
@@ -242,6 +241,8 @@ export function HeroSection() {
       >
         {taglineText}
       </motion.p>
+
+      <div className="w-full h-[2px] bg-border mt-6 sm:mt-8"></div>
 
       {/* Gallery removed for now
       <motion.div
@@ -257,7 +258,7 @@ export function HeroSection() {
             custom={index}
             variants={galleryItemVariants}
             whileHover={{ 
-              scale: (activeTransforms[index]?.scale ?? 1) * 1.1, // Scale up from its current animated scale
+              scale: (activeTransforms[index]?.scale ?? 1) * 1.05, // Scale up from its current animated scale
               y: (activeTransforms[index]?.y ?? 0) -10, // Lift up
               zIndex: 30 
             }}
