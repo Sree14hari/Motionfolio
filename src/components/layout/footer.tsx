@@ -13,7 +13,7 @@ import {
   FooterLinkItem
 } from '@/lib/constants';
 import { cn } from '@/lib/utils';
-import { ThemeToggle } from '@/components/ui/theme-toggle'; // Keep for FAB
+// import { ThemeToggle } from '@/components/ui/theme-toggle'; // Removed as it's now a FAB
 
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
@@ -57,7 +57,7 @@ export function Footer() {
   };
 
   const bioText = "I'm Sreehari - a 3rd-year CSE (AI-ML) undergrad. Thanks for checking out my site!";
-  const spotifyTrackId = "2plbrEY59IikOBgBGLjaoe"; // Dandelions by Ruth B. (was working)
+  const spotifyTrackId = "2plbrEY59IikOBgBGLjaoe"; // Dandelions by Ruth B. (working)
 
   return (
     <motion.footer 
@@ -69,7 +69,7 @@ export function Footer() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top section with columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10"> {/* Changed lg:grid-cols-3 to md:grid-cols-3 */}
           {/* Column 1: Logo, Bio, Copyright, Socials */}
           <div className="space-y-4">
             <Link href="/" passHref legacyBehavior>
@@ -111,10 +111,10 @@ export function Footer() {
             <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>
               <iframe
                 title="Spotify Embed Player"
-                src={`https://open.spotify.com/embed/track/${spotifyTrackId}?utm_source=generator`}
+                src={`https://open.spotify.com/embed/track/${spotifyTrackId}?utm_source=oembed`}
                 style={{ top: 0, left: 0, width: '100%', height: '100%', position: 'absolute', border: '0' }}
                 allowFullScreen
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                 loading="lazy"
               ></iframe>
             </div>
