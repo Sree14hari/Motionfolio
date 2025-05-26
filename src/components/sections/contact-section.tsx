@@ -30,6 +30,8 @@ const formSchema = z.object({
 
 type ContactFormValues = z.infer<typeof formSchema>;
 
+const web3FormsAccessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+
 export function ContactSection() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,37 +45,55 @@ export function ContactSection() {
     },
   });
 
-  const onSubmit: SubmitHandler<ContactFormValues> = async (data) => {
+  const onSubmit: SubmitHandler<ContactFormValues> = async (dataFromHookForm) => {
     setIsSubmitting(true);
+
+    if (!web3FormsAccessKey) {
+      toast({
+        title: "Configuration Error",
+        description: "Contact form is not set up correctly. Missing access key.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("name", dataFromHookForm.name);
+    formData.append("email", dataFromHookForm.email);
+    formData.append("message", dataFromHookForm.message);
+    formData.append("access_key", web3FormsAccessKey);
+    formData.append("subject", `New Contact Form Submission from ${dataFromHookForm.name}`);
+    formData.append("from_name", "Motionfolio Contact Form");
+
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
       });
 
       const result = await response.json();
 
-      if (response.ok) {
+      if (result.success) {
         toast({
           title: "Message Sent!",
-          description: "Thanks for reaching out. I'll get back to you soon.",
+          description: result.message || "Thanks for reaching out. I'll get back to you soon.",
           variant: "default",
         });
         form.reset();
       } else {
+        console.error("Web3Forms API Error:", result.message);
         toast({
           title: "Error Sending Message",
-          description: result.error || "Something went wrong. Please try again.",
+          description: result.message || "Something went wrong. Please try again.",
           variant: "destructive",
         });
       }
     } catch (error) {
+      console.error("Contact Form Submit Error:", error);
       toast({
         title: "Network Error",
-        description: "Could not connect to the server. Please check your internet connection.",
+        description: "Could not submit the form. Please check your internet connection.",
         variant: "destructive",
       });
     } finally {
@@ -230,3 +250,5 @@ export function ContactSection() {
     </motion.section>
   );
 }
+
+    
