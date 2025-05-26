@@ -89,7 +89,7 @@ export function Footer() {
           >
             <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>
               <iframe 
-                src="https://open.spotify.com/embed/track/0c39x5nS3S0k7Jk1NUI2A7?utm_source=generator" // Die With A Smile
+                src="https://open.spotify.com/embed/track/0c39x5nS3S0k7Jk1NUI2A7?utm_source=oembed" // Changed to oembed
                 style={{ top: 0, left: 0, width: '100%', height: '100%', position: 'absolute', border: '0' }} 
                 allowFullScreen 
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
