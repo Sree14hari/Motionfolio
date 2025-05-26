@@ -11,12 +11,11 @@ export const SECTION_IDS = {
   FEATURED_PROJECTS: 'featured-projects',
 } as const;
 
-// Define a type for individual section objects that includes an Icon and href
 export interface SectionConfig {
   id: typeof SECTION_IDS[keyof typeof SECTION_IDS];
   name: string;
-  Icon: string; // Name of the Lucide icon
-  href: string; // URL path for the section's page
+  Icon: string; 
+  href: string; 
 }
 
 export const SECTIONS: SectionConfig[] = [
@@ -37,6 +36,7 @@ export interface Project {
   tags: string[];
   liveUrl?: string;
   sourceUrl?: string;
+  // icon?: string; // Can add if each project needs a specific icon, otherwise use a default in the component
 }
 
 export const PROJECTS_DATA: Project[] = [
@@ -134,9 +134,8 @@ export const HARDWARE_DATA: HardwareItem[] = [
 export interface FooterLinkItem {
   name: string;
   href: string;
-  Icon?: string; // Optional Lucide icon name
+  Icon?: string; 
 }
-
 
 export const FOOTER_SOCIAL_LINKS: FooterLinkItem[] = [
   { name: 'GitHub', Icon: 'Github', href: 'https://github.com/Sree14hari' },
@@ -145,7 +144,7 @@ export const FOOTER_SOCIAL_LINKS: FooterLinkItem[] = [
   { name: 'Dribbble', Icon: 'Dribbble', href: '#' },
 ];
 
-
+// This constant is no longer used by the /projects page, but kept for reference or other uses.
 export interface ProjectCategory {
   id: string;
   title: string;
