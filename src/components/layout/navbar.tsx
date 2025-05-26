@@ -31,7 +31,7 @@ export function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center">
-            <motion.div // Wrapped Logo in motion.div for hover effect if needed, or apply directly to Link
+            <motion.div 
               whileHover={{ scale: 1.05 }}
             >
               <Logo width={36} height={36} />
@@ -41,16 +41,13 @@ export function Navbar() {
           {/* Centered Nav Links (Desktop) */}
           <div className="flex flex-grow justify-center min-w-0">
             <div
-              className={cn(
-                "flex items-center border border-border/50 shadow-sm rounded-full p-1 space-x-1",
-                "bg-card"
-              )}
+              className="flex items-center border border-border/50 shadow-sm rounded-full p-1 space-x-1 bg-card"
             >
               {SECTIONS.map((section) => {
                 const isActive = pathname === section.href;
                 return (
-                  <Link href={section.href} key={section.id} passHref>
-                    <motion.a // motion.a is a custom component rendering an <a>
+                  <Link href={section.href} key={section.id} passHref legacyBehavior>
+                    <motion.a 
                       className={cn(
                         "px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ease-in-out",
                         isActive
@@ -70,10 +67,7 @@ export function Navbar() {
           {/* Right Aligned Social Icons (Desktop) */}
           <div className="flex items-center space-x-3">
             <div
-              className={cn(
-                "flex items-center space-x-1 border border-border/50 shadow-sm text-muted-foreground px-3 py-1.5 rounded-full",
-                "bg-card"
-              )}
+              className="flex items-center space-x-1 border border-border/50 shadow-sm text-muted-foreground px-3 py-1.5 rounded-full bg-card"
             >
               {NAVBAR_SOCIAL_LINKS.map((link) => {
                 const IconComponent = getIcon(link.Icon);

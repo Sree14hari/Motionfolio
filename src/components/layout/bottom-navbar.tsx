@@ -33,8 +33,8 @@ export function BottomNavbar() {
             const isActive = pathname === section.href;
 
             return (
-              <Link href={section.href} key={section.id} passHref>
-                <motion.a // motion.a is a custom component rendering an <a>
+              <Link href={section.href} key={section.id} passHref legacyBehavior>
+                <motion.a 
                   className={cn(
                     "flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 ease-in-out group",
                     isActive
