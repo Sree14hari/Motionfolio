@@ -51,9 +51,9 @@
   }
 
   .dark {
-    --background: 240 10% 3.9%; /* Dark Blue Grey */
+    --background: 240 10% 3.9%; /* Dark Blue Grey - Page Background */
     --foreground: 0 0% 98%; /* Almost White */
-    --card: 240 10% 3.9%; /* Dark Blue Grey */
+    --card: 240 8% 6%; /* Slightly lighter Dark Blue Grey - Card Background */
     --card-foreground: 0 0% 98%; /* Almost White */
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
@@ -79,7 +79,7 @@
 
   /* Override variables for small and medium screens to remove gutters */
   @media (max-width: 1023px) { /* Less than lg breakpoint (1024px) */
-    :root {
+    :root, .dark { /* Apply to both light and dark themes */
       --gutter-width: 0px;
       --purple-edge-width: 0px;
     }
@@ -147,3 +147,4 @@
     z-index: -1; /* Places the grain behind the element's direct content, on top of its background */
   }
 }
+

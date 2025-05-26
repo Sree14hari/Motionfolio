@@ -44,15 +44,15 @@ function ProjectCategoryCard({ category, index }: ProjectCategoryCardProps) {
     >
       <Link href={category.href} passHref legacyBehavior>
         <a className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg">
-          {/* Main card structure with page background color */}
-          <div className="bg-background p-4 rounded-lg shadow-md border transition-all duration-300 ease-in-out group-hover:shadow-xl group-hover:-translate-y-1">
+          {/* Main card structure with card background color */}
+          <div className="bg-card p-4 rounded-lg shadow-md border transition-all duration-300 ease-in-out group-hover:shadow-xl group-hover:-translate-y-1">
             {/* Folder Tab */}
             <div className="relative h-8 mb-2">
               {/* Tab background: white in light, dark-grey in dark */}
               <div className="absolute left-0 top-0 h-8 w-2/5 bg-card dark:bg-secondary rounded-t-md"></div>
               {IconComponent && (
                 // Icon circle background: theme.secondary in light, theme.secondary in dark (matching tab). Border matches card body.
-                <div className="absolute top-[-12px] right-4 h-10 w-10 bg-secondary rounded-full flex items-center justify-center shadow-md border-2 border-background group-hover:bg-primary transition-colors">
+                <div className="absolute top-[-12px] right-4 h-10 w-10 bg-secondary rounded-full flex items-center justify-center shadow-md border-2 border-card group-hover:bg-primary transition-colors">
                   {/* Icon color: secondary-foreground (dark on light, light on dark) */}
                   <IconComponent className="h-5 w-5 text-secondary-foreground group-hover:text-primary-foreground" />
                 </div>
@@ -123,4 +123,3 @@ export default function ProjectsPage() {
     </motion.div>
   );
 }
-
