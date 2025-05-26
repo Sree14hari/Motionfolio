@@ -25,7 +25,7 @@ export function Navbar() {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={cn(
         "hidden md:flex md:fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        "bg-card/25 backdrop-blur-lg border-b border-border/70 shadow-sm" // Re-added blur and semi-transparent background
+        "bg-card/25 backdrop-blur-lg border-b border-border/70 shadow-sm"
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,7 +53,7 @@ export function Navbar() {
                       className={cn(
                         "px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ease-in-out",
                         isActive
-                          ? "bg-background text-primary font-semibold shadow-sm" // Active link style
+                          ? "bg-background text-primary font-semibold shadow-sm dark:bg-transparent dark:shadow-none" // Active link style updated for dark mode
                           : "text-muted-foreground hover:text-primary",
                         "focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-1 focus:ring-offset-card"
                       )}
@@ -94,3 +94,4 @@ export function Navbar() {
     </motion.nav>
   );
 }
+
