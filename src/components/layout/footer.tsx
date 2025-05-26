@@ -1,11 +1,19 @@
 
 "use client";
 
-import { CONTACT_SECTION_SOCIAL_LINKS } from '@/lib/constants'; 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import * as LucideIcons from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
+import Link from 'next/link';
+import { Logo } from '@/components/icons/logo';
+import { 
+  FOOTER_GENERAL_LINKS, 
+  FOOTER_SPECIFICS_LINKS, 
+  FOOTER_EXTRA_LINKS,
+  FOOTER_SOCIAL_LINKS,
+  FooterLinkItem
+} from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
@@ -13,21 +21,29 @@ const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   return IconComponent || null;
 };
 
-const FOOTER_SOCIAL_LINKS = CONTACT_SECTION_SOCIAL_LINKS.filter(
-  link => ['LinkedIn', 'GitHub', 'Instagram'].includes(link.name) 
-);
-
-
-interface BuiltWithItem {
-  text: string;
-  Icon?: React.ComponentType<LucideProps>;
+interface FooterLinkColumnProps {
+  title: string;
+  links: FooterLinkItem[];
 }
 
-const builtWithData: BuiltWithItem[] = [
-  { text: 'Next.js', Icon: getIcon('Layers') }, 
-  { text: 'Tailwind CSS', Icon: getIcon('Wind') },
-  { text: 'Framer Motion', Icon: getIcon('Move') },
-];
+function FooterLinkColumn({ title, links }: FooterLinkColumnProps) {
+  return (
+    <div className="space-y-3">
+      <h5 className="text-sm font-semibold text-foreground">{title}</h5>
+      <ul className="space-y-2">
+        {links.map((link) => (
+          <li key={link.name}>
+            <Link href={link.href} passHref legacyBehavior>
+              <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                {link.name}
+              </a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export function Footer() {
   const [currentYear, setCurrentYear] = useState<number | null>(null);
@@ -41,22 +57,33 @@ export function Footer() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
   };
 
+  const bioText = "I'm Sreehari - a 3rd-year CSE (AI-ML) undergrad. Thanks for checking out my site!";
+
   return (
     <motion.footer 
-      className="py-12 md:py-16 bg-background text-foreground border-t border-border"
+      className="py-12 md:py-16 bg-background text-foreground"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
       variants={sectionVariants}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-3 gap-8 items-start mb-10">
-          {/* Column 1: Social Icons */}
-          <motion.div 
-            variants={sectionVariants} 
-            className="flex flex-col items-center md:items-start space-y-4"
-          >
-            <div className="flex space-x-4">
+        {/* Top section with columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+          {/* Column 1: Logo, Bio, Copyright, Socials */}
+          <div className="space-y-4">
+            <Link href="/" passHref legacyBehavior>
+              <a className="inline-block">
+                <Logo className="h-8 w-auto text-primary" />
+              </a>
+            </Link>
+            <p className="text-sm text-muted-foreground">{bioText}</p>
+            {currentYear !== null && (
+              <p className="text-xs text-muted-foreground/80"> 
+                &copy; {currentYear} Sreehari
+              </p>
+            )}
+            <div className="flex items-center space-x-1 bg-foreground text-background px-3 py-1.5 rounded-full shadow-sm w-fit">
               {FOOTER_SOCIAL_LINKS.map((link) => {
                 const IconComponent = getIcon(link.Icon);
                 return IconComponent ? (
@@ -65,64 +92,43 @@ export function Footer() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, color: "hsl(var(--primary))" }}
-                    className="text-muted-foreground hover:text-primary p-1" 
+                    whileHover={{ scale: 1.15, opacity: 0.85 }}
+                    className="p-1.5" 
                     aria-label={`My ${link.name} profile`}
                   >
-                    <IconComponent size={28} strokeWidth={1.5} />
+                    <IconComponent size={18} strokeWidth={2} />
                   </motion.a>
                 ) : null;
               })}
             </div>
-             {/* ThemeToggle was here, moved to FAB */}
-          </motion.div>
+          </div>
 
-          {/* Column 2: Built With */}
-          <motion.div 
-            variants={sectionVariants} 
-            className={cn(
-              "flex flex-col items-center md:items-start space-y-2 text-sm text-muted-foreground"
-            )}
-          >
-            {builtWithData.map((item, index) => (
-              <div key={index} className="flex items-center space-x-2"> 
-                {item.Icon && <item.Icon size={18} strokeWidth={1.5} />}
-                <span>{item.text}</span>
-              </div>
-            ))}
-          </motion.div>
+          {/* Column 2: General Links */}
+          <FooterLinkColumn title="General" links={FOOTER_GENERAL_LINKS} />
 
-          {/* Column 3: Spotify Embed */}
-          <motion.div 
-            variants={sectionVariants} 
-            className={cn(
-              "w-full max-w-[320px] mx-auto", 
-              "md:w-[320px] md:ml-auto md:mr-0" 
-            )}
-          >
-            <div style={{ left: 0, width: '100%', height: '152px', position: 'relative', borderRadius: '12px', overflow: 'hidden' }}>
-              <iframe 
-                src="https://open.spotify.com/embed/track/2plbrEY59IikOBgBGLjaoe?utm_source=oembed" 
-                style={{ top: 0, left: 0, width: '100%', height: '100%', position: 'absolute', border: 0 }} 
-                allow="autoplay; clipboard-write *; encrypted-media *; fullscreen *; picture-in-picture *;"
-                allowFullScreen
-                title="Spotify Embed"
-                loading="lazy"
-              ></iframe>
-            </div>
-          </motion.div>
+          {/* Column 3: Specifics Links */}
+          <FooterLinkColumn title="Specifics" links={FOOTER_SPECIFICS_LINKS} />
+
+          {/* Column 4: Extra Links */}
+          <FooterLinkColumn title="Extra" links={FOOTER_EXTRA_LINKS} />
         </div>
 
-        {/* Copyright */}
-        <motion.div variants={sectionVariants} className="text-center border-t border-border pt-8 mt-8">
-          {currentYear !== null ? (
-            <p className="text-xs text-muted-foreground"> 
-              &copy; {currentYear} Sreehari. All rights reserved.
-            </p>
-          ) : (
-            <p className="text-xs text-muted-foreground">&nbsp;</p> 
-          )}
-        </motion.div>
+        {/* Bottom Decorative Separator */}
+        <div className="relative h-12 mt-8 mb-4">
+          <div 
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `repeating-linear-gradient(
+                -45deg,
+                hsl(var(--border)),
+                hsl(var(--border)) 1px,
+                transparent 1px,
+                transparent 5px
+              )`,
+              opacity: 0.5,
+            }}
+          />
+        </div>
       </div>
     </motion.footer>
   );
