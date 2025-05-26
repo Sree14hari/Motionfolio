@@ -107,6 +107,7 @@ export const TOOLBOX_DATA: Tool[] = [
   { id: 'figma', name: 'Figma', iconUrl: 'https://img.icons8.com/?size=100&id=snB4bDeuO6gJ&format=png&color=000000', imageHint: 'figma logo' },
   { id: 'canva', name: 'Canva', iconUrl: 'https://img.icons8.com/?size=100&id=iWw83PVcBpLw&format=png&color=000000', imageHint: 'canva logo' },
   { id: 'msoffice', name: 'MS Office', iconUrl: 'https://img.icons8.com/?size=100&id=37619&format=png&color=000000', imageHint: 'microsoft office logo' },
+  { id: 'android-studio', name: 'Android Studio', iconUrl: 'https://img.icons8.com/?size=100&id=xBW8JMtsQGFC&format=png&color=000000', imageHint: 'android studio logo' },
 ];
 
 export interface HardwareItem {
@@ -209,3 +210,4 @@ export const PROJECT_CATEGORIES: ProjectCategory[] = [
     href: '#',
   },
 ];
+
