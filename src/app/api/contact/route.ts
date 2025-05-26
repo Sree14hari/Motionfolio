@@ -1,7 +1,7 @@
 
 import { type NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import * from 'zod';
+import * as z from 'zod'; // Corrected import
 
 // Initialize Resend with your API key from environment variables
 const resendApiKey = process.env.RESEND_API_KEY;
