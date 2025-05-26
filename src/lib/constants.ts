@@ -85,7 +85,6 @@ export const NAVBAR_SOCIAL_LINKS = [
   { name: 'Instagram', Icon: 'Instagram', href: 'https://www.instagram.com/s_ree.har_i' },
   { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://www.linkedin.com/in/sree14hari/' },
   { name: 'GitHub', Icon: 'Github', href: 'https://github.com/Sree14hari' },
-  // Adding Mail icon here if needed for navbar consistency, or rely on CONTACT_SECTION_SOCIAL_LINKS for footer
 ];
 
 export const CONTACT_SECTION_SOCIAL_LINKS = [
@@ -114,8 +113,6 @@ export interface HardwareItem {
   id: string;
   name: string;
   specs: string[];
-  // imageUrl?: string; // No longer needed for Sketchfab/Vectary embed
-  // imageHint?: string; // No longer needed
 }
 
 export const HARDWARE_DATA: HardwareItem[] = [
@@ -124,14 +121,10 @@ export const HARDWARE_DATA: HardwareItem[] = [
     name: 'ROG Strix G16',
     specs: [
       '13th Gen Intel® Core™ i7-13650HX Processor 2.6 GHz',
-      '(24M Cache, up to 4.9 GHz, 14 cores: 6 P-cores and 8 E-cores)',
-      'NVIDIA® GeForce RTX™ 4050 Laptop GPU (194 AI TOPs)',
-      'ROG Boost: 2420MHz* at 140W (2370MHz Boost Clock+50MHz OC, 115W+25W Dynamic Boost)',
-      '6GB GDDR6',
-      '16GB DDR5 RAM',
-      '1TB PCIe 4.0 NVMe SSD',
+      'NVIDIA® GeForce RTX™ 4050 GPU',
+      'ROG Boost: 2420MHz* at 140W',
+      '6GB GDDR6 GPU, 16GB DDR5 RAM',
       '16" QHD+ 240Hz Display',
     ],
   },
 ];
-
