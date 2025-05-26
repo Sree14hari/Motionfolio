@@ -57,15 +57,6 @@ const fullGalleryData: GalleryImage[] = galleryImageData.map((img, index) => ({
   transformDesktop: galleryTransforms5[index],
 }));
 
-const techIcons = [
-  { src: "https://img.icons8.com/?size=100&id=13441&format=png&color=000000", alt: "HTML5", hint: "html5 logo" },
-  { src: "https://img.icons8.com/?size=100&id=7I3BjCqe9rjG&format=png&color=000000", alt: "CSS3", hint: "css3 logo" },
-  { src: "https://img.icons8.com/?size=100&id=7AFcZ2zirX6Y&format=png&color=000000", alt: "JavaScript", hint: "javascript logo" },
-  { src: "https://img.icons8.com/?size=100&id=62452&format=png&color=000000", alt: "React", hint: "react logo" },
-  { src: "https://img.icons8.com/?size=100&id=40670&format=png&color=000000", alt: "Node.js", hint: "nodejs logo" },
-  { src: "https://img.icons8.com/?size=100&id=WCL5hPLvhUjQ&format=png&color=000000", alt: "Python", hint: "python logo" },
-];
-
 export function HeroSection() {
   const headingText = "Hey, I'm Sreehari!\nWelcome to my corner of the internet!";
   const taglineText = "A 3rd-year CSE (AI-ML) undergrad at SBCE who loves developing Apps and finding solutions to problems around him.";
@@ -137,15 +128,6 @@ export function HeroSection() {
     }),
   };
 
-  const iconStripVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.3, ease: "easeOut", delay: 0.4 } // Delay after tagline
-    },
-  };
-
 
   // Fallback for when isMobile is undefined to prevent layout shift
   if (isMobile === undefined) {
@@ -200,7 +182,7 @@ export function HeroSection() {
         </motion.p>
         <div className="w-full h-px bg-border mt-4 mb-6 sm:mt-6 sm:mb-8"></div> {/* Line below tagline */}
         {/* Placeholder for icon strip and gallery */}
-        <div className="h-[48px] w-full mt-2 mb-4"></div> {/* Placeholder for icon strip height */}
+        {/* <div className="h-[48px] w-full mt-2 mb-4"></div> Placeholder for icon strip height */}
         <div className="relative flex justify-center items-start h-[250px] sm:h-[280px] md:h-[320px] w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mt-4">
           {/* Optionally, a loading spinner or skeleton here */}
         </div>
@@ -259,29 +241,6 @@ export function HeroSection() {
 
       <div className="w-full h-px bg-border mt-4 mb-6 sm:mt-6 sm:mb-8"></div> {/* Line below tagline */}
 
-      {/* Tech Icon Strip */}
-      <motion.div
-        className="w-full overflow-hidden py-2"
-        variants={iconStripVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <div className="flex whitespace-nowrap animate-marquee">
-          {[...techIcons, ...techIcons].map((icon, index) => (
-            <div key={index} className="inline-block mx-4 flex-shrink-0">
-              <Image
-                src={icon.src}
-                alt={icon.alt}
-                width={48}
-                height={48}
-                className="object-contain"
-                data-ai-hint={icon.hint}
-                unoptimized
-              />
-            </div>
-          ))}
-        </div>
-      </motion.div>
 
       {/* Restored Gallery */}
       <motion.div
@@ -293,10 +252,9 @@ export function HeroSection() {
         {activeImages.map((image, index) => (
           <motion.div
             key={image.id}
-            className={`absolute ${image.zIndex} pointer-events-none`} // Added pointer-events-none
+            className={`absolute ${image.zIndex} pointer-events-none`} 
             custom={index}
             variants={galleryItemVariants}
-            // whileHover prop removed
             transition={{ type: "spring", stiffness: 300, damping: 10 }}
             style={{
               transformOrigin: 'center center',
@@ -309,7 +267,7 @@ export function HeroSection() {
               height={isMobile ? 168 : 224}
               className="rounded-lg shadow-xl object-cover"
               data-ai-hint={image.hint}
-              priority={index === 2} // Prioritize loading the center image
+              priority={index === 2} 
             />
           </motion.div>
         ))}
