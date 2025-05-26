@@ -8,12 +8,11 @@ import type { LucideProps } from 'lucide-react';
 import Link from 'next/link';
 import { Logo } from '@/components/icons/logo';
 import { 
-  FOOTER_GENERAL_LINKS, 
   FOOTER_SOCIAL_LINKS,
-  FooterLinkItem
+  FooterLinkItem,
+  SECTIONS // Keep if FOOTER_GENERAL_LINKS was derived and might be used elsewhere, or remove if truly unused
 } from '@/lib/constants';
 import { cn } from '@/lib/utils';
-// import { ThemeToggle } from '@/components/ui/theme-toggle'; // Removed as it's now a FAB
 
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
@@ -25,6 +24,8 @@ interface FooterLinkColumnProps {
   links: FooterLinkItem[];
 }
 
+// FooterLinkColumn can be removed if FOOTER_GENERAL_LINKS was the only usage.
+// For safety, keeping it for now, but it's not used in the render.
 function FooterLinkColumn({ title, links }: FooterLinkColumnProps) {
   return (
     <div className="space-y-3">
@@ -69,7 +70,7 @@ export function Footer() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top section with columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10"> {/* Changed lg:grid-cols-3 to md:grid-cols-3 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10"> {/* Changed to md:grid-cols-2 */}
           {/* Column 1: Logo, Bio, Copyright, Socials */}
           <div className="space-y-4">
             <Link href="/" passHref legacyBehavior>
@@ -106,7 +107,7 @@ export function Footer() {
           {/* Column 2: Spotify Embed */}
           <motion.div 
             className="w-full max-w-[320px] mx-auto md:mx-auto" // Centered in its column
-            variants={sectionVariants} // Re-use variant or create a new one
+            variants={sectionVariants}
           >
             <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>
               <iframe
@@ -120,8 +121,7 @@ export function Footer() {
             </div>
           </motion.div>
 
-          {/* Column 3: General Links */}
-          <FooterLinkColumn title="General" links={FOOTER_GENERAL_LINKS} />
+          {/* General Links Column Removed */}
         </div>
 
         {/* Bottom Decorative Separator */}
