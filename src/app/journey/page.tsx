@@ -1,8 +1,5 @@
 
-import { JourneySection } from '@/components/sections/journey-section';
-
+// This page has been removed.
 export default function JourneyPage() {
-  return (
-    <JourneySection />
-  );
+  return null;
 }

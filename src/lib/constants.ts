@@ -5,7 +5,7 @@ export const SECTION_IDS = {
   HERO: 'hero',
   PROJECTS: 'projects',
   CERTIFICATES: 'certificates',
-  JOURNEY: 'journey',
+  // JOURNEY: 'journey', // Removed
   CONTACT: 'contact',
   TOOLBOX: 'toolbox',
   FEATURED_PROJECTS: 'featured-projects',
@@ -14,15 +14,15 @@ export const SECTION_IDS = {
 export interface SectionConfig {
   id: typeof SECTION_IDS[keyof typeof SECTION_IDS];
   name: string;
-  Icon: string; 
-  href: string; 
+  Icon: string;
+  href: string;
 }
 
 export const SECTIONS: SectionConfig[] = [
   { id: SECTION_IDS.HERO, name: 'Home', Icon: 'Home', href: '/' },
   { id: SECTION_IDS.PROJECTS, name: 'Projects', Icon: 'Briefcase', href: '/projects' },
   { id: SECTION_IDS.CERTIFICATES, name: 'Certificates', Icon: 'Award', href: '/certificates' },
-  { id: SECTION_IDS.JOURNEY, name: 'Journey', Icon: 'Map', href: '/journey' },
+  // { id: SECTION_IDS.JOURNEY, name: 'Journey', Icon: 'Map', href: '/journey' }, // Removed
   { id: SECTION_IDS.CONTACT, name: 'Contact', Icon: 'Mail', href: '/contact' },
 ];
 
@@ -36,7 +36,6 @@ export interface Project {
   tags: string[];
   liveUrl?: string;
   sourceUrl?: string;
-  // icon?: string; // Can add if each project needs a specific icon, otherwise use a default in the component
 }
 
 export const PROJECTS_DATA: Project[] = [
@@ -134,7 +133,7 @@ export const HARDWARE_DATA: HardwareItem[] = [
 export interface FooterLinkItem {
   name: string;
   href: string;
-  Icon?: string; 
+  Icon?: string;
 }
 
 export const FOOTER_SOCIAL_LINKS: FooterLinkItem[] = [
