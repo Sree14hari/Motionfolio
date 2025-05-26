@@ -31,31 +31,32 @@ const nextConfig: NextConfig = {
       }
     ],
   },
-  webpack(config, { isServer }) {
-    // Find the default SVG rule and modify it to exclude SVGs imported from .tsx files
-    // This allows @svgr/webpack to handle those imports as React components
+  webpack(config) {
+    // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule: any) =>
       rule.test?.test?.('.svg')
     );
 
-    if (fileLoaderRule) {
-      fileLoaderRule.exclude = /\.svg$/i; // Exclude all SVGs from the default loader initially
-    }
-    
-    // Add a rule for @svgr/webpack to handle direct SVG imports as React components.
-    config.module.rules.push({
-      test: /\.svg$/i,
-      issuer: /\.[jt]sx?$/, // Only apply to SVGs imported from JS/TSX files.
-      use: ['@svgr/webpack'],
-    });
+    config.module.rules.push(
+      // Reapply the existing rule, but only for svg imports ending in ?url
+      {
+        ...fileLoaderRule,
+        test: /\.svg$/i,
+        resourceQuery: /url/, // *.svg?url
+      },
+      // Convert all other *.svg imports to React components
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        resourceQuery: { not: /url/ }, // exclude if *.svg?url
+        use: ['@svgr/webpack'],
+      }
+    );
 
-    // Re-add a rule for SVGs to be handled as static assets if not handled by SVGR
-    // This is for cases like CSS background images or direct img src.
-    config.module.rules.push({
-      test: /\.svg$/i,
-      issuer: { not: /\.[jt]sx?$/ }, // Apply if not imported from JS/TSX
-      type: 'asset/resource',
-    });
+    // Modify the original rule to ignore *.svg imports unless they have ?url query
+    if (fileLoaderRule) {
+      fileLoaderRule.exclude = /\.svg$/i;
+    }
 
     return config;
   },

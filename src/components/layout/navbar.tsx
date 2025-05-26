@@ -8,7 +8,7 @@ import { SECTIONS, NAVBAR_SOCIAL_LINKS } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import * as LucideIcons from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
-import { Logo } from '@/components/icons/logo'; 
+// import { Logo } from '@/components/icons/logo'; // Logo removed
 
 const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
@@ -30,15 +30,19 @@ export function Navbar() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" passHref legacyBehavior>
+          {/* Logo removed */}
+          {/* <Link href="/" passHref legacyBehavior>
             <motion.a
-              className="flex items-center" // Removed color classes
+              className="flex items-center" 
               whileHover={{ scale: 1.05 }}
             >
-              <Logo className="h-8 w-auto text-foreground dark:text-white" /> {/* Apply color via className */}
+              <Logo className="h-8 w-auto text-foreground dark:text-white" />
             </motion.a>
-          </Link>
+          </Link> */}
+          
+          {/* Empty div to push nav links to center if logo was taking space on left */}
+          <div className="w-auto" />
+
 
           {/* Centered Nav Links (Desktop) */}
           <div className="flex flex-grow justify-center min-w-0">

@@ -6,11 +6,10 @@ import { motion } from 'framer-motion';
 import * as LucideIcons from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 import Link from 'next/link';
-import { Logo } from '@/components/icons/logo';
+// import { Logo } from '@/components/icons/logo'; // Logo removed
 import { 
   FOOTER_SOCIAL_LINKS,
   FooterLinkItem,
-  SECTIONS // Keep if FOOTER_GENERAL_LINKS was derived and might be used elsewhere, or remove if truly unused
 } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
@@ -19,31 +18,17 @@ const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   return IconComponent || null;
 };
 
-interface FooterLinkColumnProps {
-  title: string;
-  links: FooterLinkItem[];
+interface BuiltWithItem {
+  name: string;
+  Icon?: string; 
+  href?: string;
 }
 
-// FooterLinkColumn can be removed if FOOTER_GENERAL_LINKS was the only usage.
-// For safety, keeping it for now, but it's not used in the render.
-function FooterLinkColumn({ title, links }: FooterLinkColumnProps) {
-  return (
-    <div className="space-y-3">
-      <h5 className="text-sm font-semibold text-foreground">{title}</h5>
-      <ul className="space-y-2">
-        {links.map((link) => (
-          <li key={link.name}>
-            <Link href={link.href} passHref legacyBehavior>
-              <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                {link.name}
-              </a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+const builtWithData: BuiltWithItem[] = [
+  { name: 'Next.js', Icon: 'Layers', href: 'https://nextjs.org' }, // Using Layers as a generic framework icon
+  { name: 'Tailwind CSS', Icon: 'Wind', href: 'https://tailwindcss.com' },
+  { name: 'Framer Motion', Icon: 'Move', href: 'https://www.framer.com/motion/' },
+];
 
 export function Footer() {
   const [currentYear, setCurrentYear] = useState<number | null>(null);
@@ -62,7 +47,7 @@ export function Footer() {
 
   return (
     <motion.footer 
-      className="py-12 md:py-16 bg-background text-foreground"
+      className="py-12 md:py-16 bg-background text-foreground border-t border-border"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
@@ -70,21 +55,22 @@ export function Footer() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top section with columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10"> {/* Changed to md:grid-cols-2 */}
-          {/* Column 1: Logo, Bio, Copyright, Socials */}
-          <div className="space-y-4">
-            <Link href="/" passHref legacyBehavior>
-              <a className="inline-block">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+          {/* Column 1: Bio, Copyright, Socials */}
+          <div className="space-y-4 md:text-left text-center">
+            {/* Logo removed */}
+            {/* <Link href="/" passHref legacyBehavior>
+              <a className="inline-block mb-2">
                 <Logo className="h-8 w-auto text-primary" />
               </a>
-            </Link>
+            </Link> */}
             <p className="text-sm text-muted-foreground">{bioText}</p>
             {currentYear !== null && (
               <p className="text-xs text-muted-foreground/80"> 
                 &copy; {currentYear} Sreehari
               </p>
             )}
-            <div className="flex items-center space-x-1 bg-foreground text-background px-3 py-1.5 rounded-full shadow-sm w-fit">
+            <div className="flex items-center space-x-1 bg-foreground text-background px-3 py-1.5 rounded-full shadow-sm w-fit mx-auto md:mx-0">
               {FOOTER_SOCIAL_LINKS.map((link) => {
                 const IconComponent = getIcon(link.Icon);
                 return IconComponent ? (
@@ -104,9 +90,9 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Spotify Embed */}
+          {/* Column 2: Spotify Embed - Centered on all screens if not in 3-col */}
           <motion.div 
-            className="w-full max-w-[320px] mx-auto md:mx-auto" // Centered in its column
+            className="w-full max-w-[320px] mx-auto" 
             variants={sectionVariants}
           >
             <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>
@@ -120,8 +106,31 @@ export function Footer() {
               ></iframe>
             </div>
           </motion.div>
-
-          {/* General Links Column Removed */}
+          
+          {/* Column 3: Built With - Right aligned on md+, centered on small */}
+           <motion.div 
+            className="flex flex-col items-center md:items-end space-y-3"
+            variants={sectionVariants}
+          >
+            <h5 className="text-sm font-semibold text-foreground">Built with</h5>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              {builtWithData.map((item) => {
+                const IconComponent = item.Icon ? getIcon(item.Icon) : null;
+                return (
+                  <li key={item.name} className="flex items-center md:justify-end">
+                    {IconComponent && <IconComponent className="mr-2 h-4 w-4 text-muted-foreground" />}
+                    {item.href ? (
+                      <a href={item.href} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                        {item.name}
+                      </a>
+                    ) : (
+                      <span>{item.name}</span>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </motion.div>
         </div>
 
         {/* Bottom Decorative Separator */}
