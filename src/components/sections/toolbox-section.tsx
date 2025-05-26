@@ -5,18 +5,19 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { SECTION_IDS, TOOLBOX_DATA, HARDWARE_DATA, HardwareItem } from '@/lib/constants';
 import { ListChecks } from 'lucide-react';
-// import React, { Suspense, useState, useEffect } from 'react';
-// import dynamic from 'next/dynamic';
-
+import React, { Suspense, useState, useEffect } from 'react'; // Added useState, useEffect
 // Dynamically import LaptopViewer with SSR disabled
-// const LaptopViewer = dynamic(() => import('@/components/three/laptop-viewer').then(mod => mod.default), {
-//   ssr: false,
-//   loading: () => (
-//     <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-lg border border-border bg-muted flex items-center justify-center">
-//       <p className="text-muted-foreground text-sm">Loading 3D Model...</p>
-//     </div>
-//   ),
-// });
+import dynamic from 'next/dynamic';
+import { cn } from '@/lib/utils';
+
+const LaptopViewer = dynamic(() => import('@/components/three/laptop-viewer').then(mod => mod.default), {
+  ssr: false,
+  loading: () => (
+    <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-lg border border-border bg-muted flex items-center justify-center">
+      <p className="text-muted-foreground text-sm">Loading 3D Model...</p>
+    </div>
+  ),
+});
 
 
 const sectionVariants = {
@@ -41,17 +42,17 @@ const contentColumnVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: 'easeOut', delay: 0.2, staggerChildren: 0.1 }, // Added staggerChildren
+    transition: { duration: 0.5, ease: 'easeOut', delay: 0.2, staggerChildren: 0.1 },
   },
 };
 
 const cardItemVariants = {
-  hidden: { opacity: 0, scale: 0.9, y: 20 },
+  hidden: { opacity: 0, scale: 0.8, y: 30 },
   visible: {
     opacity: 1,
     scale: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 260, damping: 15, duration: 0.4 },
+    transition: { type: "spring", stiffness: 300, damping: 15, duration: 0.4 },
   },
 };
 
@@ -65,13 +66,13 @@ const hardwareContentVariants = {
 };
 
 export function ToolboxSection() {
-  const headingText = "Software and Hardware"; // Updated heading
+  const headingText = "Software and Hardware";
   const primaryHardware: HardwareItem | null = HARDWARE_DATA.length > 0 ? HARDWARE_DATA[0] : null;
-  // const [isClient, setIsClient] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  // useEffect(() => {
-  //   setIsClient(true);
-  // }, []);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
 
   return (
@@ -99,37 +100,45 @@ export function ToolboxSection() {
           <motion.div variants={contentColumnVariants}>
             <motion.h3
               variants={titleItemVariants}
-              className="text-2xl font-semibold text-primary text-center mb-6 sm:mb-8" // Added some bottom margin
+              className="text-2xl font-semibold text-primary text-center mb-6 sm:mb-8"
             >
               Software
             </motion.h3>
             <motion.div
-              variants={contentColumnVariants} 
+              variants={contentColumnVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
-              className="grid grid-cols-2 gap-4 md:flex md:flex-col md:space-y-4" // Changed layout here
+              className="grid grid-cols-2 gap-4 md:flex md:flex-col md:space-y-4" 
             >
-              {TOOLBOX_DATA.map((tool) => (
-                <motion.div
+              {TOOLBOX_DATA.map((tool, index) => (
+                <div
                   key={tool.id}
-                  variants={cardItemVariants}
-                  whileHover={{ y: -5, scale: 1.03, boxShadow: "0px 10px 20px -5px rgba(0,0,0,0.1)" }}
-                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                  className="flex items-center p-4 rounded-lg shadow-md bg-muted border border-border/30 space-x-4 cursor-default"
+                  className={cn(
+                    "flex flex-col items-center space-y-2",
+                    // If this is the 5th item (index 4) and there are exactly 5 items, make it span 2 columns.
+                    // This styling will only apply on mobile where the display is grid.
+                    index === 4 && TOOLBOX_DATA.length === 5 && "col-span-2" 
+                  )}
                 >
-                  <div className="p-2 bg-card rounded-md shadow-sm flex-shrink-0">
+                  <motion.div
+                    variants={cardItemVariants}
+                    whileHover={{ y: -5, scale: 1.03, boxShadow: "0px 10px 20px -5px rgba(0,0,0,0.1)" }}
+                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                    className="flex items-center justify-center p-3 rounded-lg shadow-md bg-muted border border-border/30 aspect-square w-20 h-20 cursor-default" 
+                  >
                     <Image
                       src={tool.iconUrl}
                       alt={`${tool.name} logo`}
-                      width={44} 
-                      height={44} 
+                      width={44}
+                      height={44}
                       className="object-contain"
                       data-ai-hint={tool.imageHint}
+                      unoptimized
                     />
-                  </div>
-                  <p className="text-base font-medium text-foreground">{tool.name}</p>
-                </motion.div>
+                  </motion.div>
+                  <p className="text-sm font-medium text-foreground text-center">{tool.name}</p>
+                </div>
               ))}
             </motion.div>
           </motion.div>
@@ -138,17 +147,17 @@ export function ToolboxSection() {
           <motion.div variants={hardwareContentVariants}>
             <motion.h3
               variants={titleItemVariants}
-              className="text-2xl font-semibold text-primary text-center mb-6 sm:mb-8" // Added some bottom margin
+              className="text-2xl font-semibold text-primary text-center mb-6 sm:mb-8"
             >
               Hardware
             </motion.h3>
 
             {primaryHardware && (
-              <motion.div variants={hardwareContentVariants} className="flex flex-col items-center"> {/* Centering content */}
-                {/* <div className="relative w-full max-w-md mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border border-border bg-muted"> */}
+              <motion.div variants={hardwareContentVariants} className="flex flex-col items-center">
                 <div className="relative w-full max-w-md mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden">
-                  {/* {isClient && <LaptopViewer />} */}
-                  <iframe
+                  {/* <div className="relative w-full max-w-md mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border border-border bg-muted"> */}
+                  {/* Sketchfab Embed */}
+                   <iframe
                     title="ROG Laptop Render"
                     frameBorder="0"
                     allowFullScreen
@@ -169,8 +178,8 @@ export function ToolboxSection() {
                     My primary machine for development and creative work.
                   </p>
                   <ul className="space-y-2 text-sm text-muted-foreground">
-                    {primaryHardware.specs.map((spec, index) => (
-                      <li key={index} className="flex items-center justify-start text-left"> {/* Changed to justify-start and text-left */}
+                    {primaryHardware.specs.map((spec, idx) => (
+                      <li key={idx} className="flex items-center justify-start text-left">
                         <ListChecks className="h-4 w-4 mr-2 text-muted-foreground flex-shrink-0" />
                         <span>{spec}</span>
                       </li>
@@ -185,4 +194,3 @@ export function ToolboxSection() {
     </motion.section>
   );
 }
-
