@@ -8,7 +8,7 @@
     scroll-behavior: smooth;
   }
   :root {
-    --background: 0 0% 94.1%; /* Light grey #F0F0F0 */
+    --background: 0 0% 94.1%; /* Light grey #F0F0F0 - Main content area background */
     --foreground: 0 0% 13%; /* Darker grey for better contrast on light grey */
     --card: 0 0% 100%; /* White #FFFFFF */
     --card-foreground: 0 0% 13%; /* Darker grey for text on white cards */
@@ -41,15 +41,58 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Variables for side patterns */
+    --gutter-width: 70px;
+    --purple-edge-width: 6px;
+    --brand-purple-edge: 270 50% 20%; /* Dark purple for the very edge */
+    --pattern-area-bg: 0 0% 96%; /* Background color of the patterned area (very light grey) */
+    --pattern-stripe-color: 0 0% 92%; /* Color of the diagonal stripes (slightly darker grey) */
   }
-  /* .dark class removed */
 }
 
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box; /* Ensure padding and borders are included in element's total width and height */
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    background-color: hsl(var(--brand-purple-edge)); /* Dark purple for the absolute edges */
+    @apply text-foreground font-sans;
+    position: relative; /* Context for pseudo-elements if they were absolute to body */
+                      /* Not strictly needed for fixed pseudo-elements to viewport */
+  }
+
+  body::before,
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: calc(var(--gutter-width) - var(--purple-edge-width));
+    background-color: hsl(var(--pattern-area-bg));
+    z-index: -1; /* Behind the main content wrapper, but on top of body's purple */
+  }
+
+  body::before { /* Left pattern area */
+    left: var(--purple-edge-width);
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 3px,
+      hsl(var(--pattern-stripe-color)) 3px,
+      hsl(var(--pattern-stripe-color)) 5px
+    );
+  }
+
+  body::after { /* Right pattern area */
+    right: var(--purple-edge-width);
+    background-image: repeating-linear-gradient(
+      45deg, /* Mirrored angle */
+      transparent,
+      transparent 3px,
+      hsl(var(--pattern-stripe-color)) 3px,
+      hsl(var(--pattern-stripe-color)) 5px
+    );
   }
 }

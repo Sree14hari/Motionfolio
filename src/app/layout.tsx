@@ -37,19 +37,30 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${dancingScript.variable} antialiased bg-background text-foreground`}>
-        <AppBar /> {/* Mobile-only App Bar, AppBar height is h-16 (64px) */}
-        <Navbar /> {/* Desktop-only Top navbar, Navbar height is h-16 (64px) */}
-        {/* 
-          Small screens (<md): pt-16 (for AppBar h-16) + pb-16 (for BottomNavbar h-16)
-          Medium screens and up (>=md): pt-16 (for Navbar h-16) + pb-0 (no BottomNavbar)
-        */}
-        <main className="flex-grow pt-16 pb-16 md:pb-0 bg-card"> {/* Changed to bg-card */}
-          {children}
-        </main>
-        <Footer />
-        <BottomNavbar /> {/* Mobile-only Bottom navbar, h-16 */}
-        <Toaster />
+      {/* Body background is now dark purple from globals.css */}
+      <body className={`${geistSans.variable} ${geistMono.variable} ${dancingScript.variable} antialiased text-foreground`}>
+        {/* This div wraps all content and provides the main page background and margins for gutters */}
+        <div 
+          className="relative z-0 min-h-screen"
+          style={{
+            marginLeft: 'var(--gutter-width)',
+            marginRight: 'var(--gutter-width)',
+            backgroundColor: 'hsl(var(--background))' // Main light grey page background
+          }}
+        >
+          <AppBar /> {/* Mobile-only App Bar, AppBar height is h-16 (64px) */}
+          <Navbar /> {/* Desktop-only Top navbar, Navbar height is h-16 (64px) */}
+          {/* 
+            Small screens (<md): pt-16 (for AppBar h-16) + pb-16 (for BottomNavbar h-16)
+            Medium screens and up (>=md): pt-16 (for Navbar h-16) + pb-0 (no BottomNavbar)
+          */}
+          <main className="flex-grow pt-16 pb-16 md:pb-0 bg-card"> {/* Changed to bg-card */}
+            {children}
+          </main>
+          <Footer />
+          <BottomNavbar /> {/* Mobile-only Bottom navbar, h-16 */}
+          <Toaster />
+        </div>
       </body>
     </html>
   );
