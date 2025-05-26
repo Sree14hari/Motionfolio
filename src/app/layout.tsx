@@ -8,7 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { APP_NAME } from '@/lib/constants';
 import { BottomNavbar } from '@/components/layout/bottom-navbar';
 import { AppBar } from '@/components/layout/app-bar';
-import { ThemeToggle } from '@/components/ui/theme-toggle'; // Import ThemeToggle
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -69,7 +69,7 @@ export default function RootLayout({
           <Toaster />
 
           {/* Floating Action Button for Theme Toggle */}
-          <div className="fixed bottom-6 right-6 z-50">
+          <div className="fixed right-6 z-50 bottom-24 md:bottom-6">
             <ThemeToggle />
           </div>
         </div>
