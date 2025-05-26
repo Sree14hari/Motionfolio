@@ -10,14 +10,14 @@ import React, { Suspense, useState, useEffect } from 'react'; // Added useState,
 import dynamic from 'next/dynamic';
 import { cn } from '@/lib/utils';
 
-const LaptopViewer = dynamic(() => import('@/components/three/laptop-viewer').then(mod => mod.default), {
-  ssr: false,
-  loading: () => (
-    <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-lg border border-border bg-muted flex items-center justify-center">
-      <p className="text-muted-foreground text-sm">Loading 3D Model...</p>
-    </div>
-  ),
-});
+// const LaptopViewer = dynamic(() => import('@/components/three/laptop-viewer').then(mod => mod.default), {
+//   ssr: false,
+//   loading: () => (
+//     <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-lg border border-border bg-muted flex items-center justify-center">
+//       <p className="text-muted-foreground text-sm">Loading 3D Model...</p>
+//     </div>
+//   ),
+// });
 
 
 const sectionVariants = {
@@ -68,11 +68,11 @@ const hardwareContentVariants = {
 export function ToolboxSection() {
   const headingText = "Software and Hardware";
   const primaryHardware: HardwareItem | null = HARDWARE_DATA.length > 0 ? HARDWARE_DATA[0] : null;
-  const [isClient, setIsClient] = useState(false);
+  // const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  // useEffect(() => {
+  //   setIsClient(true);
+  // }, []);
 
 
   return (
@@ -109,17 +109,12 @@ export function ToolboxSection() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
-              className="grid grid-cols-2 gap-4 md:flex md:flex-col md:space-y-4" 
+              className="grid grid-cols-2 gap-4" 
             >
               {TOOLBOX_DATA.map((tool, index) => (
                 <div
                   key={tool.id}
-                  className={cn(
-                    "flex flex-col items-center space-y-2",
-                    // If this is the 5th item (index 4) and there are exactly 5 items, make it span 2 columns.
-                    // This styling will only apply on mobile where the display is grid.
-                    index === 4 && TOOLBOX_DATA.length === 5 && "col-span-2" 
-                  )}
+                  className="flex flex-col items-center space-y-2"
                 >
                   <motion.div
                     variants={cardItemVariants}
@@ -154,9 +149,7 @@ export function ToolboxSection() {
 
             {primaryHardware && (
               <motion.div variants={hardwareContentVariants} className="flex flex-col items-center">
-                <div className="relative w-full max-w-md mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden">
-                  {/* <div className="relative w-full max-w-md mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border border-border bg-muted"> */}
-                  {/* Sketchfab Embed */}
+                 <div className="relative w-full max-w-md mx-auto aspect-[16/9] mb-6 rounded-lg overflow-hidden">
                    <iframe
                     title="ROG Laptop Render"
                     frameBorder="0"
