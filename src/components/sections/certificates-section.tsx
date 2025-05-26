@@ -3,24 +3,33 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import type { StaticImageData } from 'next/image';
+// NOTE: StaticImageData import is removed as we are using string URLs for placeholders.
+// To use local images later, uncomment the line below and update the Certificate interface.
+// import type { StaticImageData } from 'next/image';
 import { SECTION_IDS } from '@/lib/constants';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Award, Download, ExternalLink, ShieldCheck } from 'lucide-react';
 
-// Import certificate images from src/assets/certificates/
-// PLEASE ENSURE THESE FILES EXIST AT THESE EXACT PATHS WITH CORRECT CASING AND EXTENSIONS
-import ciscoCyberImage from '@/assets/certificates/cisco_cyber.jpg';
-import flutterImage from '@/assets/certificates/flutter.jpg';
-import ieeRagImage from '@/assets/certificates/iee_rag.jpg';
-import imageProImage from '@/assets/certificates/image_pro.jpg';
-import nConfImage from '@/assets/certificates/n_conf.jpg';
-import nitPythonImage from '@/assets/certificates/nit_python.jpg';
-import nvidiaGenImage from '@/assets/certificates/nvidia_gen.jpg';
-import nvidiaNlsImage from '@/assets/certificates/nvidia_nls.jpg';
-import ragCompImage from '@/assets/certificates/rag_comp.jpg';
-import uiUxImage from '@/assets/certificates/ui_ux.jpg';
+// TODO: To use your local certificate images:
+// 1. Place your images in the `src/assets/certificates/` folder.
+// 2. For each certificate below, uncomment the corresponding import line (or add new ones).
+//    Example: import ciscoCyberImage_local from '@/assets/certificates/cisco_cyber.jpg';
+// 3. Update the `Certificate` interface's `image` property type to `StaticImageData`.
+// 4. In `certificatesData`, change the `image` property to use the imported image variable.
+//    Example: image: ciscoCyberImage_local,
+
+// Placeholder imports (commented out, enable when local images are ready)
+// import ciscoCyberImage_local from '@/assets/certificates/cisco_cyber.jpg';
+// import flutterImage_local from '@/assets/certificates/flutter.jpg';
+// import ieeRagImage_local from '@/assets/certificates/iee_rag.jpg';
+// import imageProImage_local from '@/assets/certificates/image_pro.jpg';
+// import nConfImage_local from '@/assets/certificates/n_conf.jpg';
+// import nitPythonImage_local from '@/assets/certificates/nit_python.jpg';
+// import nvidiaGenImage_local from '@/assets/certificates/nvidia_gen.jpg';
+// import nvidiaNlsImage_local from '@/assets/certificates/nvidia_nls.jpg';
+// import ragCompImage_local from '@/assets/certificates/rag_comp.jpg';
+// import uiUxImage_local from '@/assets/certificates/ui_ux.jpg';
 
 
 interface Certificate {
@@ -28,8 +37,10 @@ interface Certificate {
   title: string;
   issuer: string;
   date: string;
-  image: StaticImageData; 
+  image: string; // Using string for placeholder URLs
+  // image: StaticImageData; // Use this type when using local static imports
   imageAlt: string;
+  imageHint: string; // For AI image search later if needed
   verifyUrl?: string;
   downloadUrl?: string;
 }
@@ -40,17 +51,19 @@ const certificatesData: Certificate[] = [
     title: 'Cisco Cybersecurity',
     issuer: 'Cisco',
     date: 'Oct 2023',
-    image: ciscoCyberImage,
-    imageAlt: 'Cisco Cybersecurity Certificate',
-    verifyUrl: '#', 
+    image: 'https://placehold.co/600x400.png',
+    imageAlt: 'Cisco Cybersecurity Certificate Placeholder',
+    imageHint: 'cybersecurity certificate',
+    verifyUrl: '#',
   },
   {
     id: 'cert-flutter',
     title: 'Flutter Development',
     issuer: 'Udemy',
     date: 'Nov 2023',
-    image: flutterImage,
-    imageAlt: 'Flutter Development Certificate',
+    image: 'https://placehold.co/600x400.png',
+    imageAlt: 'Flutter Development Certificate Placeholder',
+    imageHint: 'flutter certificate',
     verifyUrl: '#',
   },
   {
@@ -58,64 +71,72 @@ const certificatesData: Certificate[] = [
     title: 'IEEE RAG Workshop',
     issuer: 'IEEE',
     date: 'Dec 2023',
-    image: ieeRagImage,
-    imageAlt: 'IEEE RAG Workshop Certificate',
+    image: 'https://placehold.co/600x400.png',
+    imageAlt: 'IEEE RAG Workshop Certificate Placeholder',
+    imageHint: 'workshop certificate',
   },
   {
     id: 'cert-image-pro',
     title: 'Image Processing with Python',
     issuer: 'Coursera',
     date: 'Jan 2024',
-    image: imageProImage,
-    imageAlt: 'Image Processing with Python Certificate',
+    image: 'https://placehold.co/600x400.png',
+    imageAlt: 'Image Processing Certificate Placeholder',
+    imageHint: 'python certificate',
   },
   {
     id: 'cert-n-conf',
     title: 'N Conference Participation',
     issuer: 'NVIDIA',
     date: 'Feb 2024',
-    image: nConfImage,
-    imageAlt: 'NVIDIA N Conference Participation Certificate',
+    image: 'https://placehold.co/600x400.png',
+    imageAlt: 'NVIDIA Conference Certificate Placeholder',
+    imageHint: 'conference certificate',
   },
   {
     id: 'cert-nit-python',
     title: 'Python Programming - NIT',
     issuer: 'NIT',
     date: 'Mar 2024',
-    image: nitPythonImage,
-    imageAlt: 'NIT Python Programming Certificate',
+    image: 'https://placehold.co/600x400.png',
+    imageAlt: 'NIT Python Certificate Placeholder',
+    imageHint: 'programming certificate',
   },
   {
     id: 'cert-nvidia-gen',
     title: 'NVIDIA Generative AI',
     issuer: 'NVIDIA',
     date: 'Apr 2024',
-    image: nvidiaGenImage,
-    imageAlt: 'NVIDIA Generative AI Certificate',
+    image: 'https://placehold.co/600x400.png',
+    imageAlt: 'NVIDIA Generative AI Certificate Placeholder',
+    imageHint: 'ai certificate',
   },
   {
     id: 'cert-nvidia-nls',
     title: 'NVIDIA NLP Series',
     issuer: 'NVIDIA',
     date: 'May 2024',
-    image: nvidiaNlsImage,
-    imageAlt: 'NVIDIA NLP Series Certificate',
+    image: 'https://placehold.co/600x400.png',
+    imageAlt: 'NVIDIA NLP Certificate Placeholder',
+    imageHint: 'nlp certificate',
   },
   {
     id: 'cert-rag-comp',
     title: 'RAG Competition',
     issuer: 'Kaggle',
     date: 'Jun 2024',
-    image: ragCompImage,
-    imageAlt: 'RAG Competition Certificate',
+    image: 'https://placehold.co/600x400.png',
+    imageAlt: 'RAG Competition Certificate Placeholder',
+    imageHint: 'competition certificate',
   },
   {
     id: 'cert-ui-ux',
     title: 'UI/UX Design Fundamentals',
     issuer: 'Design Academy',
     date: 'Jul 2024',
-    image: uiUxImage, 
-    imageAlt: 'UI/UX Design Fundamentals Certificate',
+    image: 'https://placehold.co/600x400.png',
+    imageAlt: 'UI/UX Design Certificate Placeholder',
+    imageHint: 'design certificate',
   },
 ];
 
@@ -124,17 +145,17 @@ export function CertificatesSection() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.05, delayChildren: 0.1 }, // Faster animations
+      transition: { staggerChildren: 0.05, delayChildren: 0.1 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.95 }, // Simplified initial state
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.3, ease: "easeOut" }, // Faster tween animation
+      transition: { duration: 0.3, ease: "easeOut" },
     },
   };
 
@@ -160,7 +181,7 @@ export function CertificatesSection() {
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={sectionVariants} // Re-using sectionVariants for stagger effect on children
+          variants={sectionVariants}
         >
           {certificatesData.map((cert) => (
             <motion.div key={cert.id} variants={itemVariants}>
@@ -170,9 +191,11 @@ export function CertificatesSection() {
                     src={cert.image}
                     alt={cert.imageAlt}
                     layout="fill"
-                    objectFit="contain"
-                    className="p-2"
-                    placeholder="blur" 
+                    objectFit="contain" // Changed from 'cover' to 'contain' for certificate images
+                    className="p-2" // Added padding around the image
+                    data-ai-hint={cert.imageHint}
+                    // For external URLs, placeholder="blur" is not typically used without a blurDataURL.
+                    // If using local StaticImageData later, placeholder="blur" can be re-added.
                   />
                 </div>
                 <CardHeader>
@@ -200,7 +223,6 @@ export function CertificatesSection() {
                     )}
                     {!cert.verifyUrl && !cert.downloadUrl && (
                        <div className="w-full text-center text-sm text-muted-foreground py-2">
-                         {/* Placeholder if no actions. You can add a message like "Details available upon request." */}
                        </div>
                     )}
                   </div>
