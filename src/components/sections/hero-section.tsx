@@ -6,9 +6,10 @@ import Image from 'next/image';
 import { SECTION_IDS } from '@/lib/constants';
 import selfJpg from '@/assets/self.jpg';
 import { useIsMobile } from '@/hooks/use-mobile';
+import type { StaticImageData } from 'next/image'; // Import StaticImageData
 
 interface GalleryImage {
-  src: string;
+  src: string | StaticImageData; // Allow StaticImageData for imported images
   alt: string;
   hint: string;
   zIndex: string;
@@ -53,18 +54,20 @@ export function HeroSection() {
     { src: "https://i.postimg.cc/QtFC9K45/IMG-20250314-134009-347-611735110.jpg", alt: "Gallery image 5: Candid", hint: "candid moment", zIndex: "z-0" },
   ];
 
+  // Updated transforms for desktop (5 images)
   const galleryTransforms5: Transform[] = [
-    { x: -260, y: 0, rotate: -10, scale: 1 },    // Image 1 (Far Left)
-    { x: -130, y: 0, rotate: -5, scale: 1 },     // Image 2 (Near Left)
-    { x: 0, y: 0, rotate: 0, scale: 1.05 },      // Image 3 (Center)
-    { x: 130, y: 0, rotate: 5, scale: 1 },       // Image 4 (Near Right)
-    { x: 260, y: 0, rotate: 10, scale: 1 },      // Image 5 (Far Right)
+    { x: -260, y: -15, rotate: -12, scale: 1 },    // Image 1 (Far Left)
+    { x: -130, y: -5, rotate: -6, scale: 1 },     // Image 2 (Near Left)
+    { x: 0, y: 0, rotate: 0, scale: 1.1 },      // Image 3 (Center) - Baseline y, scaled up
+    { x: 130, y: -5, rotate: 6, scale: 1 },       // Image 4 (Near Right)
+    { x: 260, y: -15, rotate: 12, scale: 1 },      // Image 5 (Far Right)
   ];
 
+  // Updated transforms for mobile (3 images)
   const galleryTransforms3: Transform[] = [
-    { x: -130, y: 0, rotate: -8, scale: 1 },  // Corresponds to original allImages[1]
-    { x: 0, y: 0, rotate: 0, scale: 1.05 },   // Corresponds to original allImages[2]
-    { x: 130, y: 0, rotate: 8, scale: 1 },   // Corresponds to original allImages[3]
+    { x: -130, y: -5, rotate: -8, scale: 1 },  // Corresponds to original allImages[1]
+    { x: 0, y: 0, rotate: 0, scale: 1.1 },   // Corresponds to original allImages[2] - Baseline y, scaled up
+    { x: 130, y: -5, rotate: 8, scale: 1 },   // Corresponds to original allImages[3]
   ];
 
   let imagesToDisplay: GalleryImage[];
@@ -73,7 +76,7 @@ export function HeroSection() {
   let imageHeight: number;
 
   if (isMobile === undefined) {
-    imagesToDisplay = [];
+    imagesToDisplay = []; // No images until mobile state is known
     activeTransforms = [];
     imageWidth = 160; 
     imageHeight = 224; 
@@ -165,6 +168,7 @@ export function HeroSection() {
             style={{ transformOrigin: 'center center' }}
             whileHover={{
               scale: (activeTransforms[index]?.scale ?? 1) * 1.1,
+              y: (activeTransforms[index]?.y ?? 0) -10, // Lift image slightly on hover
               zIndex: 30,
               transition: { type: "spring", stiffness: 300, damping: 10 }
             }}
