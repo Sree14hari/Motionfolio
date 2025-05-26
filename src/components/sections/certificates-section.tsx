@@ -16,7 +16,7 @@ import ieeRagImage from '@/assets/certificate/iee_rag.jpg';
 import imageProImage from '@/assets/certificate/image_pro.jpg';
 import nConfImage from '@/assets/certificate/n_conf.jpg';
 import nitPythonImage from '@/assets/certificate/nit_python.jpg';
-import nvidiaGenImage from '@/assets/certificate/nvidia_gen.jpg';
+// import nvidiaGenImage from '@/assets/certificate/nvidia_gen.jpg'; // Commented out due to "Module not found" error
 import nvidiaNlsImage from '@/assets/certificate/nvidia_nls.jpg';
 import ragCompImage from '@/assets/certificate/rag_comp.jpg';
 import uiUxImage from '@/assets/certificate/ui_ux.jpg';
@@ -27,7 +27,7 @@ interface Certificate {
   title: string;
   issuer: string;
   date: string;
-  image: StaticImageData;
+  image: StaticImageData | string; // Allow string for placeholder
   imageAlt: string;
   imageHint: string;
   verifyUrl?: string;
@@ -96,9 +96,11 @@ const certificatesData: Certificate[] = [
     title: 'NVIDIA Generative AI',
     issuer: 'NVIDIA',
     date: 'Apr 2024',
-    image: nvidiaGenImage,
-    imageAlt: 'NVIDIA Generative AI Certificate',
+    // image: nvidiaGenImage, // Using placeholder due to import error
+    image: 'https://placehold.co/600x400.png', // Placeholder image
+    imageAlt: 'NVIDIA Generative AI Certificate - Placeholder',
     imageHint: 'ai certificate',
+    // verifyUrl: '#', // Add actual URL when image is fixed
   },
   {
     id: 'cert-nvidia-nls',
@@ -183,7 +185,7 @@ export function CertificatesSection() {
                     objectFit="contain"
                     className="p-2"
                     data-ai-hint={cert.imageHint}
-                    placeholder="blur"
+                    {...(typeof cert.image !== 'string' && cert.image.src ? { placeholder: 'blur' } : {})}
                   />
                 </div>
                 <CardHeader>
