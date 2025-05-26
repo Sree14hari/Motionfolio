@@ -30,7 +30,8 @@ const formSchema = z.object({
 
 type ContactFormValues = z.infer<typeof formSchema>;
 
-const web3FormsAccessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+// Web3Forms access key directly embedded
+const web3FormsAccessKey = "3326dc6a-5197-47c7-b638-a08616adfb5a";
 
 export function ContactSection() {
   const { toast } = useToast();
@@ -47,16 +48,6 @@ export function ContactSection() {
 
   const onSubmit: SubmitHandler<ContactFormValues> = async (dataFromHookForm) => {
     setIsSubmitting(true);
-
-    if (!web3FormsAccessKey) {
-      toast({
-        title: "Configuration Error",
-        description: "Contact form is not set up correctly. Missing access key.",
-        variant: "destructive",
-      });
-      setIsSubmitting(false);
-      return;
-    }
 
     const formData = new FormData();
     formData.append("name", dataFromHookForm.name);
