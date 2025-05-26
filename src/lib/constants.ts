@@ -1,5 +1,5 @@
 
-export const APP_NAME = "MotionFolio";
+export const APP_NAME = "SHR";
 
 export const SECTION_IDS = {
   HERO: 'hero',
@@ -101,7 +101,7 @@ export const NAVBAR_SOCIAL_LINKS: SocialLink[] = [
 export const CONTACT_SECTION_SOCIAL_LINKS: SocialLink[] = [
   { name: 'Email', Icon: 'Mail', href: 'mailto:sreehari14shr@gmail.com' },
   { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://www.linkedin.com/in/sree14hari/' },
-  { name: 'Dribbble', Icon: 'Dribbble', href: '#' }, // Placeholder link for Dribbble
+  { name: 'Dribbble', Icon: 'Dribbble', href: '#' }, 
   { name: 'Instagram', Icon: 'Instagram', href: 'https://www.instagram.com/s_ree.har_i' },
 ];
 

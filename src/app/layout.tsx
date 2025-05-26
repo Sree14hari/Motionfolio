@@ -27,8 +27,11 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: `${APP_NAME} - Portfolio`,
+  title: "SHR Portfolio",
   description: 'A modern portfolio showcasing web development projects and skills, built with Next.js and Framer Motion.',
+  icons: {
+    icon: 'https://i.postimg.cc/J0zLKxZv/me.png',
+  },
 };
 
 export default function RootLayout({

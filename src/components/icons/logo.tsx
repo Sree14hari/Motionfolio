@@ -11,7 +11,7 @@ interface LogoProps extends Omit<ImageProps, 'src' | 'alt'> {
 }
 
 export function Logo({ 
-  alt = "MotionFolio Logo", 
+  alt = "SHR Portfolio Logo", 
   width = 36, 
   height = 36, 
   className, 
