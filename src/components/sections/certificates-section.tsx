@@ -2,25 +2,31 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import Image, { type StaticImageData } from 'next/image';
+import Image from 'next/image'; // Keep Image for consistency, even with URL placeholders
 import { SECTION_IDS } from '@/lib/constants';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Award, Download, ExternalLink, ShieldCheck } from 'lucide-react';
 
-// Assume you have these images in src/assets/certificates/
-// If your filenames are different, please update the import paths.
-import cert1Image from '@/assets/certificates/cert1.png';
-import cert2Image from '@/assets/certificates/cert2.png';
-import cert3Image from '@/assets/certificates/cert3.png';
+// To use local images:
+// 1. Place your certificate images (e.g., cert1.png, cert2.png) in the src/assets/certificates/ folder.
+// 2. Uncomment the import lines below (and ensure filenames match):
+// import cert1Image from '@/assets/certificates/cert1.png';
+// import cert2Image from '@/assets/certificates/cert2.png';
+// import cert3Image from '@/assets/certificates/cert3.png';
+// 3. Update the 'image' type in the Certificate interface to StaticImageData:
+//    image: StaticImageData; // instead of string;
+// 4. In certificatesData, replace placeholder URLs with the imported image variables:
+//    image: cert1Image, // instead of "https://placehold.co/..."
 
 interface Certificate {
   id: string;
   title: string;
   issuer: string;
   date: string;
-  image: StaticImageData;
+  image: string; // Using string for placeholder URLs. Change to StaticImageData for local imports.
   imageAlt: string;
+  imageHint?: string; // For AI search if using placeholders
   verifyUrl?: string;
   downloadUrl?: string;
 }
@@ -31,8 +37,9 @@ const certificatesData: Certificate[] = [
     title: 'Advanced Web Development Bootcamp',
     issuer: 'Tech Learning Institute',
     date: 'May 2023',
-    image: cert1Image,
-    imageAlt: 'Web Development Bootcamp Certificate',
+    image: 'https://placehold.co/600x400.png',
+    imageAlt: 'Web Development Bootcamp Certificate Placeholder',
+    imageHint: 'certificate web development',
     verifyUrl: '#', // Replace with actual URL
   },
   {
@@ -40,8 +47,9 @@ const certificatesData: Certificate[] = [
     title: 'Cloud Practitioner Essentials',
     issuer: 'Cloud Services Provider',
     date: 'January 2024',
-    image: cert2Image,
-    imageAlt: 'Cloud Practitioner Certificate',
+    image: 'https://placehold.co/600x400.png',
+    imageAlt: 'Cloud Practitioner Certificate Placeholder',
+    imageHint: 'certificate cloud computing',
     downloadUrl: '#', // Replace with actual URL
   },
   {
@@ -49,8 +57,9 @@ const certificatesData: Certificate[] = [
     title: 'UI/UX Design Fundamentals',
     issuer: 'Design Academy',
     date: 'September 2022',
-    image: cert3Image,
-    imageAlt: 'UI/UX Design Certificate',
+    image: 'https://placehold.co/600x400.png',
+    imageAlt: 'UI/UX Design Certificate Placeholder',
+    imageHint: 'certificate ui ux design',
     verifyUrl: '#', // Replace with actual URL
   },
   // Add more certificates here as needed
@@ -71,7 +80,7 @@ export function CertificatesSection() {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.5, ease: "easeOut" },
+      transition: { duration: 0.3, ease: "easeOut" }, // Adjusted duration
     },
   };
 
@@ -97,7 +106,7 @@ export function CertificatesSection() {
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={sectionVariants} // Use sectionVariants for staggering children
+          variants={sectionVariants}
         >
           {certificatesData.map((cert) => (
             <motion.div key={cert.id} variants={itemVariants}>
@@ -107,8 +116,9 @@ export function CertificatesSection() {
                     src={cert.image}
                     alt={cert.imageAlt}
                     layout="fill"
-                    objectFit="contain" // Use contain to ensure the whole certificate is visible
-                    className="p-2" // Add some padding if images have no own margins
+                    objectFit="contain"
+                    className="p-2"
+                    data-ai-hint={cert.imageHint || 'certificate image'}
                   />
                 </div>
                 <CardHeader>
@@ -134,7 +144,6 @@ export function CertificatesSection() {
                         </a>
                       </Button>
                     )}
-                    {/* If no specific buttons, could add a generic link or info */}
                     {!cert.verifyUrl && !cert.downloadUrl && (
                        <div className="w-full text-center text-sm text-muted-foreground py-2">
                          {/* Placeholder if no actions */}
@@ -153,5 +162,3 @@ export function CertificatesSection() {
     </motion.section>
   );
 }
-
-    
