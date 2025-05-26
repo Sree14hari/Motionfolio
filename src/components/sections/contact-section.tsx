@@ -45,18 +45,40 @@ export function ContactSection() {
 
   const onSubmit: SubmitHandler<ContactFormValues> = async (data) => {
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500)); 
-    
-    console.log("Form data submitted:", data); // You would send this data to your backend
-    
-    toast({
-      title: "Message Sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
-      variant: "default",
-    });
-    form.reset(); // Reset form fields
-    setIsSubmitting(false);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        toast({
+          title: "Message Sent!",
+          description: "Thanks for reaching out. I'll get back to you soon.",
+          variant: "default",
+        });
+        form.reset();
+      } else {
+        toast({
+          title: "Error Sending Message",
+          description: result.error || "Something went wrong. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Network Error",
+        description: "Could not connect to the server. Please check your internet connection.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const sectionVariants = {
@@ -208,5 +230,3 @@ export function ContactSection() {
     </motion.section>
   );
 }
-
-    
