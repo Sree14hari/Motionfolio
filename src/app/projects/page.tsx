@@ -111,6 +111,9 @@ export default function ProjectsPage() {
           ))}
         </div>
       </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full h-px bg-border my-8"></div>
+      </div>
     </motion.div>
   );
 }
