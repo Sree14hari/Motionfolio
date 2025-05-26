@@ -134,11 +134,78 @@ export interface FooterLinkItem {
   href: string;
 }
 
-export const FOOTER_GENERAL_LINKS: FooterLinkItem[] = SECTIONS.map(section => ({ name: section.name, href: section.href }));
-
 export const FOOTER_SOCIAL_LINKS = [
   { name: 'GitHub', Icon: 'Github', href: 'https://github.com/Sree14hari' },
   { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://www.linkedin.com/in/sree14hari/' },
   { name: 'Instagram', Icon: 'Instagram', href: 'https://www.instagram.com/s_ree.har_i' },
-  { name: 'Dribbble', Icon: 'Dribbble', href: '#' }, // Placeholder link for Dribbble
+  { name: 'Dribbble', Icon: 'Dribbble', href: '#' }, 
+];
+
+
+export interface ProjectCategory {
+  id: string;
+  title: string;
+  icon: string; // Lucide icon name
+  previewImageUrl: string;
+  imageHint: string;
+  href: string;
+}
+
+export const PROJECT_CATEGORIES: ProjectCategory[] = [
+  {
+    id: 'ml',
+    title: 'Machine Learning',
+    icon: 'BrainCircuit',
+    previewImageUrl: 'https://placehold.co/300x180.png',
+    imageHint: 'machine learning algorithm',
+    href: '#',
+  },
+  {
+    id: 'omdena',
+    title: 'Omdena',
+    icon: 'Target',
+    previewImageUrl: 'https://placehold.co/300x180.png',
+    imageHint: 'global collaboration',
+    href: '#',
+  },
+  {
+    id: 'webdev',
+    title: 'Web Development',
+    icon: 'Atom',
+    previewImageUrl: 'https://placehold.co/300x180.png',
+    imageHint: 'website code',
+    href: '#',
+  },
+  {
+    id: 'appdev',
+    title: 'App Development',
+    icon: 'Smartphone',
+    previewImageUrl: 'https://placehold.co/300x180.png',
+    imageHint: 'mobile application',
+    href: '#',
+  },
+  {
+    id: 'hardware',
+    title: 'Hardware & IoT',
+    icon: 'Router',
+    previewImageUrl: 'https://placehold.co/300x180.png',
+    imageHint: 'iot device circuit',
+    href: '#',
+  },
+  {
+    id: 'python',
+    title: 'Python Packages',
+    icon: 'Package',
+    previewImageUrl: 'https://placehold.co/300x180.png',
+    imageHint: 'python code',
+    href: '#',
+  },
+  {
+    id: 'misc',
+    title: 'Miscellaneous',
+    icon: 'Archive',
+    previewImageUrl: 'https://placehold.co/300x180.png',
+    imageHint: 'various items',
+    href: '#',
+  },
 ];
