@@ -102,8 +102,8 @@ export function HeroSection() {
     visible: {
       opacity: 1,
       transition: { 
-        delayChildren: 0.3, // Delay before the first child starts animating
-        staggerChildren: 0.15 // Time between each child starting its animation
+        delayChildren: 0.3, 
+        staggerChildren: 0.15 
       },
     },
   };
@@ -111,10 +111,10 @@ export function HeroSection() {
   const galleryItemVariants = {
     hidden: { 
       opacity: 0, 
-      scale: 0.1, // Start very small
-      x: 0,       // Start at the horizontal center of their container (relative to final layout position)
-      y: 20,      // Start slightly below the vertical center
-      rotate: 0,  // Start with no rotation
+      scale: 0.1, 
+      x: 0,       
+      y: 20,      
+      rotate: 0,  
     },
     visible: (i: number) => ({ 
       opacity: 1,
@@ -176,8 +176,8 @@ export function HeroSection() {
           {taglineText}
         </motion.p>
         <div className="w-full h-px bg-border mt-4 mb-6 sm:mt-6 sm:mb-8"></div>
-        <div className="relative flex justify-center items-start h-[250px] sm:h-[280px] md:h-[320px] w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mt-4">
-          {/* Placeholder for gallery */}
+        {/* Placeholder for gallery while loading */}
+        <div className="relative flex justify-center items-start h-[250px] sm:h-[280px] md:h-[320px] w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mt-6 sm:mt-8">
         </div>
       </section>
     );
@@ -234,16 +234,17 @@ export function HeroSection() {
       <div className="w-full h-px bg-border mt-4 mb-6 sm:mt-6 sm:mb-8"></div>
       
       <motion.div
-        className="relative flex justify-center items-start h-[250px] sm:h-[280px] md:h-[320px] w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mt-6 sm:mt-8"
+        className="relative flex justify-center items-start h-[250px] sm:h-[280px] md:h-[320px] w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mt-6 sm:mt-8 cursor-default"
         variants={galleryContainerVariants}
         initial="hidden"
         animate="visible"
+        whileHover={{ scale: 1.03, transition: { type: 'spring', stiffness: 300, damping: 10 } }}
       >
         {activeImages.map((image, index) => (
           <motion.div
             key={image.id}
             className={`absolute ${image.zIndex} pointer-events-none`} 
-            custom={index} // Pass index to variants
+            custom={index} 
             variants={galleryItemVariants}
             style={{
               transformOrigin: 'center center',
@@ -256,7 +257,7 @@ export function HeroSection() {
               height={isMobile ? 168 : 224}
               className="rounded-lg shadow-xl object-cover"
               data-ai-hint={image.hint}
-              priority={index === Math.floor(activeImages.length / 2)} // Prioritize center image
+              priority={index === Math.floor(activeImages.length / 2)} 
             />
           </motion.div>
         ))}
@@ -264,3 +265,4 @@ export function HeroSection() {
     </section>
   );
 }
+
