@@ -49,7 +49,7 @@ export function Footer() {
       variants={sectionVariants}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-3 gap-8 items-start mb-10">
+        <div className="grid md:grid-cols-3 gap-8 items-start mb-10">
           {/* Column 1: Social Icons */}
           <motion.div variants={sectionVariants} className="flex flex-col items-center md:items-start space-y-4">
             <div className="flex space-x-4">
@@ -73,7 +73,7 @@ export function Footer() {
           </motion.div>
 
           {/* Column 2: Built With */}
-          <motion.div variants={sectionVariants} className="flex flex-col items-center md:items-start space-y-2 text-sm">
+          <motion.div variants={sectionVariants} className="flex flex-col items-center md:items-end space-y-2 text-sm">
             {builtWithData.map((item, index) => (
               <div key={index} className="flex items-center space-x-2 text-muted-foreground">
                 {item.Icon && <item.Icon size={18} strokeWidth={1.5} />}
@@ -85,7 +85,10 @@ export function Footer() {
           {/* Column 3: Spotify Embed */}
           <motion.div 
             variants={sectionVariants} 
-            className="w-full max-w-[320px] mx-auto lg:w-[320px] lg:ml-auto lg:mr-0"
+            className={cn(
+              "block md:hidden lg:block", // Show by default (small), hide on medium, show again on large
+              "w-full max-w-[320px] mx-auto lg:w-[320px] lg:ml-auto lg:mr-0"
+            )}
           >
             <div style={{ left: 0, width: '100%', height: '152px', position: 'relative' }}>
               <iframe 
