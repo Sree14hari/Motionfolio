@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { SECTIONS, SectionConfig } from '@/lib/constants';
+import { SECTIONS, type SectionConfig } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import * as LucideIcons from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
@@ -13,6 +13,8 @@ const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
   return IconComponent || null;
 };
+
+const MotionLink = motion(Link);
 
 export function BottomNavbar() {
   const pathname = usePathname();
@@ -33,31 +35,33 @@ export function BottomNavbar() {
             const isActive = pathname === section.href;
 
             return (
-              <Link href={section.href} key={section.id} passHref legacyBehavior>
-                <motion.a 
-                  className={cn(
-                    "flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 ease-in-out group",
-                    isActive
-                      ? "text-primary scale-110"
-                      : "text-muted-foreground hover:text-primary hover:scale-105",
-                    "focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-1 focus:ring-offset-card"
-                  )}
-                  whileHover={{ scale: isActive ? 1.15 : 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label={section.name}
-                >
-                  <IconComponent 
-                    size={isActive ? 26 : 24} 
-                    strokeWidth={isActive ? 2.5 : 2} 
-                  />
-                  <span className={cn(
-                    "text-xs mt-0.5",
-                    isActive ? "font-semibold" : "font-normal group-hover:font-medium"
-                  )}>
-                    {section.name}
-                  </span>
-                </motion.a>
-              </Link>
+              <MotionLink
+                href={section.href}
+                key={section.id}
+                className={cn(
+                  "flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 ease-in-out group",
+                  isActive
+                    ? "text-primary" // Removed scale-110, handle with motion
+                    : "text-muted-foreground hover:text-primary", // Removed hover:scale-105
+                  "focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-1 focus:ring-offset-card"
+                )}
+                whileHover={{ scale: isActive ? 1.15 : 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                animate={{ scale: isActive ? 1.1 : 1 }} // Apply initial scale for active item
+                transition={{ type: "spring", stiffness: 300 }}
+                aria-label={section.name}
+              >
+                <IconComponent 
+                  size={isActive ? 26 : 24} 
+                  strokeWidth={isActive ? 2.5 : 2} 
+                />
+                <span className={cn(
+                  "text-xs mt-0.5",
+                  isActive ? "font-semibold" : "font-normal group-hover:font-medium"
+                )}>
+                  {section.name}
+                </span>
+              </MotionLink>
             );
           })}
         </div>

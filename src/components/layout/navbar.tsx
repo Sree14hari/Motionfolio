@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { SECTIONS, NAVBAR_SOCIAL_LINKS } from '@/lib/constants';
+import { SECTIONS, NAVBAR_SOCIAL_LINKS, type SectionConfig } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import * as LucideIcons from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
@@ -14,6 +14,8 @@ const getIcon = (name: string): React.ComponentType<LucideProps> | null => {
   const IconComponent = (LucideIcons as any)[name];
   return IconComponent || null;
 };
+
+const MotionLink = motion(Link);
 
 export function Navbar() {
   const pathname = usePathname();
@@ -34,7 +36,7 @@ export function Navbar() {
             <motion.div 
               whileHover={{ scale: 1.05 }}
             >
-              <Logo width={36} height={36} />
+              <Logo width={36} height={36} className="text-foreground dark:text-white" />
             </motion.div>
           </Link>
 
@@ -43,22 +45,22 @@ export function Navbar() {
             <div
               className="flex items-center border border-border/50 shadow-sm rounded-full p-1 space-x-1 bg-card"
             >
-              {SECTIONS.map((section) => {
+              {SECTIONS.map((section: SectionConfig) => {
                 const isActive = pathname === section.href;
                 return (
-                  <Link href={section.href} key={section.id} passHref legacyBehavior>
-                    <motion.a 
-                      className={cn(
-                        "px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ease-in-out",
-                        isActive
-                          ? "bg-background text-primary font-semibold shadow-sm dark:bg-transparent dark:shadow-none"
-                          : "text-muted-foreground hover:text-primary",
-                        "focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-1 focus:ring-offset-card"
-                      )}
-                    >
-                      {section.name}
-                    </motion.a>
-                  </Link>
+                  <MotionLink
+                    href={section.href}
+                    key={section.id}
+                    className={cn(
+                      "px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ease-in-out",
+                      isActive
+                        ? "bg-background text-primary font-semibold shadow-sm dark:bg-transparent dark:shadow-none"
+                        : "text-muted-foreground hover:text-primary",
+                      "focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-1 focus:ring-offset-card"
+                    )}
+                  >
+                    {section.name}
+                  </MotionLink>
                 );
               })}
             </div>
