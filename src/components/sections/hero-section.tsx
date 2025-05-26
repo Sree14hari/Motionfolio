@@ -5,16 +5,23 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { SECTION_IDS } from '@/lib/constants';
 import selfJpg from '@/assets/self.jpg';
-import { useIsMobile } from '@/hooks/use-mobile';
 import type { StaticImageData } from 'next/image'; // Import StaticImageData
-import { useEffect, useState } from 'react';
 
+// Data for the gallery images
 interface GalleryImage {
   src: string | StaticImageData;
   alt: string;
   hint: string;
   zIndex: string;
 }
+
+const galleryImages: GalleryImage[] = [
+  { src: "https://i.postimg.cc/kG1kjmNF/PXL-20250223-134508159-441290144-1465373175.jpg", alt: "Gallery image 1: Fun moment", hint: "personal activity", zIndex: "z-0" },
+  { src: "https://i.postimg.cc/W1jN3WTV/IMG-20250311-184430-815-292984781.jpg", alt: "Gallery image 2: Exploring", hint: "travel adventure", zIndex: "z-10" },
+  { src: "https://i.postimg.cc/rwTDnmsX/IMG-20250201-091854-995-709592560.jpg", alt: "Gallery image 3: Genesis event badge", hint: "professional headshot", zIndex: "z-20" },
+  { src: "https://i.postimg.cc/Y0Q8Yx1G/Screenshot-20250315-091344-Instagram-992781481.jpg", alt: "Gallery image 4: Group photo", hint: "social event", zIndex: "z-10" },
+  { src: "https://i.postimg.cc/QtFC9K45/IMG-20250314-134009-347-611735110.jpg", alt: "Gallery image 5: Candid", hint: "candid moment", zIndex: "z-0" },
+];
 
 interface Transform {
   x: number;
@@ -23,23 +30,32 @@ interface Transform {
   scale: number;
 }
 
+// Transforms for the 5-image layout (desktop)
+const galleryTransforms5: Transform[] = [
+  { x: -220, y: -15, rotate: -15, scale: 1 },
+  { x: -110, y: -5, rotate: -7, scale: 1.05 },
+  { x: 0, y: 0, rotate: 0, scale: 1.1 },
+  { x: 110, y: -5, rotate: 7, scale: 1.05 },
+  { x: 220, y: -15, rotate: 15, scale: 1 },
+];
+
+// Transforms for the 3-image layout (mobile - uses images 1, 2, 3 from the 5-image set, which are galleryImages[1], galleryImages[2], galleryImages[3])
+const galleryTransforms3: Transform[] = [
+  { x: -130, y: -5, rotate: -10, scale: 1 }, // Corresponds to galleryImages[1]
+  { x: 0, y: 0, rotate: 0, scale: 1.1 },    // Corresponds to galleryImages[2]
+  { x: 130, y: -5, rotate: 10, scale: 1 }, // Corresponds to galleryImages[3]
+];
+
 export function HeroSection() {
   const headingText = "Hey, I'm Sreehari!\nWelcome to my corner of the internet!";
-  const taglineText = "I'm a front-end developer with a love for design and a knack for tinkering.\nThis site is intentionally over-engineered and serves as my playground for experimenting with new ideas and seeing what sticks!";
-
-  const isMobile = useIsMobile();
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const taglineText = "A 3rd-year CSE (AI-ML) undergrad at SBCE who loves developing Apps and finding solutions to problems around him.";
 
   const profilePicVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.4, ease: "easeOut" }
+      transition: { duration: 0.3, ease: "easeOut", delay: 0.1 } // slightly faster animation
     },
   };
 
@@ -48,7 +64,7 @@ export function HeroSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, ease: "easeOut", delay: 0.1 }
+      transition: { duration: 0.3, ease: "easeOut", delay: 0.2 } // slightly faster animation
     },
   };
 
@@ -96,12 +112,12 @@ export function HeroSection() {
         variants={contentVariants}
         initial="hidden"
         animate="visible"
-        style={{ transition: { delay: 0.15 } }}
+        style={{ transition: { delay: 0.25 } }} // slightly faster animation
       >
         {taglineText}
       </motion.p>
 
-      {/* Image gallery removed */}
+      {/* Gallery removed for now */}
     </section>
   );
 }
