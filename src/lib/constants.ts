@@ -41,43 +41,44 @@ export interface Project {
 
 export const PROJECTS_DATA: Project[] = [
   {
-    id: 'proj1',
-    title: 'E-commerce Platform',
-    description: 'A full-featured online store with modern UI.',
-    longDescription: 'Detailed description about the e-commerce platform, technologies used (React, Node.js, PostgreSQL), challenges faced, and solutions implemented. This platform supports product listings, user authentication, cart management, and a secure checkout process.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'online store',
-    tags: ['React', 'TypeScript', 'Node.js', 'Stripe'],
-    liveUrl: '#',
+    id: 'proj-cropmate',
+    title: 'CROPMATE APP',
+    description: 'A mobile application for crop management and assistance.',
+    longDescription: 'CROPMATE APP is designed to help farmers and agricultural enthusiasts with crop management, providing tools and information for better yields.',
+    imageUrl: 'https://i.postimg.cc/bv0FtLxc/CROPMATE.png',
+    imageHint: 'crop management app',
+    tags: ['Flutter', 'Mobile App', 'Agriculture'],
+    sourceUrl: 'https://github.com/Sree14hari/CROPMATE-APP.git',
   },
   {
-    id: 'proj2',
-    title: 'Creative Portfolio',
-    description: 'A sleek personal portfolio to showcase skills and projects.',
-    longDescription: 'This portfolio website, built with Next.js and Tailwind CSS, features smooth animations and a responsive design. It highlights my skills, projects, and contact information in an engaging way, tailored for creative professionals.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'website design',
-    tags: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
-    sourceUrl: '#',
+    id: 'proj-weather',
+    title: 'WEATHER APP',
+    description: 'A mobile application to check current weather conditions and forecasts.',
+    longDescription: 'This Weather App provides real-time weather updates and forecasts, built using Flutter and integrated with weather APIs.',
+    imageUrl: 'https://i.postimg.cc/L8KT3L6H/icon.png',
+    imageHint: 'weather forecast app',
+    tags: ['Flutter', 'Mobile App', 'API', 'Weather'],
+    sourceUrl: 'https://github.com/Sree14hari/Weather-App.git',
   },
   {
-    id: 'proj3',
-    title: 'Task Management App',
-    description: 'A collaborative tool for managing tasks efficiently.',
-    longDescription: 'A web application designed for team collaboration and task management. Features include drag-and-drop task boards, real-time updates, user assignments, and progress tracking. Built with Vue.js and Firebase for seamless experience.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'productivity app',
-    tags: ['Vue.js', 'Firebase', 'Collaboration'],
+    id: 'proj-flutter-portfolio',
+    title: 'FIRST FLUTTER PORTFOLIO',
+    description: 'My first portfolio website developed using the Flutter framework.',
+    longDescription: 'A personal portfolio application built entirely with Flutter, showcasing my initial projects and skills in mobile and web development with Flutter.',
+    imageUrl: 'https://i.postimg.cc/Y99fCx8x/1.png',
+    imageHint: 'flutter portfolio app',
+    tags: ['Flutter', 'Portfolio', 'Mobile App', 'Web'],
+    sourceUrl: 'https://github.com/Sree14hari/Portfolio-flutter.git',
   },
   {
-    id: 'proj4',
-    title: 'Data Visualization Dashboard',
-    description: 'An interactive dashboard for visualizing complex datasets.',
-    longDescription: 'This dashboard provides users with powerful tools to explore and understand data through interactive charts and graphs. Built with D3.js and React, it offers customizable views and real-time data processing capabilities.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'data analytics',
-    tags: ['React', 'D3.js', 'Data Analytics'],
-    liveUrl: '#',
+    id: 'proj-image-diffuser',
+    title: 'PYTHON IMAGE DIFFUSER',
+    description: 'A Python-based backend for an image diffusion model.',
+    longDescription: 'This project implements the backend logic for an image diffusion model, enabling generative AI capabilities for image creation. Built with Python.',
+    imageUrl: 'https://i.postimg.cc/wTJPz61j/logo-for-my-new-brand-matricz-it-is-tech-based-c.png',
+    imageHint: 'python ai logo',
+    tags: ['Python', 'AI', 'Backend', 'API', 'Generative AI'],
+    sourceUrl: 'https://github.com/Sree14hari/image-diffuser-backend.git',
   },
 ];
 
@@ -121,11 +122,11 @@ export const HARDWARE_DATA: HardwareItem[] = [
     id: 'laptop-rog-strix-g16',
     name: 'ROG Strix G16',
     specs: [
-        "13th Gen Intel® Core™ i7-13650HX Processor 2.6 GHz",
-        "NVIDIA® GeForce RTX™ 4050 GPU",
-        "ROG Boost: 2420MHz* at 140W",
-        "6GB GDDR6 GPU, 16GB DDR5 RAM",
-        "16\" QHD+ 240Hz Display",
+      "13th Gen Intel® Core™ i7-13650HX Processor 2.6 GHz",
+      "NVIDIA® GeForce RTX™ 4050 GPU",
+      "ROG Boost: 2420MHz* at 140W",
+      "6GB GDDR6 GPU, 16GB DDR5 RAM",
+      "16\" QHD+ 240Hz Display",
     ],
   },
 ];
@@ -133,13 +134,15 @@ export const HARDWARE_DATA: HardwareItem[] = [
 export interface FooterLinkItem {
   name: string;
   href: string;
+  Icon?: string; // Optional Lucide icon name
 }
 
-export const FOOTER_SOCIAL_LINKS = [
+
+export const FOOTER_SOCIAL_LINKS: FooterLinkItem[] = [
   { name: 'GitHub', Icon: 'Github', href: 'https://github.com/Sree14hari' },
   { name: 'LinkedIn', Icon: 'Linkedin', href: 'https://www.linkedin.com/in/sree14hari/' },
   { name: 'Instagram', Icon: 'Instagram', href: 'https://www.instagram.com/s_ree.har_i' },
-  { name: 'Dribbble', Icon: 'Dribbble', href: '#' }, 
+  { name: 'Dribbble', Icon: 'Dribbble', href: '#' },
 ];
 
 
@@ -210,4 +213,3 @@ export const PROJECT_CATEGORIES: ProjectCategory[] = [
     href: '#',
   },
 ];
-
