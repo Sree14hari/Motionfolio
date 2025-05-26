@@ -29,6 +29,8 @@ export default function HomePage() {
       <ToolboxSection />
       <div className="w-full h-px bg-border my-8"></div> {/* Separator Line */}
       <FeaturedProjectsSection />
+      <div className="w-full h-px bg-border my-8"></div> {/* Separator Line added here */}
     </>
   );
 }
+
