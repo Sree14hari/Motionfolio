@@ -49,6 +49,14 @@
     --pattern-area-bg: 0 0% 96%; /* Background color of the patterned area (very light grey) */
     --pattern-stripe-color: 0 0% 92%; /* Color of the diagonal stripes (slightly darker grey) */
   }
+
+  /* Override variables for small screens */
+  @media (max-width: 767px) { /* Less than md breakpoint (768px) */
+    :root {
+      --gutter-width: 35px; 
+      --purple-edge-width: 3px;
+    }
+  }
 }
 
 @layer base {
