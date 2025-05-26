@@ -67,13 +67,13 @@ export function FeaturedProjectsSection() {
 
         {featuredProjectData.length > 0 ? (
           <motion.div
-            variants={sectionVariants}
+            variants={sectionVariants} // Use sectionVariants for staggering children
             className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 mb-12 sm:mb-16"
           >
             {featuredProjectData.map((project, index) => (
               <motion.div
                 key={project.id}
-                variants={itemVariants}
+                variants={itemVariants} // Each card uses itemVariants
                 className="bg-background p-1 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
               >
                 <div className="rounded-lg overflow-hidden">
