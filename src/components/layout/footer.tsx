@@ -87,11 +87,10 @@ export function Footer() {
             <iframe
               title="Spotify Embed: Die With A Smile - Lady Gaga, Bruno Mars"
               style={{ borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }} // Adjusted shadow for light bg
-              src="https://open.spotify.com/embed/track/0c39x5nS3S0k7Jk1NUI2A7?utm_source=generator" // Removed &theme=1 for default light theme
+              src="https://open.spotify.com/embed/track/0c39x5nS3S0k7Jk1NUI2A7?utm_source=generator" // Standard Spotify embed URL
               width="100%"
               height="152" 
               frameBorder="0"
-              allowFullScreen={false}
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
             ></iframe>
